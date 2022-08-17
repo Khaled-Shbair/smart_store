@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_store/api/controller/auth%20api%20controller.dart';
-import 'package:smart_store/models/api%20response.dart';
-import 'package:smart_store/utils/helpers.dart';
 
+import '../../api/api_response.dart';
+import '../../getX/auth_controller_getX.dart';
+import '../../utils/helpers.dart';
 import '../../widgets/code field.dart';
 
 class SendCodeScreen extends StatefulWidget {

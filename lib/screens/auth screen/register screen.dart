@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_store/models/cities/city.dart';
-
-import '../../api/controller/auth api controller.dart';
-import '../../api/controller/cities api controller.dart';
-import '../../models/api response.dart';
+import 'package:smart_store/constants/String.dart';
+import '../../api/api_response.dart';
+import '../../getX/auth_controller_getX.dart';
+import '../../models/city_model.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/input filed.dart';
 import '../../widgets/password filed.dart';
@@ -76,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     return InputFiled(
       controller: _mobileController,
       keyboard: TextInputType.phone,
-      prefixIcon: Icons.mail,
+      prefixIcon: Icons.phone_android,
       hintText: 'Mobile',
     );
   }
@@ -155,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
         ),
         TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/LoginScreen');
+              Navigator.pushNamed(context, loginScreen);
             },
             child: const Text(
               'Login!',
@@ -169,33 +168,21 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   }
 
   Widget selectCity() {
-    return FutureBuilder<List<City>>(
-      future: CitiesApiController().readCities(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          city = snapshot.data!;
-          return DropdownButton<String>(
-            value: selectedCityId,
-            hint: const Text('City'),
-            items: city
-                .map(
-                  (dynamic list) => DropdownMenuItem<String>(
-                    value: list.id.toString(),
-                    child: Text(city[list.id].nameAr),
-                  ),
-                )
-                .toList(),
-            onChanged: (String? value) {
-              setState(() {
-                selectedCityId = value;
-              });
-            },
-          );
-        } else {
-          return const Center(child: Text("NO DATA"));
-        }
+    return DropdownButton<String>(
+      value: selectedCityId,
+      hint: const Text('City'),
+      items: city
+          .map(
+            (dynamic list) => DropdownMenuItem<String>(
+              value: list.id.toString(),
+              child: Text(city[list.id].nameAr),
+            ),
+          )
+          .toList(),
+      onChanged: (String? value) {
+        setState(() {
+          selectedCityId = value;
+        });
       },
     );
   }

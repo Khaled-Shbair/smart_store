@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:smart_store/app%20routers.dart';
 
-void main() {
+import 'api/dio_settings.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DioSettings.init();
   runApp(MyApp(appRouters: AppRouters()));
 }
 

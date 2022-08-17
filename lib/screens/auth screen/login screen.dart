@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:smart_store/models/api%20response.dart';
-import 'package:smart_store/utils/helpers.dart';
 
-import '../../api/controller/auth api controller.dart';
+import '../../api/api_response.dart';
+import '../../constants/String.dart';
+import '../../getX/auth_controller_getX.dart';
+import '../../utils/helpers.dart';
 import '../../widgets/input filed.dart';
 import '../../widgets/password filed.dart';
-import 'send code screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     return InputFiled(
       controller: _mobileController,
       keyboard: TextInputType.phone,
-      prefixIcon: Icons.mail,
+      prefixIcon: Icons.phone_android,
       hintText: 'Mobile',
     );
   }
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
       alignment: AlignmentDirectional.centerEnd,
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/ForgetPassword');
+          Navigator.pushNamed(context, forgetPassword);
         },
         child: const Text(
           'Forget password?',
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         ),
         TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/RegisterScreen');
+              Navigator.pushNamed(context, registerScreen);
             },
             child: const Text(
               'Create now!',
@@ -208,13 +208,13 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   }
 
   void navigator() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SendCodeScreen(
-          phone: _mobileController.text,
-        ),
-      ),
+    Navigator.pushReplacementNamed(
+      context, sendCodeScreen,
+      arguments: _mobileController.text,
+      //MaterialPageRoute(
+      //  builder: (context) =>  SendCodeScreen(
+      //    phone: _mobileController.text,
+      //  ),
     );
   }
 }
