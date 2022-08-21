@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smart_store/constants/String.dart';
+import 'package:smart_store/getX/cities_getX.dart';
 import '../../api/api_response.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../models/city_model.dart';
@@ -15,7 +17,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> with Helpers {
-  List<City> city = <City>[];
+  //final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
+  List<City> _city = <City>[];
+
   late TextEditingController _nameController;
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
@@ -153,36 +157,58 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
           ),
         ),
         TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, loginScreen);
-            },
-            child: const Text(
-              'Login!',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
+          onPressed: () {
+            Navigator.pushNamed(context, loginScreen);
+          },
+          child: const Text(
+            'Login!',
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }
 
   Widget selectCity() {
-    return DropdownButton<String>(
-      value: selectedCityId,
-      hint: const Text('City'),
-      items: city
-          .map(
-            (dynamic list) => DropdownMenuItem<String>(
-              value: list.id.toString(),
-              child: Text(city[list.id].nameAr),
+    return FutureBuilder<List<City>>(
+      //  future: CitiesGetX().readUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          _city = snapshot.data!;
+          return DropdownButton<String>(
+            items: _city
+                .map(
+                  (list) => DropdownMenuItem(
+                    value: list.id.toString(),
+                    child: Text(_city[1].nameAr),
+                  ),
+                )
+                .toList(),
+            hint: const Text('City'),
+            onChanged: (String? value) {
+              setState(() => selectedCityId = value!);
+            },
+          );
+        } else {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.warning, size: 80, color: Colors.black45),
+                Text(
+                  "NO DATA",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black45,
+                  ),
+                ),
+              ],
             ),
-          )
-          .toList(),
-      onChanged: (String? value) {
-        setState(() {
-          selectedCityId = value;
-        });
+          );
+        }
       },
     );
   }
@@ -245,12 +271,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
         _nameController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(context, message: 'Enter required data!', error: true);
+    showSnackBar(message: 'Enter required data!', error: true);
     return false;
-  }
-
-  void _showSnackBar(String message, bool error) {
-    showSnackBar(context, message: message, error: error);
   }
 
   Future<void> _login() async {
@@ -261,13 +283,59 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       cityId: selectedCityId.toString(),
       gender: _gender,
     );
-    _showSnackBar(apiResponse.message, !apiResponse.status);
-    if (apiResponse.status) {
-      navigator();
-    }
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+    // if (apiResponse.status) {
+    //   navigator();
+    // }
   }
 
   void navigator() {
     Navigator.pop(context);
   }
 }
+/*
+  Widget selectCity() {
+    return FutureBuilder<List<City>>(
+      future: CitiesGetX().readUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          _city = snapshot.data!;
+          return DropdownButton<String>(
+            items: _city
+                .map(
+                  (list) => DropdownMenuItem(
+                    value: list.id.toString(),
+                    child: Text(_city[1].nameAr),
+                  ),
+                )
+                .toList(),
+            hint: const Text('City'),
+            onChanged: (String? value) {
+              setState(() => selectedCityId = value!);
+            },
+          );
+        } else {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Icon(Icons.warning, size: 80, color: Colors.black45),
+                Text(
+                  "NO DATA",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                    color: Colors.black45,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
+
+ */

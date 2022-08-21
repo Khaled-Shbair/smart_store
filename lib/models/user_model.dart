@@ -1,52 +1,91 @@
+import 'city_model.dart';
+
 class UserModel {
   late bool status;
   late String message;
-  late List<User> data;
+  User? data;
 
   UserModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = <User>[];
-      json['data'].forEach((v) {
-        data.add(User.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? User.fromJson(json['data']) : null;
   }
 }
 
 class User {
-  int? id;
-  late String firstName;
-  late String lastName;
-  late String email;
+  late int id;
+  late String name;
+  String? email;
   late String mobile;
-  late String bio;
-  late String jobTitle;
-  late String latitude;
-  late String longitude;
-  late String country;
-  late String image;
-  late String active;
-  late String emailVerifiedAt;
-  late String imagesCount;
-
-  User();
+  late String gender;
+  late bool active;
+  late bool verified;
+  late String cityId;
+  late String storeId;
+  String? fcmToken;
+  late String token;
+  late String tokenType;
+  late String refreshToken;
+  City? city;
+  Store? store;
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
+    name = json['name'];
     email = json['email'];
     mobile = json['mobile'];
-    bio = json['bio'];
-    jobTitle = json['job_title'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-    country = json['country'];
-    image = json['image'];
+    gender = json['gender'];
     active = json['active'];
+    verified = json['verified'];
+    cityId = json['city_id'];
+    storeId = json['store_id'];
+    fcmToken = json['fcm_token'];
+    token = json['token'];
+    tokenType = json['token_type'];
+    refreshToken = json['refresh_token'];
+    city = json['city'] != null ? City.fromJson(json['city']) : null;
+    store = json['store'] != null ? Store.fromJson(json['store']) : null;
+  }
+}
+
+class Store {
+  late int id;
+  late String name;
+  late String storeName;
+  late String email;
+  dynamic emailVerifiedAt;
+  late String mobile;
+  late String storeUuid;
+  late String cityId;
+  dynamic verificationCode;
+  late String active;
+  late String verified;
+  late String firebaseKey;
+  String? image;
+  late String address;
+  dynamic facebook;
+  dynamic instagram;
+  late String createdAt;
+  late String updatedAt;
+
+  Store.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    storeName = json['store_name'];
+    email = json['email'];
     emailVerifiedAt = json['email_verified_at'];
-    imagesCount = json['images_count'];
+    mobile = json['mobile'];
+    storeUuid = json['store_uuid'];
+    cityId = json['city_id'];
+    verificationCode = json['verification_code'];
+    active = json['active'];
+    verified = json['verified'];
+    firebaseKey = json['firebase_key'];
+    image = json['image'];
+    address = json['address'];
+    facebook = json['facebook'];
+    instagram = json['instagram'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 }

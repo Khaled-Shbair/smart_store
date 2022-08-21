@@ -1,27 +1,32 @@
 import 'dart:convert';
-import 'package:smart_store/api/dio_settings.dart';
-
+import 'package:get/get.dart';
 import '../api/api_paths.dart';
 import '../api/api_response.dart';
 import '../../models/user_model.dart';
+import 'package:http/http.dart' as http;
 
-class AuthApiController {
+class AuthApiController extends GetxController {
+  static AuthApiController get to => Get.find();
+  UserModel? userModel;
+
   Future<ApiResponse> login({
     required String phone,
     required String password,
   }) async {
-    var response = await DioSettings.postData(
-      url: ApiPath.login,
-      data: {
-        'mobile': phone,
-        'password': password,
+    var uri = Uri.parse(ApiPath.login);
+    var response = await http.post(
+      uri,
+      body: {'mobile': phone, 'password': password},
+      headers: {
+        'lang': 'en',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     );
     if (response.statusCode == 200 || response.statusCode == 400) {
-      var jsonResponse = jsonDecode(response.data);
+      var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        User student = User.fromJson(jsonResponse);
-        // SharedPrefController().save(student: student);
+        //    UserModel userModel = UserModel.fromJson(jsonResponse);
+        //TODO: pref_controller
       }
       return ApiResponse(
         message: jsonResponse['message'],
@@ -41,9 +46,11 @@ class AuthApiController {
     required String cityId,
     required String gender,
   }) async {
-    var response = await DioSettings.postData(
-      url: ApiPath.register,
-      data: {
+    var uri = Uri.parse(ApiPath.register);
+
+    var response = await http.post(
+      uri,
+      body: {
         'name': name,
         'mobile': phone,
         'password': password,
@@ -53,7 +60,12 @@ class AuthApiController {
       },
     );
     if (response.statusCode == 201 || response.statusCode == 400) {
-      var jsonResponse = jsonDecode(response.data);
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        // UserModel userModel = UserModel.fromJson(jsonResponse);
+        print('201 ,created');
+      }
+      print('400 ,un created');
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],
@@ -67,15 +79,14 @@ class AuthApiController {
 
   Future<ApiResponse> sendCode(
       {required String phone, required String code}) async {
-    var response = await DioSettings.postData(
-      url: ApiPath.activate,
-      data: {
-        'mobile': phone,
-        'code': code,
-      },
-    );
+    var uri = Uri.parse(ApiPath.activate);
+    var response = await http.post(uri, body: {
+      'mobile': phone,
+      'code': code,
+    });
     if (response.statusCode == 200 || response.statusCode == 400) {
-      var jsonResponse = jsonDecode(response.data);
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {}
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],

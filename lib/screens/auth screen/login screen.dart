@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../api/api_response.dart';
 import '../../constants/String.dart';
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with Helpers {
+  final AuthApiController _controller = Get.put(AuthApiController());
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
   bool _obscureText = true;
@@ -189,32 +191,21 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         _passwordController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(context, message: 'Enter required data!', error: true);
+
+    showSnackBar(message: 'Enter required data!', error: true);
     return false;
   }
 
-  void _showSnackBar(String message, bool error) {
-    showSnackBar(context, message: message, error: error);
-  }
-
   Future<void> _login() async {
-    ApiResponse apiResponse = await AuthApiController().login(
+    ApiResponse apiResponse = await _controller.login(
         phone: _mobileController.text, password: _passwordController.text);
-    _showSnackBar(apiResponse.message, !apiResponse.status);
-
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
       navigator();
     }
   }
 
   void navigator() {
-    Navigator.pushReplacementNamed(
-      context, sendCodeScreen,
-      arguments: _mobileController.text,
-      //MaterialPageRoute(
-      //  builder: (context) =>  SendCodeScreen(
-      //    phone: _mobileController.text,
-      //  ),
-    );
+    Navigator.pushReplacementNamed(context, mainScreen);
   }
 }

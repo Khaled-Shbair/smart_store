@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 mixin Helpers {
-  void showSnackBar(BuildContext context,
-      {required String message, bool error = false}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(message),
+  void showSnackBar({required String message, bool error = false}) {
+    Fluttertoast.showToast(
+      msg: message,
+      fontSize: 16,
+      timeInSecForIosWeb: 5,
+      textColor: Colors.white,
+      gravity: ToastGravity.SNACKBAR,
+      toastLength: Toast.LENGTH_LONG,
       backgroundColor: error ? Colors.red : Colors.green,
-      behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 3),
-      dismissDirection: DismissDirection.horizontal,
-      padding: const EdgeInsetsDirectional.only(start: 20, end: 20),
-    ));
+    );
   }
 }

@@ -1,8 +1,14 @@
 class ApiPath {
-  static const String baseUrl = 'https://smart-store.mr-dev.tech/api/';
-  static const String login = 'auth/login';
-  static const String logout = 'auth/logout';
-  static const String activate = 'auth/activate';
-  static const String register = 'auth/register';
-  static const String cities = 'cities';
+  static const String _baseUrl = 'https://smart-store.mr-dev.tech/api/';
+  static const String login = '${_baseUrl}auth/login';
+  static const String logout = '${_baseUrl}auth/logout';
+  static const String activate = '${_baseUrl}auth/activate';
+  static const String register = '${_baseUrl}auth/register';
+  static const String refreshFcmToken = '${_baseUrl}auth/refresh-fcm-token';
+  static const String updateProfile = '${_baseUrl}auth/update-profile';
+  static const String changePassword = '${_baseUrl}auth/change-password';
+  static const String forgetPassword = '${_baseUrl}auth/forget-password';
+  static const String resetPassword = '${_baseUrl}auth/reset-password';
+  static const String cities = '${_baseUrl}cities';
+  static const String home = '${_baseUrl}home';
 }

@@ -170,7 +170,7 @@ class _SendCodeScreenState extends State<SendCodeScreen> with Helpers {
   }
 
   void _showSnackBar(String message, bool error) {
-    showSnackBar(context, message: message, error: error);
+    showSnackBar(message: message, error: error);
   }
 
   Future<void> _preformSend() async {
