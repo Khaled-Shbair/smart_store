@@ -11,34 +11,34 @@ class HomeModel {
 }
 
 class Data {
-  late List<Slider> slider;
-  late List<Categories> categories;
-  late List<LatestProducts> latestProducts;
-  late List<FamousProducts> famousProducts;
+  List<Slider>? slider;
+  List<Categories>? categories;
+  List<LatestProducts>? latestProducts;
+  List<FamousProducts>? famousProducts;
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['slider'] != null) {
       slider = <Slider>[];
       json['slider'].forEach((v) {
-        slider.add(Slider.fromJson(v));
+        slider!.add(Slider.fromJson(v));
       });
     }
     if (json['categories'] != null) {
       categories = <Categories>[];
       json['categories'].forEach((v) {
-        categories.add(Categories.fromJson(v));
+        categories!.add(Categories.fromJson(v));
       });
     }
     if (json['latest_products'] != null) {
       latestProducts = <LatestProducts>[];
       json['latest_products'].forEach((v) {
-        latestProducts.add(LatestProducts.fromJson(v));
+        latestProducts!.add(LatestProducts.fromJson(v));
       });
     }
     if (json['famous_products'] != null) {
       famousProducts = <FamousProducts>[];
       json['famous_products'].forEach((v) {
-        famousProducts.add(FamousProducts.fromJson(v));
+        famousProducts!.add(FamousProducts.fromJson(v));
       });
     }
   }
@@ -80,12 +80,12 @@ class LatestProducts {
   late String nameAr;
   late String infoEn;
   late String infoAr;
-  late String price;
-  late String quantity;
-  late String overalRate;
-  late String subCategoryId;
-  late int productRate;
-  late String offerPrice;
+  late dynamic price;
+  late dynamic quantity;
+  late dynamic overalRate;
+  late dynamic subCategoryId;
+  late dynamic productRate;
+  late dynamic offerPrice;
   late bool isFavorite;
   late String imageUrl;
 
@@ -112,11 +112,11 @@ class FamousProducts {
   late String nameAr;
   late String infoEn;
   late String infoAr;
-  late String price;
-  late String quantity;
-  late String overalRate;
-  late String subCategoryId;
-  late int productRate;
+  late dynamic price;
+  late dynamic quantity;
+  late dynamic overalRate;
+  late dynamic subCategoryId;
+  late dynamic productRate;
   late dynamic offerPrice;
   late bool isFavorite;
   late String imageUrl;

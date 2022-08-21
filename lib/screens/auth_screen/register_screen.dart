@@ -6,8 +6,8 @@ import '../../api/api_response.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../models/city_model.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/input filed.dart';
-import '../../widgets/password filed.dart';
+import '../../widgets/input_filed.dart';
+import '../../widgets/password_filed.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> with Helpers {
-  //final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
+  final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
   List<City> _city = <City>[];
 
   late TextEditingController _nameController;
@@ -169,9 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     );
   }
 
-  Widget selectCity() {
+  Widget selectCitys() {
     return FutureBuilder<List<City>>(
-      //  future: CitiesGetX().readUsers(),
+      future: _citiesGetX.readCities(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -209,6 +209,32 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             ),
           );
         }
+      },
+    );
+  }
+
+  Widget selectCity() {
+    return GetX<CitiesGetX>(
+      builder: (controller) {
+        if (_citiesGetX.loading.isTrue) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return DropdownButton<String>(
+          borderRadius: BorderRadius.circular(20),
+          dropdownColor: Colors.red,
+          items: _city
+              .map(
+                (list) => DropdownMenuItem(
+                  value: list.id.toString(),
+                  child: Text(_city[1].nameAr),
+                ),
+              )
+              .toList(),
+          hint: const Text('City'),
+          onChanged: (String? value) {
+            setState(() => selectedCityId = value!);
+          },
+        );
       },
     );
   }
@@ -293,49 +319,3 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     Navigator.pop(context);
   }
 }
-/*
-  Widget selectCity() {
-    return FutureBuilder<List<City>>(
-      future: CitiesGetX().readUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          _city = snapshot.data!;
-          return DropdownButton<String>(
-            items: _city
-                .map(
-                  (list) => DropdownMenuItem(
-                    value: list.id.toString(),
-                    child: Text(_city[1].nameAr),
-                  ),
-                )
-                .toList(),
-            hint: const Text('City'),
-            onChanged: (String? value) {
-              setState(() => selectedCityId = value!);
-            },
-          );
-        } else {
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(Icons.warning, size: 80, color: Colors.black45),
-                Text(
-                  "NO DATA",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                    color: Colors.black45,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-      },
-    );
-  }
-
- */

@@ -3,36 +3,36 @@ import 'package:get/get.dart';
 
 import '../api/api_paths.dart';
 import '../models/city_model.dart';
-/*
+import 'package:http/http.dart' as http;
+
 class CitiesGetX extends GetxController {
   static CitiesGetX get to => Get.find();
-  CityModel? cityModel;
+  RxBool loading = false.obs;
 
-  Future<List<City>> readCities() async {
-    dynamic response;
-    response = await DioSettings.getData(
-      url: ApiPath.cities,
-      query: {},
-    ).then(
-      (value) {
-        print(response.data);
-        print(cityModel!.list);
-        return CityModel.fromJson(value.data);
-      },
-    );
+  final _cityModel = Rxn<CityModel>();
 
-    return [];
+  CityModel? get cityModel => _cityModel.value;
+
+  set cityModel(CityModel? value) {
+    _cityModel.value = value;
   }
 
-  late CityModel cityModels;
+  @override
+  void onInit() {
+    super.onInit();
+    readCities();
+  }
 
-  Future<List<City>> readUsers() async {
-    var response = await DioSettings.getData(url: ApiPath.cities);
+  Future<List<City>> readCities() async {
+    loading.value = true;
+    var uri = Uri.parse(ApiPath.cities);
+    var response = await http.get(uri, headers: {'Accept': 'application/json'});
     if (response.statusCode == 200) {
-      cityModels = CityModel.fromJson(response.data);
-      return cityModels.list;
+      var jsonResponse = jsonDecode(response.body);
+      cityModel = CityModel.fromJson(jsonResponse);
+      loading.value = false;
+      return cityModel!.list;
     }
     return [];
   }
 }
-*/

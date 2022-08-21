@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../api/api_response.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/code field.dart';
+import '../../widgets/code_field.dart';
 
 class SendCodeScreen extends StatefulWidget {
   const SendCodeScreen({

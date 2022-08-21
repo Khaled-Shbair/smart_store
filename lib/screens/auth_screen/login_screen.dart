@@ -5,8 +5,8 @@ import '../../api/api_response.dart';
 import '../../constants/String.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/input filed.dart';
-import '../../widgets/password filed.dart';
+import '../../widgets/input_filed.dart';
+import '../../widgets/password_filed.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
