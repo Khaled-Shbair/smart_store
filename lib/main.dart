@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'app_routers.dart';
+import 'shared_preferences/pref_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PrefController().init();
   runApp(MyApp(appRouters: AppRouters()));
 }
 

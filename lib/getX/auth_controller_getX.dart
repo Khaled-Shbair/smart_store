@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:smart_store/shared_preferences/pref_controller.dart';
 import '../api/api_paths.dart';
 import '../api/api_response.dart';
 import '../../models/user_model.dart';
@@ -25,8 +26,8 @@ class AuthApiController extends GetxController {
     if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        //    UserModel userModel = UserModel.fromJson(jsonResponse);
-        //TODO: pref_controller
+        UserModel userModel = UserModel.fromJson(jsonResponse);
+        PrefController().save(userModel.data!);
       }
       return ApiResponse(
         message: jsonResponse['message'],

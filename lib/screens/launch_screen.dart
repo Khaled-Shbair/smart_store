@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_store/shared_preferences/pref_controller.dart';
 
 import '../constants/String.dart';
 
@@ -13,8 +14,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-    String route = loginScreen;
-    // String route = SharedPreferencesController().login ? mainScreen : loginScreen;
+     String route = PrefController().login ? mainScreen : loginScreen;
     Future.delayed(const Duration(seconds: 3),
         () => Navigator.pushReplacementNamed(context, route));
   }
