@@ -14,7 +14,7 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-     String route = PrefController().login ? mainScreen : loginScreen;
+     String route = PrefController().login ? smartStoreLayout : loginScreen;
     Future.delayed(const Duration(seconds: 3),
         () => Navigator.pushReplacementNamed(context, route));
   }

@@ -2,7 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:smart_store/getX/home_getX.dart';
+
+import '../constants/String.dart';
+import '../getX/home_getX.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,23 +18,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: GetX<HomeGetX>(
-          builder: (controller) {
-            if (_homeGetX.loading.isTrue) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return ListView(
-              children: [
-                carouselSlider(),
-                listCategories(),
-                listProduct(),
-              ],
-            );
-          },
-        ),
-      ),
+    return GetX<HomeGetX>(
+      builder: (controller) {
+        if (_homeGetX.loading.isTrue) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return ListView(
+          children: [
+            carouselSlider(),
+            listCategories(),
+            listProduct(),
+          ],
+        );
+      },
     );
   }
 
@@ -149,7 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              //TODO:screen later
+              Navigator.pushNamed(context, detailsProduct,
+                  arguments: _homeGetX.homeModel!.data!.latestProducts![index]);
             },
             child: Container(
               alignment: AlignmentDirectional.topStart,
