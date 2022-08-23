@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:smart_store/getX/home_getX.dart';
 
@@ -16,44 +17,53 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetX<HomeGetX>(
-        builder: (controller) {
-          if (_homeGetX.loading.isTrue) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return ListView(
-            children: [
-              carouselSlider(),
-              listCategories(),
-              listProduct(),
-            ],
-          );
-        },
+      body: SafeArea(
+        child: GetX<HomeGetX>(
+          builder: (controller) {
+            if (_homeGetX.loading.isTrue) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return ListView(
+              children: [
+                carouselSlider(),
+                listCategories(),
+                listProduct(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
   Widget carouselSlider() {
     if (_homeGetX.homeModel != null) {
-      return CarouselSlider(
-        items: _homeGetX.homeModel!.data!.slider!.map((e) {
-          return Image(
-            fit: BoxFit.cover,
-            width: double.infinity,
-            image: NetworkImage(e.imageUrl),
-          );
-        }).toList(),
-        options: CarouselOptions(
-          height: 250,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 3),
-          autoPlayAnimationDuration: const Duration(seconds: 1),
-          autoPlayCurve: Curves.fastOutSlowIn,
-          scrollDirection: Axis.horizontal,
-          viewportFraction: 1,
+      return Container(
+        margin: const EdgeInsetsDirectional.only(top: 20, bottom: 20),
+        child: CarouselSlider(
+          items: _homeGetX.homeModel!.data!.slider!.map((e) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image(
+                fit: BoxFit.cover,
+                width: double.infinity,
+                image: NetworkImage(e.imageUrl),
+              ),
+            );
+          }).toList(),
+          options: CarouselOptions(
+            height: 250,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            enlargeCenterPage: true,
+            autoPlayInterval: const Duration(seconds: 3),
+            autoPlayAnimationDuration: const Duration(seconds: 1),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            scrollDirection: Axis.horizontal,
+            viewportFraction: 0.8,
+          ),
         ),
       );
     }
@@ -63,12 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget listCategories() {
     if (_homeGetX.homeModel != null) {
       return Container(
-        margin: const EdgeInsetsDirectional.only(
-          top: 20,
-          bottom: 20,
-          start: 10,
-          end: 10,
-        ),
+        margin:
+            const EdgeInsetsDirectional.only(bottom: 20, start: 10, end: 10),
         height: 100,
         child: ListView.separated(
           itemCount: _homeGetX.homeModel!.data!.categories!.length,
@@ -78,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
           separatorBuilder: (context, index) => const SizedBox(width: 10),
           itemBuilder: (context, index) {
             return Container(
+              alignment: AlignmentDirectional.center,
               decoration: BoxDecoration(
                 color: Colors.grey,
                 borderRadius: BorderRadius.circular(15),
@@ -85,12 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
                 children: [
-                  Image(
-                    image: NetworkImage(
-                      _homeGetX.homeModel!.data!.categories![index].imageUrl,
+                  Container(
+                    alignment: AlignmentDirectional.center,
+                    padding: const EdgeInsetsDirectional.only(bottom: 20),
+                    child: Image(
+                      image: NetworkImage(
+                        _homeGetX.homeModel!.data!.categories![index].imageUrl,
+                      ),
+                      height: 100,
+                      width: 100,
                     ),
-                    height: 100,
-                    width: 100,
                   ),
                   Container(
                     width: 100,
@@ -132,27 +143,106 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 1 / 1.7,
+          childAspectRatio: 4 / 5.5,
         ),
+        itemCount: _homeGetX.homeModel!.data!.latestProducts!.length,
         itemBuilder: (context, index) {
-          return Container(
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image(
-                  image: NetworkImage(
-                    _homeGetX.homeModel!.data!.latestProducts![index].imageUrl,
-                  ),
-                  width: double.infinity,
-                  height: 200,
-                ),
-              ],
+          return InkWell(
+            onTap: () {
+              //TODO:screen later
+            },
+            child: Container(
+              alignment: AlignmentDirectional.topStart,
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  imageProduct(index),
+                  const SizedBox(height: 8),
+                  nameProduct(index),
+                  const SizedBox(height: 5),
+                  priceProduct(index),
+                  const SizedBox(height: 5),
+                  rating(index),
+                ],
+              ),
             ),
           );
         },
       );
     }
     return const Center(child: CircularProgressIndicator());
+  }
+
+  Widget imageProduct(int index) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image(
+        image: NetworkImage(
+          _homeGetX.homeModel!.data!.latestProducts![index].imageUrl,
+        ),
+        fit: BoxFit.fitHeight,
+        width: double.infinity,
+        height: 180,
+      ),
+    );
+  }
+
+  Widget nameProduct(int index) {
+    return Text(
+      _homeGetX.homeModel!.data!.latestProducts![index].nameEn,
+      style: const TextStyle(
+        overflow: TextOverflow.ellipsis,
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: Colors.red,
+      ),
+    );
+  }
+
+  Widget priceProduct(int index) {
+    if (_homeGetX.homeModel!.data!.latestProducts![index].offerPrice != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            _homeGetX.homeModel!.data!.latestProducts![index].offerPrice,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.red, fontSize: 16),
+          ),
+          const SizedBox(width: 20),
+          Text(
+            _homeGetX.homeModel!.data!.latestProducts![index].price,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+              fontSize: 13,
+              decoration: TextDecoration.lineThrough,
+            ),
+          ),
+        ],
+      );
+    }
+    return Text(
+      _homeGetX.homeModel!.data!.latestProducts![index].price,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.red,
+        fontSize: 16,
+      ),
+    );
+  }
+
+  Widget rating(int index) {
+    return RatingBarIndicator(
+      itemSize: 18,
+      rating: double.parse(
+          _homeGetX.homeModel!.data!.latestProducts![index].overalRate),
+      itemBuilder: (context, index) =>
+          const Icon(Icons.star, color: Colors.yellowAccent),
+    );
   }
 }
