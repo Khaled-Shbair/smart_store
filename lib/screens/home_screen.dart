@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../constants/String.dart';
 import '../getX/home_getX.dart';
+import '../widgets/view_details.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -104,21 +105,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     width: 100,
                     height: 20,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(.8),
-                      borderRadius: const BorderRadius.only(
+                    decoration: const BoxDecoration(
+                      color: Colors.white30,
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15),
                       ),
                     ),
-                    child: Text(
-                      _homeGetX.homeModel!.data!.categories![index].nameEn,
+                    child: ViewDetails(
+                      data:
+                          _homeGetX.homeModel!.data!.categories![index].nameEn,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
+                      fontSize: 16,
                       maxLines: 1,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
                     ),
                   ),
                 ],
@@ -160,11 +160,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   imageProduct(index),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 5),
                   nameProduct(index),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 3),
                   priceProduct(index),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 3),
                   rating(index),
                 ],
               ),
@@ -191,14 +191,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget nameProduct(int index) {
-    return Text(
-      _homeGetX.homeModel!.data!.latestProducts![index].nameEn,
-      style: const TextStyle(
-        overflow: TextOverflow.ellipsis,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: Colors.red,
-      ),
+    return ViewDetails(
+      data: _homeGetX.homeModel!.data!.latestProducts![index].nameEn,
+      fontSize: 20,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -207,31 +203,25 @@ class _HomeScreenState extends State<HomeScreen> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            _homeGetX.homeModel!.data!.latestProducts![index].offerPrice,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.red, fontSize: 16),
+          ViewDetails(
+            data: _homeGetX.homeModel!.data!.latestProducts![index].offerPrice,
+            fontSize: 16,
           ),
-          const SizedBox(width: 20),
-          Text(
-            _homeGetX.homeModel!.data!.latestProducts![index].price,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-              fontSize: 13,
-              decoration: TextDecoration.lineThrough,
-            ),
+          const SizedBox(width: 10),
+          ViewDetails(
+            data: _homeGetX.homeModel!.data!.latestProducts![index].price,
+            fontSize: 13,
+            decoration: TextDecoration.lineThrough,
+            fontWeight: FontWeight.w500,
+            height: 1.7,
+            decorationThickness: 2,
           ),
         ],
       );
     }
-    return Text(
-      _homeGetX.homeModel!.data!.latestProducts![index].price,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.red,
-        fontSize: 16,
-      ),
+    return ViewDetails(
+      data: _homeGetX.homeModel!.data!.latestProducts![index].price,
+      fontSize: 16,
     );
   }
 

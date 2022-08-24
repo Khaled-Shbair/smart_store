@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:smart_store/models/home_model.dart';
 
 import '../models/home_model.dart';
+import '../widgets/view_details.dart';
 
 class DetailsProduct extends StatefulWidget {
   const DetailsProduct({Key? key, required this.product}) : super(key: key);
@@ -27,10 +28,12 @@ class _DetailsProductState extends State<DetailsProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: appBar(context),
       body: Column(
         children: [
-          Container(
+          SizedBox(
+            height: 275,
             child: Image(image: NetworkImage(widget.product.imageUrl)),
           ),
           details(),
@@ -39,55 +42,58 @@ class _DetailsProductState extends State<DetailsProduct> {
     );
   }
 
-  Widget rating() {
-    return Row(
-      children: [
-        const Text(
-          'Evaluation: ',
-          style: TextStyle(
-            fontSize: 26,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
+  Widget details() {
+    return Container(
+      height: 440,
+      decoration: const BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
         ),
-        RatingBarIndicator(
-          itemSize: 22,
-          rating: double.parse(widget.product.overalRate),
-          itemBuilder: (context, index) =>
-              const Icon(Icons.star, color: Colors.yellowAccent),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsetsDirectional.only(top: 40, start: 20, bottom: 30),
+        child: Column(
+          children: [
+            nameProduct(),
+            sizedBox(10),
+            infoProduct(),
+            sizedBox(10),
+            priceProduct(),
+            sizedBox(10),
+            quantityProduct(),
+            sizedBox(10),
+            rating(),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                addToCart(),
+                const SizedBox(width: 20),
+                addToFavorite(),
+              ],
+            ),
+          ],
         ),
-      ],
-    );
-  }
-
-  Widget quantityProduct() {
-    return Text(
-      'quantity: ${widget.product.quantity}',
-      style: const TextStyle(
-        fontSize: 26,
-        color: Colors.red,
-        fontWeight: FontWeight.bold,
       ),
     );
   }
 
   Widget nameProduct() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Name: ',
-          style: TextStyle(
-            fontSize: 28,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
+        const ViewDetails(
+          data: 'Name: ',
+          color: Colors.black,
         ),
-        Text(
-          widget.product.nameEn,
-          style: const TextStyle(
-            fontSize: 28,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          child: ViewDetails(
+            data: widget.product.nameEn,
+            fontSize: 24,
+            height: 1.3,
           ),
         ),
       ],
@@ -96,22 +102,20 @@ class _DetailsProductState extends State<DetailsProduct> {
 
   Widget infoProduct() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Info: ',
-          maxLines: 3,
-          style: TextStyle(
-            fontSize: 22,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
+        const ViewDetails(
+          data: 'Info: ',
+          color: Colors.black,
         ),
-        Text(
-          widget.product.infoEn,
-          style: const TextStyle(
-            fontSize: 22,
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
+        Expanded(
+          child: SingleChildScrollView(
+            child: ViewDetails(
+              data: widget.product.infoEn,
+              fontSize: 24,
+              height: 1.3,
+              maxLines: 3,
+            ),
           ),
         ),
       ],
@@ -121,36 +125,73 @@ class _DetailsProductState extends State<DetailsProduct> {
   Widget priceProduct() {
     if (widget.product.offerPrice != null) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'offerPrice: ${widget.product.offerPrice}',
-            style: const TextStyle(
-              fontSize: 26,
-              color: Colors.red,
-              fontWeight: FontWeight.bold,
-            ),
+          const ViewDetails(
+            data: 'Offer Price: ',
+            color: Colors.black,
           ),
-          const SizedBox(width: 20),
-          Text(
-            '${widget.product.price}',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-              fontSize: 24,
-              decoration: TextDecoration.lineThrough,
-            ),
+          ViewDetails(
+            data: widget.product.offerPrice,
+            fontSize: 24,
+            height: 1.3,
+          ),
+          const SizedBox(width: 10),
+          ViewDetails(
+            data: widget.product.price,
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+            height: 1.5,
+            decoration: TextDecoration.lineThrough,
+            decorationThickness: 2.5,
           ),
         ],
       );
     }
-    return Text(
-      'price: ${widget.product.price}',
-      style: const TextStyle(
-        fontSize: 20,
-        color: Colors.red,
-        fontWeight: FontWeight.bold,
-      ),
+    return Row(
+      children: [
+        const ViewDetails(
+          data: 'Price: ',
+          color: Colors.black,
+        ),
+        ViewDetails(
+          data: widget.product.price,
+          fontSize: 24,
+          height: 1.3,
+        ),
+      ],
+    );
+  }
+
+  Widget quantityProduct() {
+    return Row(
+      children: [
+        const ViewDetails(
+          data: 'Quantity: ',
+          color: Colors.black,
+        ),
+        ViewDetails(
+          data: widget.product.quantity,
+          fontSize: 24,
+          height: 1.3,
+        ),
+      ],
+    );
+  }
+
+  Widget rating() {
+    return Row(
+      children: [
+        const ViewDetails(
+          data: 'Evaluation: ',
+          color: Colors.black,
+        ),
+        RatingBarIndicator(
+          itemSize: 22,
+          rating: double.parse(widget.product.overalRate),
+          itemBuilder: (context, index) =>
+              const Icon(Icons.star, color: Colors.yellowAccent),
+        ),
+      ],
     );
   }
 
@@ -171,44 +212,5 @@ class _DetailsProductState extends State<DetailsProduct> {
     );
   }
 
-  Widget details() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: ListView(
-        padding: const EdgeInsetsDirectional.only(
-          top: 30,
-          start: 10,
-          end: 10,
-          bottom: 30,
-        ),
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        children: [
-          nameProduct(),
-          infoProduct(),
-          priceProduct(),
-          quantityProduct(),
-          rating(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              addToCart(),
-              const SizedBox(width: 20),
-              addToFavorite(),
-            ],
-          ),
-
-          SizedBox(
-            height: 190,
-          ),
-        ],
-      ),
-    );
-  }
+  SizedBox sizedBox(double height) => SizedBox(height: height);
 }
