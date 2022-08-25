@@ -6,3 +6,6 @@ const String forgetPassword = '/forgetPassword';
 const String sendCodeScreen = '/sendCodeScreen';
 const String detailsProduct = '/detailsProduct';
 const String smartStoreLayout = '/smartStoreLayout';
+const String subCategoryScreen = '/subCategoryScreen';
+const String productCategoryScreen = '/productCategoryScreen';
+const String productDetailsScreen = '/productDetailsScreen';

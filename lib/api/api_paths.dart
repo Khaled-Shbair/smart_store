@@ -11,4 +11,7 @@ class ApiPath {
   static const String resetPassword = '${_baseUrl}auth/reset-password';
   static const String cities = '${_baseUrl}cities';
   static const String home = '${_baseUrl}home';
+  static const String categories = '${_baseUrl}categories';
+  static const String subCategories = '${_baseUrl}sub-categories/';
+  static const String products = '${_baseUrl}products/';
 }

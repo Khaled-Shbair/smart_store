@@ -8,7 +8,10 @@ import 'screens/auth_screen/send_code_screen.dart';
 import 'screens/details product.dart';
 import 'screens/home_screen.dart';
 import 'screens/launch_screen.dart';
+import 'screens/product_category_screen.dart';
+import 'screens/product_details_screen.dart';
 import 'screens/smart_store_layout.dart';
+import 'screens/sub_category_screen.dart';
 
 class AppRouters {
   Route onGenerateRoute(RouteSettings settings) {
@@ -21,8 +24,18 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const RegisterScreen());
       case forgetPassword:
         return MaterialPageRoute(builder: (context) => const ForgetPassword());
-        case smartStoreLayout:
-        return MaterialPageRoute(builder: (context) =>  SmartStoreLayout());
+      case smartStoreLayout:
+        return MaterialPageRoute(
+            builder: (context) => const SmartStoreLayout());
+      case subCategoryScreen:
+        return MaterialPageRoute(
+            builder: (context) => const SubCategoryScreen());
+      case productCategoryScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ProductCategoryScreen());
+      case productDetailsScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ProductDetailsScreen());
       case sendCodeScreen:
         final phone = settings.arguments as String;
         return MaterialPageRoute(

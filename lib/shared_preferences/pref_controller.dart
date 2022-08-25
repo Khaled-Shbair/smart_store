@@ -19,8 +19,9 @@ class PrefController {
   Future<void> save(User user) async {
     await _sharedPreferences.setBool(PrefKeys.login.toString(), true);
     await _sharedPreferences.setString(PrefKeys.phone.toString(), user.mobile);
-    await _sharedPreferences.setString(PrefKeys.token.toString(), user.token);
     await _sharedPreferences.setString(PrefKeys.name.toString(), user.name);
+    await _sharedPreferences.setString(
+        PrefKeys.token.toString(), 'Bearer ${user.token}');
   }
 
   bool get login =>

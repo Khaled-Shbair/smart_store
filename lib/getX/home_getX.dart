@@ -27,7 +27,7 @@ class HomeGetX extends GetxController {
       uri,
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer ${PrefController().token}',
+        'Authorization': PrefController().token,
       },
     );
     if (response.statusCode == 200) {
@@ -36,5 +36,4 @@ class HomeGetX extends GetxController {
       loading.value = false;
     }
   }
-
 }
