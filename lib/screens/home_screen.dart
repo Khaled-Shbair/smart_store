@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../constants/String.dart';
+import '../getX/favorite-products_getX.dart';
 import '../getX/home_getX.dart';
 import '../widgets/view_details.dart';
 
@@ -16,11 +17,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeGetX _homeGetX = Get.put(HomeGetX());
+  final FavoriteProductsGetX _favoriteProducts =
+      Get.put(FavoriteProductsGetX());
 
   @override
   Widget build(BuildContext context) {
     return GetX<HomeGetX>(
-
       builder: (controller) {
         if (_homeGetX.loading.isTrue) {
           return const Center(child: CircularProgressIndicator());

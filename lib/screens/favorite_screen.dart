@@ -13,14 +13,14 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  final FavoriteProductsGetX _favoriteProducts =
-      Get.put(FavoriteProductsGetX());
-
   @override
   Widget build(BuildContext context) {
     return GetX<FavoriteProductsGetX>(
+      initState: (state) {
+        state.controller!.getFavoriteProductsData();
+      },
       builder: (controller) {
-        if (_favoriteProducts.loading.isTrue) {
+        if (FavoriteProductsGetX.to.loading.isTrue) {
           return const Center(child: CircularProgressIndicator());
         }
         return listFavoriteProducts();
@@ -29,8 +29,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget listFavoriteProducts() {
-    if (_favoriteProducts.favoriteProducts != null) {
-      print('true');
+    if (FavoriteProductsGetX.to.favoriteProducts != null) {
       return GridView.builder(
         padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -39,7 +38,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           crossAxisSpacing: 10,
           childAspectRatio: 4 / 5.7,
         ),
-        itemCount: _favoriteProducts.favoriteProducts!.data!.length,
+        itemCount: FavoriteProductsGetX.to.favoriteProducts!.data!.length,
         itemBuilder: (context, index) {
           return Container(
             alignment: AlignmentDirectional.topStart,
@@ -63,7 +62,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         },
       );
     }
-    print('null');
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +82,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       borderRadius: BorderRadius.circular(20),
       child: Image(
         image: NetworkImage(
-          _favoriteProducts.favoriteProducts!.data![index].imageUrl,
+          FavoriteProductsGetX.to.favoriteProducts!.data![index].imageUrl,
         ),
         fit: BoxFit.fitHeight,
         width: double.infinity,
@@ -95,24 +93,26 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   Widget nameProduct(int index) {
     return ViewDetails(
-      data: _favoriteProducts.favoriteProducts!.data![index].nameEn,
+      data: FavoriteProductsGetX.to.favoriteProducts!.data![index].nameEn,
       fontSize: 20,
       overflow: TextOverflow.ellipsis,
     );
   }
 
   Widget priceProduct(int index) {
-    if (_favoriteProducts.favoriteProducts!.data![index].offerPrice != null) {
+    if (FavoriteProductsGetX.to.favoriteProducts!.data![index].offerPrice !=
+        null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ViewDetails(
-            data: _favoriteProducts.favoriteProducts!.data![index].offerPrice,
+            data: FavoriteProductsGetX
+                .to.favoriteProducts!.data![index].offerPrice,
             fontSize: 16,
           ),
           const SizedBox(width: 10),
           ViewDetails(
-            data: _favoriteProducts.favoriteProducts!.data![index].price,
+            data: FavoriteProductsGetX.to.favoriteProducts!.data![index].price,
             fontSize: 13,
             decoration: TextDecoration.lineThrough,
             fontWeight: FontWeight.w500,
@@ -123,7 +123,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       );
     }
     return ViewDetails(
-      data: _favoriteProducts.favoriteProducts!.data![index].price,
+      data: FavoriteProductsGetX.to.favoriteProducts!.data![index].price,
       fontSize: 16,
     );
   }
@@ -132,7 +132,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return RatingBarIndicator(
       itemSize: 18,
       rating: double.parse(
-          _favoriteProducts.favoriteProducts!.data![index].overalRate),
+          FavoriteProductsGetX.to.favoriteProducts!.data![index].overalRate),
       itemBuilder: (context, index) =>
           const Icon(Icons.star, color: Colors.yellowAccent),
     );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:smart_store/api/api_response.dart';
 import 'package:smart_store/models/home_model.dart';
 
+import '../getX/favorite-products_getX.dart';
 import '../models/home_model.dart';
+import '../utils/helpers.dart';
 import '../widgets/view_details.dart';
 
 class DetailsProduct extends StatefulWidget {
@@ -13,23 +16,23 @@ class DetailsProduct extends StatefulWidget {
   State<DetailsProduct> createState() => _DetailsProductState();
 }
 
-PreferredSizeWidget appBar(BuildContext context) {
-  return AppBar(
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    leading: IconButton(
-      onPressed: () => Navigator.pop(context),
-      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-    ),
-  );
-}
+class _DetailsProductState extends State<DetailsProduct> with Helpers {
+  PreferredSizeWidget appBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+      ),
+    );
+  }
 
-class _DetailsProductState extends State<DetailsProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBar(context),
+      appBar: appBar(),
       body: Column(
         children: [
           SizedBox(
@@ -201,9 +204,9 @@ class _DetailsProductState extends State<DetailsProduct> {
 
   Widget addToFavorite() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () => addFavorite(),
       style: ElevatedButton.styleFrom(
-        primary: Colors.red,
+        primary: widget.product.isFavorite ? Colors.red : Colors.blue,
         onPrimary: Colors.black,
         padding: EdgeInsetsDirectional.zero,
         minimumSize: const Size(35, 40),
@@ -213,4 +216,10 @@ class _DetailsProductState extends State<DetailsProduct> {
   }
 
   SizedBox sizedBox(double height) => SizedBox(height: height);
+
+  void addFavorite() async {
+    ApiResponse apiResponse = await FavoriteProductsGetX.to
+        .postFavoriteProductsData(id: widget.product.id.toString());
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+  }
 }

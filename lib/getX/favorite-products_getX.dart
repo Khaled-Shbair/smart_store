@@ -11,7 +11,6 @@ import '../shared_preferences/pref_controller.dart';
 class FavoriteProductsGetX extends GetxController {
   static FavoriteProductsGetX get to => Get.find();
   RxBool loading = false.obs;
-
   final _favoriteProducts = Rxn<FavoriteProductsModel>();
 
   FavoriteProductsModel? get favoriteProducts => _favoriteProducts.value;
@@ -43,8 +42,7 @@ class FavoriteProductsGetX extends GetxController {
     }
   }
 
-  Future<ApiResponse> postFavoriteProductsData({required int id}) async {
-    // loading.value = true;
+  Future<ApiResponse> postFavoriteProductsData({required dynamic id}) async {
     var uri = Uri.parse(ApiPath.favoriteProducts);
     var response = await http.post(
       uri,
@@ -58,10 +56,9 @@ class FavoriteProductsGetX extends GetxController {
     );
     if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
-      // if (response.statusCode == 200) {
-      //   favoriteProducts = FavoriteProductsModel.fromJson(jsonResponse);
-      //   //  loading.value = false;
-      // }
+      if (response.statusCode == 200) {
+        favoriteProducts = FavoriteProductsModel.fromJson(jsonResponse);
+      }
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],

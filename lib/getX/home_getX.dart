@@ -36,4 +36,5 @@ class HomeGetX extends GetxController {
       loading.value = false;
     }
   }
+
 }
