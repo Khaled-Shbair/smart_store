@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../constants/fonts.dart';
+
 class PasswordFiled extends StatelessWidget {
   const PasswordFiled({
     Key? key,
     required this.controller,
     required this.keyboard,
-    required this.hintText,
+    required this.labelText,
     required this.prefixIcon,
     required this.suffixIcon,
     required this.onPressed,
@@ -14,7 +16,7 @@ class PasswordFiled extends StatelessWidget {
 
   final TextEditingController controller;
   final TextInputType keyboard;
-  final String hintText;
+  final String labelText;
   final bool obscureText;
   final IconData prefixIcon;
   final IconData suffixIcon;
@@ -27,13 +29,29 @@ class PasswordFiled extends StatelessWidget {
       keyboardType: keyboard,
       obscureText: obscureText,
       decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(prefixIcon),
+        labelText: labelText,
+        prefixIcon: Icon(prefixIcon,color: const Color(0XFF0EBE7F)),
         suffixIcon: IconButton(
           onPressed: onPressed,
-          icon: Icon(suffixIcon),
+          icon: Icon(suffixIcon, color: const Color(0XFF0EBE7F)),
+        ),
+        labelStyle: const TextStyle(
+          fontFamily: FontsApp.fontRegular,
+          color: Color(0XFF677294),
         ),
         helperStyle: const TextStyle(color: Colors.grey),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: const BorderSide(
+            color: Color(0XFF0EBE7F),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: const BorderSide(
+            color: Color(0XFF0EBE7F),
+          ),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
         ),

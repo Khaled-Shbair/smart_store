@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:smart_store/shared_preferences/pref_controller.dart';
+import 'package:http/http.dart' as http;
 import '../api/api_paths.dart';
 import '../api/api_response.dart';
 import '../../models/user_model.dart';
-import 'package:http/http.dart' as http;
+import '../shared_preferences/pref_controller.dart';
 
 class AuthApiController extends GetxController {
   static AuthApiController get to => Get.find();
@@ -64,9 +64,7 @@ class AuthApiController extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 201) {
         // UserModel userModel = UserModel.fromJson(jsonResponse);
-        print('201 ,created');
       }
-      print('400 ,un created');
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],

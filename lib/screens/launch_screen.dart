@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_store/shared_preferences/pref_controller.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../constants/String.dart';
 
 class LaunchScreen extends StatefulWidget {
@@ -14,35 +14,35 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-     String route = PrefController().login ? smartStoreLayout : loginScreen;
-    Future.delayed(const Duration(seconds: 3),
-        () => Navigator.pushReplacementNamed(context, route));
+    String route = PrefController().login ? smartStoreLayout : loginScreen;
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => Navigator.pushReplacementNamed(context, route),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: AlignmentDirectional.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.blue.shade900,
-              Colors.blue.shade100,
-            ],
-          ),
-        ),
-        child: const Center(
-          child: Text(
-            'SMART STORE',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'asset/images/shopping_logo.svg',
+              height: 100,
+              width: 100,
             ),
-          ),
+            const SizedBox(height: 5),
+            const Text(
+              'Smart Store',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

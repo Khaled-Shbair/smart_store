@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_store/screens/auth_screen/login_screen.dart';
 import 'app_routers.dart';
 import 'shared_preferences/pref_controller.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
+    home: LoginScreen(),
     );
   }
 }

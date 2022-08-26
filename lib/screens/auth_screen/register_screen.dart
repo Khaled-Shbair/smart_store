@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       controller: _nameController,
       keyboard: TextInputType.name,
       prefixIcon: Icons.person,
-      hintText: 'Name',
+      labelText: 'Name',
     );
   }
 
@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       controller: _mobileController,
       keyboard: TextInputType.phone,
       prefixIcon: Icons.phone_android,
-      hintText: 'Mobile',
+      labelText: 'Mobile',
     );
   }
 
@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       controller: _passwordController,
       keyboard: TextInputType.visiblePassword,
       obscureText: _obscureText,
-      hintText: 'Password',
+      labelText: 'Password',
       prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
       suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
       onPressed: () {

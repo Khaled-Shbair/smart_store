@@ -58,6 +58,7 @@ class FavoriteProductsGetX extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
         favoriteProducts = FavoriteProductsModel.fromJson(jsonResponse);
+        getFavoriteProductsData();
       }
       return ApiResponse(
         message: jsonResponse['message'],

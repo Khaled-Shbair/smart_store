@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:smart_store/api/api_response.dart';
-import 'package:smart_store/models/home_model.dart';
-
+import '../api/api_response.dart';
+import '../getX/rate_products_getX.dart';
 import '../getX/favorite-products_getX.dart';
 import '../models/home_model.dart';
 import '../utils/helpers.dart';
@@ -17,6 +16,8 @@ class DetailsProduct extends StatefulWidget {
 }
 
 class _DetailsProductState extends State<DetailsProduct> with Helpers {
+  double rate = 0;
+
   PreferredSizeWidget appBar() {
     return AppBar(
       backgroundColor: Colors.transparent,
@@ -76,6 +77,8 @@ class _DetailsProductState extends State<DetailsProduct> with Helpers {
                 addToCart(),
                 const SizedBox(width: 20),
                 addToFavorite(),
+                const SizedBox(width: 20),
+                rateProduct(),
               ],
             ),
           ],
@@ -190,7 +193,7 @@ class _DetailsProductState extends State<DetailsProduct> with Helpers {
         ),
         RatingBarIndicator(
           itemSize: 22,
-          rating: double.parse(widget.product.overalRate),
+          rating: rate == 0 ? double.parse(widget.product.overalRate) : rate,
           itemBuilder: (context, index) =>
               const Icon(Icons.star, color: Colors.yellowAccent),
         ),
@@ -215,11 +218,83 @@ class _DetailsProductState extends State<DetailsProduct> with Helpers {
     );
   }
 
+  Widget rateProduct() {
+    return ElevatedButton(
+      onPressed: () => showDialogs(),
+      style: ElevatedButton.styleFrom(
+        primary: widget.product.isFavorite ? Colors.red : Colors.blue,
+        onPrimary: Colors.black,
+        padding: EdgeInsetsDirectional.zero,
+        minimumSize: const Size(35, 40),
+      ),
+      child: const Icon(Icons.star),
+    );
+  }
+
   SizedBox sizedBox(double height) => SizedBox(height: height);
+
+  Future<void> showDialogs() {
+    return showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const ViewDetails(
+            data: 'Rate This Product',
+            fontSize: 24,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                rateProducts();
+                Navigator.pop(context);
+              },
+              child: const ViewDetails(
+                data: 'OK',
+                fontSize: 18,
+              ),
+            ),
+          ],
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const ViewDetails(
+                data: 'Please leave a star rating',
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.w400,
+              ),
+              sizedBox(20),
+              RatingBar.builder(
+                itemSize: 46,
+                minRating: 1,
+                maxRating: 5,
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    rate = rating;
+                  });
+                },
+                updateOnDrag: true,
+                itemBuilder: (context, index) =>
+                    const Icon(Icons.star, color: Colors.yellowAccent),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   void addFavorite() async {
     ApiResponse apiResponse = await FavoriteProductsGetX.to
         .postFavoriteProductsData(id: widget.product.id.toString());
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+  }
+
+  void rateProducts() async {
+    ApiResponse apiResponse = await RateProductsGetX.to.postRateProducts(
+        id: widget.product.id.toString(), rate: rate.toString());
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
   }
 }

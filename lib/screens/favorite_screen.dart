@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
+import '../api/api_response.dart';
 import '../getX/favorite-products_getX.dart';
+import '../utils/helpers.dart';
 import '../widgets/view_details.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ class FavoriteScreen extends StatefulWidget {
   State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
 
-class _FavoriteScreenState extends State<FavoriteScreen> {
+class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return GetX<FavoriteProductsGetX>(
@@ -29,14 +31,14 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   }
 
   Widget listFavoriteProducts() {
-    if (FavoriteProductsGetX.to.favoriteProducts != null) {
+    if (FavoriteProductsGetX.to.favoriteProducts!.data!.isNotEmpty) {
       return GridView.builder(
         padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 4 / 5.7,
+          childAspectRatio: 4 / 7,
         ),
         itemCount: FavoriteProductsGetX.to.favoriteProducts!.data!.length,
         itemBuilder: (context, index) {
@@ -56,6 +58,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 priceProduct(index),
                 const SizedBox(height: 3),
                 rating(index),
+                IconButton(
+                  onPressed: () => addFavorite(index),
+                  icon: const Icon(Icons.favorite),
+                ),
               ],
             ),
           );
@@ -136,5 +142,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       itemBuilder: (context, index) =>
           const Icon(Icons.star, color: Colors.yellowAccent),
     );
+  }
+
+  void addFavorite(int index) async {
+    ApiResponse apiResponse = await FavoriteProductsGetX.to
+        .postFavoriteProductsData(
+            id: FavoriteProductsGetX.to.favoriteProducts!.data![index].id
+                .toString());
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
   }
 }

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../constants/String.dart';
 import '../getX/favorite-products_getX.dart';
 import '../getX/home_getX.dart';
+import '../getX/rate_products_getX.dart';
 import '../widgets/view_details.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeGetX _homeGetX = Get.put(HomeGetX());
+  final RateProductsGetX _rateProducts = Get.put(RateProductsGetX());
   final FavoriteProductsGetX _favoriteProducts =
       Get.put(FavoriteProductsGetX());
 

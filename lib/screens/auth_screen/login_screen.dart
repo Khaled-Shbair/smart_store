@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../widgets/view_details.dart';
 import '../../api/api_response.dart';
 import '../../constants/String.dart';
+import '../../constants/fonts.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
+import '../../widgets/appBar_app.dart';
+import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import '../../widgets/password_filed.dart';
 
@@ -35,146 +38,98 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     super.dispose();
   }
 
-  Widget titleText() {
-    return const Text(
-      'Welcome back..',
-      style: TextStyle(
-        color: Colors.black,
-        fontWeight: FontWeight.bold,
-        fontSize: 25,
-      ),
-    );
-  }
 
-  Widget subTitleText() {
-    return const Text(
-      'Login to start using app',
-      style: TextStyle(
-        color: Colors.black45,
-        fontWeight: FontWeight.w300,
-        height: 1,
-        fontSize: 17,
-      ),
-    );
-  }
-
-  Widget mobileField() {
-    return InputFiled(
-      controller: _mobileController,
-      keyboard: TextInputType.phone,
-      prefixIcon: Icons.phone_android,
-      hintText: 'Mobile',
-    );
-  }
-
-  Widget passwordField() {
-    return PasswordFiled(
-      controller: _passwordController,
-      keyboard: TextInputType.visiblePassword,
-      obscureText: _obscureText,
-      hintText: 'Password',
-      prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
-      suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
-      onPressed: () {
-        setState(() {
-          _obscureText = !_obscureText;
-        });
-      },
-    );
-  }
-
-  Widget loginButton() {
-    return ElevatedButton(
-      onPressed: () async => await _preformLogin(),
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50),
-      ),
-      child: const Text('Login'),
-    );
-  }
-
-  Widget forgetPasswordButton() {
-    return Align(
-      alignment: AlignmentDirectional.centerEnd,
-      child: TextButton(
-        onPressed: () {
-          Navigator.pushNamed(context, forgetPassword);
-        },
-        child: const Text(
-          'Forget password?',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget createButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Don\'t have an account',
-          style: TextStyle(
-            color: Colors.black45,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-        TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, registerScreen);
-            },
-            child: const Text(
-              'Create now!',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-      ],
-    );
-  }
-
-  Widget sizedBox() => const SizedBox(height: 20);
-
-  PreferredSizeWidget appBar() {
-    return AppBar(
-      title: const Text(
-        'LOGIN',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-      ),
-      centerTitle: true,
-      elevation: 0,
-      backgroundColor: Colors.white,
-    );
-  }
+  Widget sizedBox(double height) => SizedBox(height: height);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: appBar(),
+      appBar: appBarApp(title: 'LOGIN'),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          titleText(),
-          subTitleText(),
-          sizedBox(),
-          mobileField(),
-          sizedBox(),
-          passwordField(),
-          sizedBox(),
-          loginButton(),
-          sizedBox(),
-          forgetPasswordButton(),
-          sizedBox(),
-          createButton(),
+          const ViewDetails(
+            data: 'Welcome back',
+            fontFamily: FontsApp.fontMedium,
+            color: Colors.black,
+            fontSize: 25,
+          ),
+          const ViewDetails(
+            data: 'Login to start using app',
+            fontFamily: FontsApp.fontRegular,
+            color: Color(0XFF677294),
+            fontSize: 17,
+          ),
+          sizedBox(20),
+          InputFiled(
+            controller: _mobileController,
+            keyboard: TextInputType.phone,
+            prefixIcon: Icons.phone_android,
+            labelText: 'Mobile',
+          ),
+          sizedBox(20),
+          PasswordFiled(
+            controller: _passwordController,
+            keyboard: TextInputType.visiblePassword,
+            obscureText: _obscureText,
+            labelText: 'Password',
+            prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
+            suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
+          ),
+          sizedBox(20),
+          ButtonAuth(
+            text: 'Login',
+            onPressed: () async => await _preformLogin(),
+          ),
+          sizedBox(20),
+          Align(
+            alignment: AlignmentDirectional.centerEnd,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, forgetPassword);
+              },
+              child: const Text(
+                'Forget password?',
+                style: TextStyle(
+                  fontFamily: FontsApp.fontRegular,
+                  color: Color(0XFF0EBE7F),
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+          sizedBox(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Don\'t have an account?',
+                style: TextStyle(
+                  fontFamily: FontsApp.fontRegular,
+                  color: Color(0XFF0EBE7F),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, registerScreen);
+                },
+                child: const Text(
+                  'Create now!',
+                  style: TextStyle(
+                    fontFamily: FontsApp.fontBold,
+                    color: Color(0XFF0EBE7F),
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -191,7 +146,6 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         _passwordController.text.isNotEmpty) {
       return true;
     }
-
     showSnackBar(message: 'Enter required data!', error: true);
     return false;
   }
