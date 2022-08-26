@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:smart_store/getX/product_details_getX.dart';
 import '../widgets/view_details.dart';
 
@@ -16,7 +17,7 @@ PreferredSizeWidget appBar(BuildContext context) {
     elevation: 0,
     leading: IconButton(
       onPressed: () => Navigator.pop(context),
-      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
     ),
   );
 }
@@ -27,24 +28,60 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBar(context),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 275,
-            child: Image(
-              image: NetworkImage(
-                  ProductDetailsGetX.to.productDetails!.data!.imageUrl),
+      body: GetX<ProductDetailsGetX>(
+        initState: (state) {
+          state.controller!.getProductDetailsData();
+        },
+        builder: (controller) {
+          if (ProductDetailsGetX.to.loading.isTrue) {
+            const Center(child: CircularProgressIndicator());
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: imageProduct(),
+              ),
+              details(),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget imageProduct() {
+    return GridView.builder(
+      padding: const EdgeInsetsDirectional.only(
+        start: 20,
+        end: 20,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: .4 / .5,
+      ),
+      shrinkWrap: true,
+      itemCount: ProductDetailsGetX.to.productDetails!.data!.images.length,
+      itemBuilder: (context, index) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image(
+            alignment: AlignmentDirectional.center,
+            fit: BoxFit.fitWidth,
+            image: NetworkImage(
+              ProductDetailsGetX
+                  .to.productDetails!.data!.images[index].imageUrl,
             ),
           ),
-          details(),
-        ],
-      ),
+        );
+      },
     );
   }
 
   Widget details() {
     return Container(
-      height: 440,
+      height: 400,
       decoration: const BoxDecoration(
         color: Colors.grey,
         borderRadius: BorderRadius.only(

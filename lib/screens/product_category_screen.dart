@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:smart_store/getX/product_category_getX.dart';
 
+import '../constants/String.dart';
 import '../getX/product_details_getX.dart';
 import '../widgets/view_details.dart';
 
@@ -71,7 +72,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                 _productDetails.id.value =
                     ProductCategoryGetX.to.productCategory!.data![index].id;
               });
-              //   Navigator.pushNamed(context, detailsProduct, );
+              Navigator.pushNamed(context, productDetailsScreen);
             },
             child: Container(
               alignment: AlignmentDirectional.topStart,

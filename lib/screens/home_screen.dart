@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return GetX<HomeGetX>(
+
       builder: (controller) {
         if (_homeGetX.loading.isTrue) {
           return const Center(child: CircularProgressIndicator());

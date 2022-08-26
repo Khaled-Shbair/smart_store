@@ -14,4 +14,5 @@ class ApiPath {
   static const String categories = '${_baseUrl}categories';
   static const String subCategories = '${_baseUrl}sub-categories/';
   static const String products = '${_baseUrl}products/';
+  static const String favoriteProducts = '${_baseUrl}favorite-products';
 }

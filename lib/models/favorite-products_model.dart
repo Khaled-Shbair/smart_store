@@ -1,17 +1,21 @@
-class ProductDetailsModel {
+class FavoriteProductsModel {
   late bool status;
   late String message;
-  ProductDetails? data;
+  List<FavoriteProducts>? data;
 
-  ProductDetailsModel.fromJson(Map<String, dynamic> json) {
+  FavoriteProductsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data =
-        json['object'] != null ? ProductDetails.fromJson(json['object']) : null;
+    if (json['list'] != null) {
+      data = <FavoriteProducts>[];
+      json['list'].forEach((v) {
+        data!.add(FavoriteProducts.fromJson(v));
+      });
+    }
   }
 }
 
-class ProductDetails {
+class FavoriteProducts {
   late int id;
   late String nameEn;
   late String nameAr;
@@ -25,9 +29,9 @@ class ProductDetails {
   late dynamic offerPrice;
   late bool isFavorite;
   late String imageUrl;
-  late List<Images> images;
+  late Pivot pivot;
 
-  ProductDetails.fromJson(Map<String, dynamic> json) {
+  FavoriteProducts.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];
@@ -41,25 +45,16 @@ class ProductDetails {
     offerPrice = json['offer_price'];
     isFavorite = json['is_favorite'];
     imageUrl = json['image_url'];
-    if (json['images'] != null) {
-      images = <Images>[];
-      json['images'].forEach((v) {
-        images.add(Images.fromJson(v));
-      });
-    }
+    pivot = Pivot.fromJson(json['pivot']);
   }
 }
 
-class Images {
-  late int id;
-  late String objectId;
-  late String url;
-  late String imageUrl;
+class Pivot {
+  late String userId;
+  late String productId;
 
-  Images.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    objectId = json['object_id'];
-    url = json['url'];
-    imageUrl = json['image_url'];
+  Pivot.fromJson(Map<String, dynamic> json) {
+    userId = json['user_id'];
+    productId = json['product_id'];
   }
 }
