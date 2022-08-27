@@ -8,7 +8,7 @@ import '../shared_preferences/pref_controller.dart';
 
 class AuthApiController extends GetxController {
   static AuthApiController get to => Get.find();
-  UserModel? userModel;
+  final String lang = 'en';
 
   Future<ApiResponse> login({
     required String phone,
@@ -19,7 +19,7 @@ class AuthApiController extends GetxController {
       uri,
       body: {'mobile': phone, 'password': password},
       headers: {
-        'lang': 'en',
+        'lang': lang,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     );
@@ -40,6 +40,60 @@ class AuthApiController extends GetxController {
     );
   }
 
+  Future<ApiResponse> resetPassword({
+    required String phone,
+    required String code,
+    required String password,
+  }) async {
+    var uri = Uri.parse(ApiPath.resetPassword);
+    var response = await http.post(uri, headers: {
+      'lang': lang,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }, body: {
+      'mobile': phone,
+      'code': code,
+      'password': password,
+      'password_confirmation': password,
+    });
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {}
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> forgetPassword({required String phone}) async {
+    var uri = Uri.parse(ApiPath.forgetPassword);
+    var response = await http.post(uri, headers: {
+      'lang': lang,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }, body: {
+      'mobile': phone,
+    });
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        print(jsonResponse['code']);
+      }
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+///////////////////////////////////////////////////////////////////////////////
   Future<ApiResponse> register({
     required String name,
     required String phone,
@@ -65,27 +119,6 @@ class AuthApiController extends GetxController {
       if (response.statusCode == 201) {
         // UserModel userModel = UserModel.fromJson(jsonResponse);
       }
-      return ApiResponse(
-        message: jsonResponse['message'],
-        status: jsonResponse['status'],
-      );
-    }
-    return ApiResponse(
-      message: 'Something went wrong, try again',
-      status: false,
-    );
-  }
-
-  Future<ApiResponse> sendCode(
-      {required String phone, required String code}) async {
-    var uri = Uri.parse(ApiPath.activate);
-    var response = await http.post(uri, body: {
-      'mobile': phone,
-      'code': code,
-    });
-    if (response.statusCode == 200 || response.statusCode == 400) {
-      var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 200) {}
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],

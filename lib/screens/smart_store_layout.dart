@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
 import '../models/screen_model.dart';
+import '../widgets/appBar_app.dart';
 import 'category_screen.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
@@ -26,23 +28,13 @@ class _SmartStoreLayoutState extends State<SmartStoreLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white12,
-      appBar: AppBar(
-        titleTextStyle: const TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        title: Text(screen[currentIndex].title),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      backgroundColor: Colors.white,
+      appBar: appBarApp(title: screen[currentIndex].title),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (value) => setState(() => currentIndex = value),
-        selectedItemColor: Colors.red,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: MyColors.green,
+        unselectedItemColor: MyColors.geryBold,
         showSelectedLabels: false,
         iconSize: 28,
         items: const [

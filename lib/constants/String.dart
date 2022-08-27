@@ -9,3 +9,4 @@ const String smartStoreLayout = '/smartStoreLayout';
 const String subCategoryScreen = '/subCategoryScreen';
 const String productCategoryScreen = '/productCategoryScreen';
 const String productDetailsScreen = '/productDetailsScreen';
+const String resetPasswordScreen = '/resetPasswordScreen';

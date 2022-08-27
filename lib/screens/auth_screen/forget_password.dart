@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../../api/api_response.dart';
 import '../../constants/String.dart';
+import '../../constants/colors.dart';
 import '../../constants/fonts.dart';
+import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/appBar_app.dart';
 import '../../widgets/button_auth.dart';
@@ -31,82 +32,6 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
     super.dispose();
   }
 
-  void show() {
-    showModalBottomSheet(
-      barrierColor: Colors.black.withAlpha(200),
-      backgroundColor: Colors.transparent,
-      elevation: 4,
-      context: context,
-      builder: (context) {
-        return BottomSheet(
-          onClosing: () {},
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-          ),
-          builder: (context) {
-            return Padding(
-              padding: const EdgeInsetsDirectional.only(
-                top: 20,
-                start: 20,
-                end: 20,
-                bottom: 50,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional.center,
-                    child: Container(
-                      height: 5,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        color: const Color(0XFFC4C4C4),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 54),
-                  const ViewDetails(
-                    data: 'Enter 4 Digits Code',
-                    fontSize: 24,
-                    color: Colors.black,
-                    fontFamily: FontsApp.fontMedium,
-                  ),
-                  const SizedBox(height: 12),
-                  const ViewDetails(
-                    data:
-                        'Enter the 4 digits code that you received on your email.',
-                    fontSize: 16,
-                    color: Color(0XFF677294),
-                    fontFamily: FontsApp.fontRegular,
-                  ),
-                  const SizedBox(height: 20),
-                  InputFiled(
-                    controller: _mobileController,
-                    keyboard: TextInputType.phone,
-                    prefixIcon: Icons.phone_android,
-                    labelText: 'Mobile',
-                  ),
-                  const SizedBox(height: 30),
-                  ButtonAuth(
-                    text: 'Continue',
-                    // onPressed: () async => await _preformForget(),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +51,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             data: 'Enter your phone number for the verification process, '
                 'we will send 4 digits code to your phone.',
             fontSize: 15,
-            color: Color(0XFF677294),
+            color: MyColors.gery,
             fontFamily: FontsApp.fontRegular,
           ),
           const SizedBox(height: 30),
@@ -139,8 +64,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
           const SizedBox(height: 30),
           ButtonAuth(
             text: 'Send',
-            // onPressed: () async => await _preformForget(),
-            onPressed: () => show(),
+            onPressed: () async => await _preformForget(),
           ),
         ],
       ),
@@ -162,15 +86,16 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   }
 
   Future<void> _forget() async {
-    //ApiResponse apiResponse = await _controller.login(
-    //    phone: _mobileController.text, password: _passwordController.text);
-    //showSnackBar(message: apiResponse.message, error: !apiResponse.status);
-    //if (apiResponse.status) {
-    //  navigator();
-    //}
+    ApiResponse apiResponse = await AuthApiController.to
+        .forgetPassword(phone: _mobileController.text);
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+    if (apiResponse.status) {
+      navigator();
+    }
   }
 
   void navigator() {
-    //Navigator.pushReplacementNamed(context, );
+    Navigator.pushNamed(context, resetPasswordScreen,
+        arguments: _mobileController.text);
   }
 }

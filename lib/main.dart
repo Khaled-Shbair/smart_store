@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
-    home: LoginScreen(),
     );
   }
 }

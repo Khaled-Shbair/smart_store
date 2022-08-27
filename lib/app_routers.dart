@@ -4,7 +4,7 @@ import 'models/home_model.dart';
 import 'screens/auth_screen/forget_password.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/auth_screen/register_screen.dart';
-import 'screens/auth_screen/send_code_screen.dart';
+import 'screens/auth_screen/reset_password_screen.dart';
 import 'screens/details product.dart';
 import 'screens/home_screen.dart';
 import 'screens/launch_screen.dart';
@@ -36,10 +36,10 @@ class AppRouters {
       case productDetailsScreen:
         return MaterialPageRoute(
             builder: (context) => const ProductDetailsScreen());
-      case sendCodeScreen:
+      case resetPasswordScreen:
         final phone = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (context) => SendCodeScreen(phone: phone));
+            builder: (context) => ResetPasswordScreen(phone: phone));
       case detailsProduct:
         final latestProducts = settings.arguments as Products;
         return MaterialPageRoute(

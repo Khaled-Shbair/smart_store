@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
+
 class CodeField extends StatelessWidget {
   const CodeField({
     Key? key,
@@ -16,6 +18,7 @@ class CodeField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
+        keyboardType: TextInputType.number,
         focusNode: focusNode,
         controller: controller,
         onChanged: onChanged,
@@ -24,11 +27,24 @@ class CodeField extends StatelessWidget {
         autofocus: true,
         decoration: InputDecoration(
           counterText: '',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(
+              color: MyColors.green,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(
+              color: MyColors.green,
+            ),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(color: MyColors.red),
           ),
         ),
       ),

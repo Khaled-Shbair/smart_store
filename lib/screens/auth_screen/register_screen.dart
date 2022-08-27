@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_store/constants/String.dart';
-import 'package:smart_store/getX/cities_getX.dart';
+import '../../constants/String.dart';
+import '../../getX/cities_getX.dart';
 import '../../api/api_response.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../models/city_model.dart';

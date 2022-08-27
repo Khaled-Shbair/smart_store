@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
 import '../constants/fonts.dart';
 
 class InputFiled extends StatelessWidget {
@@ -25,29 +26,35 @@ class InputFiled extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         prefixText: '0',
+        prefixStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+        ),
         counterText: '',
-        prefixIcon: Icon(prefixIcon, color: const Color(0XFF0EBE7F)),
+        prefixIcon: Icon(prefixIcon, color: MyColors.green),
         labelStyle: const TextStyle(
-            fontFamily: FontsApp.fontRegular, color: Color(0XFF677294)),
+          fontFamily: FontsApp.fontRegular,
+          color: MyColors.gery,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
           borderSide: const BorderSide(
-            color: Color(0XFF0EBE7F),
+            color: MyColors.green,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
           borderSide: const BorderSide(
-            color: Color(0XFF0EBE7F),
+            color: MyColors.green,
           ),
         ),
-        helperStyle: const TextStyle(color: Colors.grey),
+        helperStyle: const TextStyle(color: MyColors.gery),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: MyColors.red),
         ),
       ),
     );
