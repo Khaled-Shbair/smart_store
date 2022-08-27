@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
 import '../constants/fonts.dart';
 
 class PasswordFiled extends StatelessWidget {
@@ -30,26 +31,26 @@ class PasswordFiled extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon,color: const Color(0XFF0EBE7F)),
+        prefixIcon: Icon(prefixIcon, color: ColorsApp.green),
         suffixIcon: IconButton(
           onPressed: onPressed,
-          icon: Icon(suffixIcon, color: const Color(0XFF0EBE7F)),
+          icon: Icon(suffixIcon, color: ColorsApp.green),
         ),
         labelStyle: const TextStyle(
           fontFamily: FontsApp.fontRegular,
-          color: Color(0XFF677294),
+          color: ColorsApp.gery,
         ),
-        helperStyle: const TextStyle(color: Colors.grey),
+        helperStyle: const TextStyle(color: ColorsApp.gery),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
           borderSide: const BorderSide(
-            color: Color(0XFF0EBE7F),
+            color: ColorsApp.green,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
           borderSide: const BorderSide(
-            color: Color(0XFF0EBE7F),
+            color: ColorsApp.green,
           ),
         ),
         border: OutlineInputBorder(
@@ -57,7 +58,7 @@ class PasswordFiled extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: Colors.red),
+          borderSide: const BorderSide(color: ColorsApp.red),
         ),
       ),
     );

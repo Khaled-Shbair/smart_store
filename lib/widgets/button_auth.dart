@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
 import '../constants/fonts.dart';
 
 class ButtonAuth extends StatelessWidget {
@@ -17,7 +18,7 @@ class ButtonAuth extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        primary: const Color(0XFF0EBE7F),
+        primary: ColorsApp.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

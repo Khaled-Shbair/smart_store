@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../constants/colors.dart';
+
 mixin Helpers {
   void showSnackBar({required String message, bool error = false}) {
     Fluttertoast.showToast(
@@ -10,7 +12,7 @@ mixin Helpers {
       textColor: Colors.white,
       gravity: ToastGravity.SNACKBAR,
       toastLength: Toast.LENGTH_LONG,
-      backgroundColor: error ? Colors.red : Colors.green,
+      backgroundColor: error ? ColorsApp.red : ColorsApp.green,
     );
   }
 }

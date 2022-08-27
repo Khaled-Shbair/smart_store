@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constants/colors.dart';
 import '../../widgets/view_details.dart';
 import '../../api/api_response.dart';
-import '../../constants/String.dart';
+import '../../constants/routes.dart';
 import '../../constants/fonts.dart';
 import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
@@ -38,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     super.dispose();
   }
 
-
   Widget sizedBox(double height) => SizedBox(height: height);
 
   @override
@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           const ViewDetails(
             data: 'Login to start using app',
             fontFamily: FontsApp.fontRegular,
-            color: Color(0XFF677294),
+            color: ColorsApp.gery,
             fontSize: 17,
           ),
           sizedBox(20),
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
               });
             },
           ),
-          sizedBox(20),
+          sizedBox(40),
           ButtonAuth(
             text: 'Login',
             onPressed: () async => await _preformLogin(),
@@ -98,13 +98,13 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                 'Forget password?',
                 style: TextStyle(
                   fontFamily: FontsApp.fontRegular,
-                  color: Color(0XFF0EBE7F),
+                  color: ColorsApp.green,
                   decoration: TextDecoration.underline,
                 ),
               ),
             ),
           ),
-          sizedBox(20),
+          sizedBox(15),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                 'Don\'t have an account?',
                 style: TextStyle(
                   fontFamily: FontsApp.fontRegular,
-                  color: Color(0XFF0EBE7F),
+                  color: ColorsApp.green,
                 ),
               ),
               TextButton(
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                   'Create now!',
                   style: TextStyle(
                     fontFamily: FontsApp.fontBold,
-                    color: Color(0XFF0EBE7F),
+                    color: ColorsApp.green,
                     decoration: TextDecoration.underline,
                   ),
                 ),

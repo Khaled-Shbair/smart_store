@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../shared_preferences/pref_controller.dart';
-import '../constants/String.dart';
+import '../constants/routes.dart';
 
 class LaunchScreen extends StatefulWidget {
   const LaunchScreen({Key? key}) : super(key: key);

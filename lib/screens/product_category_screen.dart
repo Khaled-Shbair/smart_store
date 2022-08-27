@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:smart_store/getX/product_category_getX.dart';
 
-import '../constants/String.dart';
+import '../constants/routes.dart';
 import '../getX/product_details_getX.dart';
 import '../widgets/view_details.dart';
 

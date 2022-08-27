@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_store/getX/sub_category_model_getX.dart';
-import '../constants/String.dart';
+import '../constants/routes.dart';
 import '../getX/category_getX.dart';
 import '../widgets/view_details.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/String.dart';
+import '../constants/routes.dart';
 import '../getX/product_category_getX.dart';
 import '../getX/sub_category_model_getX.dart';
 import '../widgets/view_details.dart';
