@@ -1,13 +1,11 @@
 import 'dart:convert';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import '../api/api_paths.dart';
-import '../api/api_response.dart';
+import 'api_paths.dart';
+import 'api_response.dart';
 import '../../models/user_model.dart';
+import 'package:http/http.dart' as http;
 import '../shared_preferences/pref_controller.dart';
 
-class AuthApiController extends GetxController {
-  static AuthApiController get to => Get.find();
+class AuthApiController {
   final String lang = 'en';
 
   Future<ApiResponse> login({
@@ -81,6 +79,32 @@ class AuthApiController extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
         print(jsonResponse['code']);
+      }
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> logout() async {
+    var uri = Uri.parse(ApiPath.logout);
+    var response = await http.get(
+      uri,
+      headers: {
+        'lang': lang,
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': PrefController().token,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        PrefController().clear();
       }
       return ApiResponse(
         message: jsonResponse['message'],

@@ -7,7 +7,7 @@ import '../../constants/colors.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
-import '../../getX/auth_controller_getX.dart';
+import '../../api/auth_api_controller.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
@@ -95,8 +95,8 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   }
 
   Future<void> _forget() async {
-    ApiResponse apiResponse = await AuthApiController.to
-        .forgetPassword(phone: _mobileController.text);
+    ApiResponse apiResponse =
+        await AuthApiController().forgetPassword(phone: _mobileController.text);
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
       navigator();

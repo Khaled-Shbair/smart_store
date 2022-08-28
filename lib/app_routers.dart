@@ -11,7 +11,7 @@ import 'screens/home_screen.dart';
 import 'screens/launch_screen.dart';
 import 'screens/product_category_screen.dart';
 import 'screens/product_details_screen.dart';
-import 'screens/smart_store_layout.dart';
+import 'screens/app_layout.dart';
 import 'screens/sub_category_screen.dart';
 
 class AppRouters {

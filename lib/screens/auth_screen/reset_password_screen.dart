@@ -7,7 +7,7 @@ import '../../widgets/code_field.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
-import '../../getX/auth_controller_getX.dart';
+import '../../api/auth_api_controller.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key, required this.phone}) : super(key: key);
@@ -209,7 +209,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   }
 
   Future<void> _sendCode() async {
-    ApiResponse apiResponse = await AuthApiController.to.resetPassword(
+    ApiResponse apiResponse = await AuthApiController().resetPassword(
       phone: widget.phone,
       password: _newPasswordController.text,
       code: code,

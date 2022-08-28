@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../utils/helpers.dart';
 import '../../constants/fonts.dart';
 import '../../constants/colors.dart';
@@ -9,7 +8,7 @@ import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
-import '../../getX/auth_controller_getX.dart';
+import '../../api/auth_api_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with Helpers {
-  final AuthApiController _controller = Get.put(AuthApiController());
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
   bool _obscureText = true;
@@ -160,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   }
 
   Future<void> _login() async {
-    ApiResponse apiResponse = await _controller.login(
+    ApiResponse apiResponse = await AuthApiController().login(
         phone: _mobileController.text, password: _passwordController.text);
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
@@ -169,6 +167,6 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   }
 
   void navigator() {
-    Navigator.pushReplacementNamed(context, mainScreen);
+    Navigator.pushReplacementNamed(context, appLayout);
   }
 }

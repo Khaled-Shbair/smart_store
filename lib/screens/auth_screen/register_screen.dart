@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../constants/routes.dart';
 import '../../getX/cities_getX.dart';
 import '../../api/api_response.dart';
-import '../../getX/auth_controller_getX.dart';
+import '../../api/auth_api_controller.dart';
 import '../../models/city_model.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/input_filed.dart';
