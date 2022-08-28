@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../utils/helpers.dart';
+import '../../constants/fonts.dart';
 import '../../constants/colors.dart';
-import '../../widgets/view_details.dart';
 import '../../api/api_response.dart';
 import '../../constants/routes.dart';
-import '../../constants/fonts.dart';
-import '../../getX/auth_controller_getX.dart';
-import '../../utils/helpers.dart';
-import '../../widgets/appBar_app.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
+import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
+import '../../getX/auth_controller_getX.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -44,7 +43,17 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarApp(title: 'LOGIN'),
+      appBar: AppBar(
+        title: const ViewDetails(
+          data: 'LOGIN',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),

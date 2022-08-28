@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
-import '../../widgets/password_filed.dart';
-import '../../api/api_response.dart';
-import '../../constants/fonts.dart';
-import '../../getX/auth_controller_getX.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/appBar_app.dart';
-import '../../widgets/button_auth.dart';
+import '../../constants/fonts.dart';
+import '../../constants/colors.dart';
+import '../../api/api_response.dart';
 import '../../widgets/code_field.dart';
+import '../../widgets/button_auth.dart';
 import '../../widgets/view_details.dart';
+import '../../widgets/password_filed.dart';
+import '../../getX/auth_controller_getX.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key, required this.phone}) : super(key: key);
@@ -67,7 +66,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarApp(title: 'RESET PASSWORD'),
+      appBar: AppBar(
+        title: const ViewDetails(
+          data: 'RESET PASSWORD',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),

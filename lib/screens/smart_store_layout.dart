@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-
-import '../constants/colors.dart';
-import '../models/screen_model.dart';
-import '../widgets/appBar_app.dart';
 import 'category_screen.dart';
 import 'favorite_screen.dart';
 import 'home_screen.dart';
-import 'notification_screen.dart';
+import 'settings_screen.dart';
+import '../constants/colors.dart';
 
-class SmartStoreLayout extends StatefulWidget {
-  const SmartStoreLayout({Key? key}) : super(key: key);
+class AppLayout extends StatefulWidget {
+  const AppLayout({Key? key}) : super(key: key);
 
   @override
-  State<SmartStoreLayout> createState() => _SmartStoreLayoutState();
+  State<AppLayout> createState() => _AppLayoutState();
 }
 
-class _SmartStoreLayoutState extends State<SmartStoreLayout> {
-  final List<Screen> screen = <Screen>[
-    Screen(title: 'Home', widget: const HomeScreen()),
-    Screen(title: 'Category', widget: const CategoryScreen()),
-    Screen(title: 'Favorite', widget: const FavoriteScreen()),
-    Screen(title: 'Notification', widget: const NotificationScreen()),
+class _AppLayoutState extends State<AppLayout> {
+  final List<Widget> screen = <Widget>[
+    const HomeScreen(),
+    const CategoryScreen(),
+    const FavoriteScreen(),
+    const SettingsScreen()
   ];
 
   int currentIndex = 0;
@@ -28,8 +25,6 @@ class _SmartStoreLayoutState extends State<SmartStoreLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: appBarApp(title: screen[currentIndex].title),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (value) => setState(() => currentIndex = value),
@@ -41,10 +36,10 @@ class _SmartStoreLayoutState extends State<SmartStoreLayout> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.category), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
         ],
       ),
-      body: screen[currentIndex].widget,
+      body: screen[currentIndex],
     );
   }
 }

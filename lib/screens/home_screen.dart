@@ -1,16 +1,18 @@
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../constants/colors.dart';
-import '../constants/fonts.dart';
-import '../constants/routes.dart';
-import '../getX/favorite-products_getX.dart';
+import '../utils/helpers.dart';
 import '../getX/home_getX.dart';
-import '../getX/rate_products_getX.dart';
+import '../constants/fonts.dart';
 import '../widgets/loading.dart';
+import '../api/api_response.dart';
+import '../constants/colors.dart';
+import '../constants/routes.dart';
 import '../widgets/title_list.dart';
 import '../widgets/view_details.dart';
+import '../getX/rate_products_getX.dart';
+import '../getX/favorite-products_getX.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,26 +21,40 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with Helpers {
   final HomeGetX _homeGetX = Get.put(HomeGetX());
   final RateProductsGetX rateProducts = Get.put(RateProductsGetX());
   final FavoriteProductsGetX favoriteProducts = Get.put(FavoriteProductsGetX());
 
   @override
   Widget build(BuildContext context) {
-    return GetX<HomeGetX>(
-      builder: (controller) {
-        if (_homeGetX.loading.isTrue) {
-          return const Loading();
-        }
-        return ListView(
-          children: [
-            carouselSlider(),
-            listCategories(),
-            listProduct(),
-          ],
-        );
-      },
+    return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
+      appBar: AppBar(
+        title: const ViewDetails(
+          data: 'Home',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: GetX<HomeGetX>(
+        builder: (controller) {
+          if (_homeGetX.loading.isTrue) {
+            return const Loading();
+          }
+          return ListView(
+            children: [
+              carouselSlider(),
+              listCategories(),
+              listProduct(),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -88,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TitleList(
               title: 'Categories',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, categoryScreen);
+              },
             ),
             const SizedBox(height: 5),
             SizedBox(
@@ -153,7 +171,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TitleList(
               title: 'Products',
-              onPressed: () {},
+              onPressed: () {
+                //TODO: later
+                //  Navigator.pushNamed(context, );
+              },
             ),
             const SizedBox(height: 10),
             GridView.builder(
@@ -168,48 +189,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               itemCount: _homeGetX.homeModel!.data!.latestProducts!.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      detailsProduct,
-                      arguments:
-                          _homeGetX.homeModel!.data!.latestProducts![index],
-                    );
-                  },
-                  child: Container(
-                    alignment: AlignmentDirectional.topStart,
-                    decoration: BoxDecoration(
-                      color: ColorsApp.background.withAlpha(117),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        imageProduct(index),
-                        const SizedBox(height: 5),
-                        ViewDetails(
-                          data: _homeGetX
-                              .homeModel!.data!.latestProducts![index].nameEn,
-                          fontSize: 18,
-                          color: ColorsApp.black,
-                          fontFamily: FontsApp.fontMedium,
-                          overflow: TextOverflow.ellipsis,
+                return Container(
+                  alignment: AlignmentDirectional.topStart,
+                  decoration: BoxDecoration(
+                    color: ColorsApp.background.withAlpha(117),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      imageProduct(index),
+                      const SizedBox(height: 5),
+                      ViewDetails(
+                        data: _homeGetX
+                            .homeModel!.data!.latestProducts![index].nameEn,
+                        fontSize: 18,
+                        color: ColorsApp.black,
+                        fontFamily: FontsApp.fontMedium,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 3),
+                      priceProduct(index),
+                      const SizedBox(height: 3),
+                      RatingBarIndicator(
+                        itemSize: 18,
+                        rating: double.parse(_homeGetX.homeModel!.data!
+                            .latestProducts![index].overalRate),
+                        itemBuilder: (context, index) => const Icon(
+                          Icons.star,
+                          color: Colors.yellowAccent,
                         ),
-                        const SizedBox(height: 3),
-                        priceProduct(index),
-                        const SizedBox(height: 3),
-                        RatingBarIndicator(
-                          itemSize: 18,
-                          rating: double.parse(_homeGetX.homeModel!.data!
-                              .latestProducts![index].overalRate),
-                          itemBuilder: (context, index) => const Icon(
-                            Icons.star,
-                            color: Colors.yellowAccent,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -252,12 +263,25 @@ class _HomeScreenState extends State<HomeScreen> {
           Align(
             alignment: AlignmentDirectional.topEnd,
             child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.favorite,
-                color: ColorsApp.red,
-                size: 28,
-              ),
+              onPressed: () {
+                addFavorite(index);
+                setState(() {
+                  _homeGetX.homeModel!.data!.latestProducts![index].isFavorite =
+                      !_homeGetX
+                          .homeModel!.data!.latestProducts![index].isFavorite;
+                });
+              },
+              icon: _homeGetX.homeModel!.data!.latestProducts![index].isFavorite
+                  ? const Icon(
+                      Icons.favorite,
+                      color: ColorsApp.red,
+                      size: 28,
+                    )
+                  : const Icon(
+                      Icons.favorite_outline,
+                      color: ColorsApp.red,
+                      size: 28,
+                    ),
               padding: EdgeInsetsDirectional.zero,
             ),
           ),
@@ -282,12 +306,24 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.favorite,
-            color: ColorsApp.red,
-            size: 28,
-          ),
+          onPressed: () {
+            addFavorite(index);
+            setState(() {
+              _homeGetX.homeModel!.data!.latestProducts![index].isFavorite =
+                  !_homeGetX.homeModel!.data!.latestProducts![index].isFavorite;
+            });
+          },
+          icon: _homeGetX.homeModel!.data!.latestProducts![index].isFavorite
+              ? const Icon(
+                  Icons.favorite,
+                  color: ColorsApp.red,
+                  size: 28,
+                )
+              : const Icon(
+                  Icons.favorite_outline,
+                  color: ColorsApp.red,
+                  size: 28,
+                ),
           padding: EdgeInsetsDirectional.zero,
         ),
       ],
@@ -325,10 +361,14 @@ class _HomeScreenState extends State<HomeScreen> {
       fontSize: 16,
     );
   }
+
+  void addFavorite(int index) async {
+    ApiResponse apiResponse = await favoriteProducts.postFavoriteProductsData(
+        id: _homeGetX.homeModel!.data!.latestProducts![index].id.toString());
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+  }
 }
 /*
-
-
   Widget listProduct() {
     if (_homeGetX.homeModel != null) {
       return Padding(

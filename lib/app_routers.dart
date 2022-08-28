@@ -25,9 +25,10 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const RegisterScreen());
       case forgetPassword:
         return MaterialPageRoute(builder: (context) => const ForgetPassword());
-      case smartStoreLayout:
-        return MaterialPageRoute(
-            builder: (context) => const SmartStoreLayout());
+      case categoryScreen:
+        return MaterialPageRoute(builder: (context) => const CategoryScreen());
+      case appLayout:
+        return MaterialPageRoute(builder: (context) => const AppLayout());
       case subCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => const SubCategoryScreen());

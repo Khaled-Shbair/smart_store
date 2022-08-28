@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_store/getX/product_details_getX.dart';
+import '../getX/product_details_getX.dart';
 import '../widgets/view_details.dart';
 
 class ProductDetailsScreen extends StatefulWidget {

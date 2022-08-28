@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../constants/colors.dart';
 import '../shared_preferences/pref_controller.dart';
 import '../constants/routes.dart';
 
@@ -14,16 +15,16 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   void initState() {
     super.initState();
-    String route = PrefController().login ? smartStoreLayout : loginScreen;
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, route),
-    );
+    String route = PrefController().login ? appLayout : loginScreen;
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, route);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

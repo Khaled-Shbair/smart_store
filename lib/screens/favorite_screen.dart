@@ -1,11 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../api/api_response.dart';
-import '../getX/favorite-products_getX.dart';
 import '../utils/helpers.dart';
+import '../constants/fonts.dart';
+import '../api/api_response.dart';
+import '../constants/colors.dart';
+import '../widgets/loading.dart';
 import '../widgets/view_details.dart';
+import '../getX/favorite-products_getX.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -15,52 +17,77 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
+
   @override
   Widget build(BuildContext context) {
-    return GetX<FavoriteProductsGetX>(
-      initState: (state) {
-        state.controller!.getFavoriteProductsData();
-      },
-      builder: (controller) {
-        if (FavoriteProductsGetX.to.loading.isTrue) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return listFavoriteProducts();
-      },
+    return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
+      appBar: AppBar(
+        title: const ViewDetails(
+          data: 'Favorite',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: GetX<FavoriteProductsGetX>(
+        initState: (state) {
+          state.controller!.getFavoriteProductsData();
+        },
+        builder: (controller) {
+          if (FavoriteProductsGetX.to.loading.isTrue) {
+            return const Loading();
+          }
+          return listFavoriteProducts();
+        },
+      ),
     );
   }
 
   Widget listFavoriteProducts() {
     if (FavoriteProductsGetX.to.favoriteProducts!.data!.isNotEmpty) {
       return GridView.builder(
-        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
+          mainAxisSpacing: 15,
           crossAxisSpacing: 10,
-          childAspectRatio: 4 / 7,
+          childAspectRatio: 190 / 264,
         ),
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
         itemCount: FavoriteProductsGetX.to.favoriteProducts!.data!.length,
         itemBuilder: (context, index) {
           return Container(
             alignment: AlignmentDirectional.topStart,
             decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(20),
+              color: ColorsApp.background.withAlpha(117),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 imageProduct(index),
                 const SizedBox(height: 5),
-                nameProduct(index),
+                ViewDetails(
+                  data: FavoriteProductsGetX
+                      .to.favoriteProducts!.data![index].nameEn,
+                  fontSize: 18,
+                  color: ColorsApp.black,
+                  fontFamily: FontsApp.fontMedium,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 const SizedBox(height: 3),
                 priceProduct(index),
                 const SizedBox(height: 3),
-                rating(index),
-                IconButton(
-                  onPressed: () => addFavorite(index),
-                  icon: const Icon(Icons.favorite),
+                RatingBarIndicator(
+                  itemSize: 18,
+                  rating: double.parse(FavoriteProductsGetX
+                      .to.favoriteProducts!.data![index].overalRate),
+                  itemBuilder: (context, index) =>
+                      const Icon(Icons.star, color: Colors.yellowAccent),
                 ),
               ],
             ),
@@ -73,10 +100,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: const [
-          Icon(Icons.warning, size: 84, color: Colors.red),
+          Icon(Icons.warning, size: 84, color: ColorsApp.green),
           ViewDetails(
             data: 'No Data',
+            fontFamily: FontsApp.fontMedium,
             fontSize: 30,
+            color: ColorsApp.green,
           ),
         ],
       ),
@@ -84,24 +113,33 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
   }
 
   Widget imageProduct(int index) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Image(
-        image: NetworkImage(
-          FavoriteProductsGetX.to.favoriteProducts!.data![index].imageUrl,
+    return Stack(
+      alignment: AlignmentDirectional.topEnd,
+      children: [
+        ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+          child: Image(
+            image: NetworkImage(
+              FavoriteProductsGetX.to.favoriteProducts!.data![index].imageUrl,
+            ),
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 180,
+          ),
         ),
-        fit: BoxFit.fitHeight,
-        width: double.infinity,
-        height: 180,
-      ),
-    );
-  }
-
-  Widget nameProduct(int index) {
-    return ViewDetails(
-      data: FavoriteProductsGetX.to.favoriteProducts!.data![index].nameEn,
-      fontSize: 20,
-      overflow: TextOverflow.ellipsis,
+        IconButton(
+          onPressed: () => addFavorite(index),
+          icon: const Icon(
+            Icons.favorite,
+            color: ColorsApp.red,
+            size: 28,
+          ),
+          padding: EdgeInsetsDirectional.zero,
+        ),
+      ],
     );
   }
 
@@ -115,32 +153,27 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
             data: FavoriteProductsGetX
                 .to.favoriteProducts!.data![index].offerPrice,
             fontSize: 16,
+            fontFamily: FontsApp.fontMedium,
+            color: ColorsApp.green,
           ),
           const SizedBox(width: 10),
           ViewDetails(
             data: FavoriteProductsGetX.to.favoriteProducts!.data![index].price,
-            fontSize: 13,
             decoration: TextDecoration.lineThrough,
-            fontWeight: FontWeight.w500,
+            fontFamily: FontsApp.fontMedium,
+            color: ColorsApp.gery,
+            decorationThickness: 1,
+            fontSize: 13,
             height: 1.7,
-            decorationThickness: 2,
           ),
         ],
       );
     }
     return ViewDetails(
       data: FavoriteProductsGetX.to.favoriteProducts!.data![index].price,
+      fontFamily: FontsApp.fontMedium,
+      color: ColorsApp.green,
       fontSize: 16,
-    );
-  }
-
-  Widget rating(int index) {
-    return RatingBarIndicator(
-      itemSize: 18,
-      rating: double.parse(
-          FavoriteProductsGetX.to.favoriteProducts!.data![index].overalRate),
-      itemBuilder: (context, index) =>
-          const Icon(Icons.star, color: Colors.yellowAccent),
     );
   }
 

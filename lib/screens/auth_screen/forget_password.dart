@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../utils/helpers.dart';
+import '../../constants/fonts.dart';
 import '../../api/api_response.dart';
 import '../../constants/routes.dart';
 import '../../constants/colors.dart';
-import '../../constants/fonts.dart';
-import '../../getX/auth_controller_getX.dart';
-import '../../utils/helpers.dart';
-import '../../widgets/appBar_app.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
+import '../../getX/auth_controller_getX.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
@@ -35,7 +34,17 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarApp(title: 'FORGET PASSWORD'),
+      appBar: AppBar(
+        title: const ViewDetails(
+          data: 'FORGET PASSWORD',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
+          fontSize: 24,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),

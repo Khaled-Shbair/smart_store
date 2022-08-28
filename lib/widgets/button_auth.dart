@@ -18,7 +18,7 @@ class ButtonAuth extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 50),
-        primary: MyColors.green,
+        primary: ColorsApp.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
