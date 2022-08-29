@@ -43,6 +43,9 @@ class PrefController {
 
   String get name =>
       _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
+  set name(String name) =>
+      _sharedPreferences.setString(PrefKeys.name.toString(), name);
+
 
   String get image =>
       _sharedPreferences.getString(PrefKeys.image.toString()) ?? '';

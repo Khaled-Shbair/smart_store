@@ -67,6 +67,37 @@ class AuthApiController {
     );
   }
 
+  Future<ApiResponse> changePassword({
+    required String password,
+    required String newPassword,
+  }) async {
+    var uri = Uri.parse(ApiPath.changePassword);
+    var response = await http.post(uri, headers: {
+      'lang': lang,
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': PrefController().token,
+    }, body: {
+      'current_password': password,
+      'new_password': newPassword,
+      'new_password_confirmation': newPassword,
+    });
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400 ||
+        response.statusCode == 401) {
+      var jsonResponse = jsonDecode(response.body);
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
   Future<ApiResponse> forgetPassword({required String phone}) async {
     var uri = Uri.parse(ApiPath.forgetPassword);
     var response = await http.post(uri, headers: {
@@ -117,27 +148,29 @@ class AuthApiController {
     );
   }
 
-  Future<ApiResponse> changePassword({
-    required String password,
-    required String newPassword,
+///////////////////////////////////////////////////////////////////////////////
+  Future<ApiResponse> updateProfile({
+    required dynamic cityOd,
+    required String name,
+    required String gender,
   }) async {
-    var uri = Uri.parse(ApiPath.changePassword);
-    var response = await http.post(uri, headers: {
-      'lang': lang,
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': PrefController().token,
-    }, body: {
-      'current_password': password,
-      'new_password': newPassword,
-      'new_password_confirmation': newPassword,
-    });
-    if (response.statusCode == 200 ||
-        response.statusCode == 201 ||
-        response.statusCode == 400 ||
-        response.statusCode == 401) {
+    var uri = Uri.parse(ApiPath.updateProfile);
+    var response = await http.post(
+      uri,
+      headers: {
+        'lang': lang,
+        'Authorization': PrefController().token,
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: {
+        'city_id': cityOd,
+        'name': name,
+        'gender': gender,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 200) {}
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],
@@ -175,6 +208,35 @@ class AuthApiController {
       if (response.statusCode == 201) {
         // UserModel userModel = UserModel.fromJson(jsonResponse);
       }
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> activateAccount({
+    required String phone,
+    required String code,
+  }) async {
+    var uri = Uri.parse(ApiPath.activate);
+    var response = await http.post(
+      uri,
+      headers: {
+        'lang': lang,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: {
+        'code': code,
+        'mobile': phone,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],

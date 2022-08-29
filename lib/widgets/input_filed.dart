@@ -10,12 +10,20 @@ class InputFiled extends StatelessWidget {
     required this.keyboard,
     required this.labelText,
     required this.prefixIcon,
+    this.fontSizeLabel,
+    this.prefixText='0',
+    this.colorLabel = ColorsApp.gery,
+    this.fontFamilyLabel =  FontsApp.fontRegular,
   }) : super(key: key);
 
   final TextEditingController controller;
   final TextInputType keyboard;
   final String labelText;
+  final String prefixText;
   final IconData prefixIcon;
+  final Color colorLabel;
+  final String? fontFamilyLabel;
+  final double? fontSizeLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +33,17 @@ class InputFiled extends StatelessWidget {
       maxLength: 9,
       decoration: InputDecoration(
         labelText: labelText,
-        prefixText: '0',
+        prefixText: prefixText,
         prefixStyle: const TextStyle(
           color: Colors.black,
           fontSize: 16,
         ),
         counterText: '',
         prefixIcon: Icon(prefixIcon, color: ColorsApp.green),
-        labelStyle: const TextStyle(
-          fontFamily: FontsApp.fontRegular,
-          color: ColorsApp.gery,
+        labelStyle: TextStyle(
+            fontFamily: fontFamilyLabel,
+            color: colorLabel,
+            fontSize:fontSizeLabel,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
