@@ -11,5 +11,6 @@ const String categoryScreen = '/categoryScreen';
 const String favoriteScreen = '/favoriteScreen';
 const String subCategoryScreen = '/subCategoryScreen';
 const String resetPasswordScreen = '/resetPasswordScreen';
+const String changePasswordScreen = '/changePasswordScreen';
 const String productDetailsScreen = '/productDetailsScreen';
 const String productCategoryScreen = '/productCategoryScreen';

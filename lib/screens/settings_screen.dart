@@ -7,6 +7,7 @@ import '../constants/fonts.dart';
 import '../constants/colors.dart';
 import '../utils/helpers.dart';
 import '../widgets/button_auth.dart';
+import '../widgets/list_settings.dart';
 import '../widgets/view_details.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -37,23 +38,45 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
         children: [
           Text(PrefController().name),
           Text(PrefController().phone),
-          ListTile(
-            leading: Icon(Icons.person),
+          ListSettings(
+            icon: Icons.person,
+            backgroundColor: ColorsApp.iconBlue,
+            title: 'Edit profile',
+            onTap: () => Navigator.pushNamed(context, ''), //TODO
           ),
+          divider(),
+          ListSettings(
+            icon: Icons.notifications_active,
+            backgroundColor: ColorsApp.iconGreen,
+            title: 'Notifications',
+            onTap: () => Navigator.pushNamed(context, ''), //TODO
+          ),
+          divider(),
+          ListSettings(
+            icon: Icons.lock,
+            backgroundColor: ColorsApp.iconRed,
+            title: 'Change password',
+            onTap: () => Navigator.pushNamed(context, changePasswordScreen),
+          ),
+          divider(),
+          const SizedBox(height: 20),
           ButtonAuth(
             text: 'LOGOUT',
-            onPressed: () async {
-              ApiResponse apiResponse = await AuthApiController().logout();
-              showSnackBar(
-                  message: apiResponse.message, error: !apiResponse.status);
-              if (apiResponse.status) {
-                navigator();
-              }
-            },
+            onPressed: () async => _logout(),
           ),
         ],
       ),
     );
+  }
+
+  Widget divider() => const Divider(color: ColorsApp.gery, thickness: 1);
+
+  Future<void> _logout() async {
+    ApiResponse apiResponse = await AuthApiController().logout();
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+    if (apiResponse.status) {
+      navigator();
+    }
   }
 
   void navigator() => Navigator.pushReplacementNamed(context, loginScreen);

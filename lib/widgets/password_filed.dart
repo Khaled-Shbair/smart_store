@@ -7,34 +7,34 @@ class PasswordFiled extends StatelessWidget {
   const PasswordFiled({
     Key? key,
     required this.controller,
-    required this.keyboard,
     required this.labelText,
-    required this.prefixIcon,
-    required this.suffixIcon,
     required this.onPressed,
     this.obscureText = false,
   }) : super(key: key);
 
   final TextEditingController controller;
-  final TextInputType keyboard;
   final String labelText;
   final bool obscureText;
-  final IconData prefixIcon;
-  final IconData suffixIcon;
   final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      keyboardType: keyboard,
+      keyboardType: TextInputType.visiblePassword,
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: labelText,
-        prefixIcon: Icon(prefixIcon, color: ColorsApp.green),
+        prefixIcon: const Icon(
+          Icons.lock_outline,
+          color: ColorsApp.green,
+        ),
         suffixIcon: IconButton(
           onPressed: onPressed,
-          icon: Icon(suffixIcon, color: ColorsApp.green),
+          icon: Icon(
+            obscureText ? Icons.visibility : Icons.visibility_off,
+            color: ColorsApp.green,
+          ),
         ),
         labelStyle: const TextStyle(
           fontFamily: FontsApp.fontRegular,

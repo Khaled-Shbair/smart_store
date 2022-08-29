@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants/routes.dart';
 import 'models/home_model.dart';
+import 'screens/auth_screen/change_password_screen.dart';
 import 'screens/auth_screen/forget_password.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/auth_screen/register_screen.dart';
@@ -29,6 +30,9 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case changePasswordScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ChangePasswordScreen());
       case subCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => const SubCategoryScreen());

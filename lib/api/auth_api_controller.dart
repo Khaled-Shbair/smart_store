@@ -117,6 +117,38 @@ class AuthApiController {
     );
   }
 
+  Future<ApiResponse> changePassword({
+    required String password,
+    required String newPassword,
+  }) async {
+    var uri = Uri.parse(ApiPath.changePassword);
+    var response = await http.post(uri, headers: {
+      'lang': lang,
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': PrefController().token,
+    }, body: {
+      'current_password': password,
+      'new_password': newPassword,
+      'new_password_confirmation': newPassword,
+    });
+    if (response.statusCode == 200 ||
+        response.statusCode == 201 ||
+        response.statusCode == 400 ||
+        response.statusCode == 401) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {}
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
 ///////////////////////////////////////////////////////////////////////////////
   Future<ApiResponse> register({
     required String name,

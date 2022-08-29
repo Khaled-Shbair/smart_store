@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: const ViewDetails(
           data: 'LOGIN',
@@ -78,11 +79,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           sizedBox(20),
           PasswordFiled(
             controller: _passwordController,
-            keyboard: TextInputType.visiblePassword,
             obscureText: _obscureText,
             labelText: 'Password',
-            prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
-            suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;

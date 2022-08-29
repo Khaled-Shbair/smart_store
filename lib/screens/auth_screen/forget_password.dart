@@ -34,6 +34,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: const ViewDetails(
           data: 'FORGET PASSWORD',

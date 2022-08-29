@@ -87,11 +87,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   Widget passwordField() {
     return PasswordFiled(
       controller: _passwordController,
-      keyboard: TextInputType.visiblePassword,
       obscureText: _obscureText,
       labelText: 'Password',
-      prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
-      suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
       onPressed: () {
         setState(() {
           _obscureText = !_obscureText;

@@ -8,4 +8,8 @@ class ColorsApp {
   static const Color gery = Color(0XFF677294);
   static const Color geryBold = Color(0XFF858EA9);
   static const Color scaffoldColor = Colors.white;
+  static const Color iconRed = Color(0XFFEB5757);
+  static const Color iconGreen = Color(0XFF219653);
+  static const Color iconBlue = Color(0XFF56CCF2);
+
 }

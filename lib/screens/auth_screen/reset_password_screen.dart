@@ -66,6 +66,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: const ViewDetails(
           data: 'RESET PASSWORD',
@@ -145,11 +146,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           const SizedBox(height: 30),
           PasswordFiled(
             controller: _newPasswordController,
-            keyboard: TextInputType.visiblePassword,
             obscureText: _obscureText,
             labelText: 'New Password',
-            prefixIcon: _obscureText ? Icons.lock_outline : Icons.lock_open,
-            suffixIcon: _obscureText ? Icons.visibility : Icons.visibility_off,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
@@ -159,18 +157,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           const SizedBox(height: 30),
           PasswordFiled(
             controller: _passwordConfirmationController,
-            keyboard: TextInputType.visiblePassword,
             obscureText: _obscureText,
             labelText: 'Password Confirmation',
-            prefixIcon:
-                _obscureConfirmationText ? Icons.lock_outline : Icons.lock_open,
-            suffixIcon: _obscureConfirmationText
-                ? Icons.visibility
-                : Icons.visibility_off,
             onPressed: () {
-              setState(() {
-                _obscureConfirmationText = !_obscureConfirmationText;
-              });
+              setState(
+                  () => _obscureConfirmationText = !_obscureConfirmationText);
             },
           ),
           const SizedBox(height: 30),
