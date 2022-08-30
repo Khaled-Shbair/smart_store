@@ -72,6 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       keyboard: TextInputType.name,
       prefixIcon: Icons.person,
       labelText: 'Name',
+      maxLength: 8,
     );
   }
 
@@ -81,6 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       keyboard: TextInputType.phone,
       prefixIcon: Icons.phone_android,
       labelText: 'Mobile',
+      maxLength: 9,
     );
   }
 

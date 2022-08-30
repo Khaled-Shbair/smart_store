@@ -56,6 +56,13 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
             onTap: () => Navigator.pushNamed(context, changePasswordScreen),
           ),
           divider(),
+          ListSettings(
+            icon: Icons.add_home,
+            backgroundColor: ColorsApp.iconOrange,
+            title: 'Addresses',
+            onTap: () => Navigator.pushNamed(context, listAddressesScreen),
+          ),
+          divider(),
           const SizedBox(height: 20),
           ButtonAuth(
             text: 'LOGOUT',
@@ -67,48 +74,6 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
   }
 
   Widget divider() => const Divider(color: ColorsApp.gery, thickness: 1);
-
-  void logout() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const ViewDetails(
-            data: 'Logout',
-            fontSize: 26,
-            color: ColorsApp.black,
-            fontFamily: FontsApp.fontMedium,
-          ),
-          content: const ViewDetails(
-            data: 'Are you sure you want to logout?',
-            fontSize: 16,
-            color: ColorsApp.gery,
-            fontFamily: FontsApp.fontRegular,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const ViewDetails(
-                data: 'Cancel',
-                fontSize: 16,
-                color: ColorsApp.green,
-                fontFamily: FontsApp.fontMedium,
-              ),
-            ),
-            TextButton(
-              onPressed: () async => await _logout(),
-              child: const ViewDetails(
-                data: 'Ok',
-                fontSize: 16,
-                color: ColorsApp.green,
-                fontFamily: FontsApp.fontMedium,
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
   Future<void> _logout() async {
     showDialog(

@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
             labelText: 'Mobile',
+            maxLength: 9,
           ),
           sizedBox(20),
           PasswordFiled(

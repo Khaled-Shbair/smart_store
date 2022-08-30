@@ -70,6 +70,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
             labelText: 'Phone',
+            maxLength: 9,
           ),
           const SizedBox(height: 30),
           ButtonAuth(

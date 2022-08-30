@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
+import '../widgets/no_data.dart';
 import '../widgets/view_details.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -23,9 +24,7 @@ class NotificationsScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: ListView(
-        children: [],
-      ),
+      body: const NoData(),
     );
   }
 }

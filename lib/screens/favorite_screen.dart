@@ -6,6 +6,7 @@ import '../constants/fonts.dart';
 import '../api/api_response.dart';
 import '../constants/colors.dart';
 import '../widgets/loading.dart';
+import '../widgets/no_data.dart';
 import '../widgets/view_details.dart';
 import '../getX/favorite-products_getX.dart';
 
@@ -95,21 +96,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
         },
       );
     }
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Icon(Icons.warning, size: 84, color: ColorsApp.green),
-          ViewDetails(
-            data: 'No Data',
-            fontFamily: FontsApp.fontMedium,
-            fontSize: 30,
-            color: ColorsApp.green,
-          ),
-        ],
-      ),
-    );
+    return const NoData();
   }
 
   Widget imageProduct(int index) {

@@ -16,4 +16,5 @@ class ApiPath {
   static const String products = '${_baseUrl}products/';
   static const String favoriteProducts = '${_baseUrl}favorite-products';
   static const String rateProducts = '${_baseUrl}products/rate';
+  static const String addresses = '${_baseUrl}addresses';
 }

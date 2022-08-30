@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import '../api/api_paths.dart';
 import '../models/home_model.dart';
 import '../shared_preferences/pref_controller.dart';
-import 'favorite-products_getX.dart';
 
 class HomeGetX extends GetxController {
   static HomeGetX get to => Get.find();

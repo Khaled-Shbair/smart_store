@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:smart_store/shared_preferences/pref_controller.dart';
-import 'package:smart_store/widgets/input_filed.dart';
 
 import '../../api/api_response.dart';
 import '../../api/auth_api_controller.dart';
 import '../../constants/colors.dart';
 import '../../constants/fonts.dart';
+import '../../shared_preferences/pref_controller.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/choose_gender.dart';
 import '../../widgets/field_profile.dart';
+import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -36,7 +36,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     super.dispose();
   }
 
-  Widget gender() {
+  Widget updateGender() {
     return Row(
       children: [
         ChooseGender(
@@ -67,6 +67,60 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     );
   }
 
+  void updateName() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const ViewDetails(
+            data: 'Enter your new name',
+            fontSize: 20,
+            color: ColorsApp.black,
+            fontFamily: FontsApp.fontRegular,
+          ),
+          content: InputFiled(
+            prefixText: '',
+            controller: _nameController,
+            labelText: 'new name',
+            prefixIcon: Icons.person,
+            colorLabel: ColorsApp.black,
+            maxLength: 30,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const ViewDetails(
+                data: 'Cancel',
+                fontSize: 16,
+                color: ColorsApp.green,
+                fontFamily: FontsApp.fontMedium,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                if (_nameController.text.isNotEmpty) {
+                  Navigator.pop(context);
+                } else {
+                  showSnackBar(message: 'Enter new name', error: true);
+                }
+              },
+              child: const ViewDetails(
+                data: 'Ok',
+                fontSize: 16,
+                color: ColorsApp.green,
+                fontFamily: FontsApp.fontMedium,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget updateCity() {
+    return Text(''); //TODO : Update city
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +143,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
         children: [
           const SizedBox(height: 50),
           FieldProfile(
-            title: PrefController().name,
+            title: _nameController.text.isEmpty
+                ? PrefController().name
+                : _nameController.text,
             icon: Icons.person,
             trailing: IconButton(
               icon: const Icon(Icons.edit, color: ColorsApp.green),
@@ -104,7 +160,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           //const SizedBox(height: 20),
           //TODO: Choose City
           const SizedBox(height: 20),
-          gender(),
+          updateGender(),
           const SizedBox(height: 50),
           ButtonAuth(
             text: 'Update',
@@ -112,55 +168,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           ),
         ],
       ),
-    );
-  }
-
-  void updateName() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const ViewDetails(
-            data: 'Enter your new name',
-            fontSize: 20,
-            color: ColorsApp.black,
-            fontFamily: FontsApp.fontRegular,
-          ),
-          content: InputFiled(
-            prefixText: '',
-            controller: _nameController,
-            keyboard: TextInputType.text,
-            labelText: 'new name',
-            prefixIcon: Icons.person,
-            colorLabel: ColorsApp.black,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const ViewDetails(
-                data: 'Cancel',
-                fontSize: 16,
-                color: ColorsApp.green,
-                fontFamily: FontsApp.fontMedium,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                PrefController().name = _nameController.text;
-                if (_nameController.text.isNotEmpty) {
-                  Navigator.pop(context);
-                }
-              },
-              child: const ViewDetails(
-                data: 'Ok',
-                fontSize: 16,
-                color: ColorsApp.green,
-                fontFamily: FontsApp.fontMedium,
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -172,6 +179,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
+      PrefController().name = _nameController.text;
+      //PrefController().city = _nameController.text;
       navigator();
     }
   }

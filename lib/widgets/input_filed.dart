@@ -7,13 +7,14 @@ class InputFiled extends StatelessWidget {
   const InputFiled({
     Key? key,
     required this.controller,
-    required this.keyboard,
     required this.labelText,
     required this.prefixIcon,
     this.fontSizeLabel,
-    this.prefixText='0',
+    required this.maxLength,
+    this.prefixText = '0',
     this.colorLabel = ColorsApp.gery,
-    this.fontFamilyLabel =  FontsApp.fontRegular,
+    this.fontFamilyLabel = FontsApp.fontRegular,
+    this.keyboard = TextInputType.text,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -24,13 +25,16 @@ class InputFiled extends StatelessWidget {
   final Color colorLabel;
   final String? fontFamilyLabel;
   final double? fontSizeLabel;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       keyboardType: keyboard,
-      maxLength: 9,
+      maxLength: maxLength,
+      maxLines: 3,
+      minLines: 1,
       decoration: InputDecoration(
         labelText: labelText,
         prefixText: prefixText,
@@ -41,9 +45,9 @@ class InputFiled extends StatelessWidget {
         counterText: '',
         prefixIcon: Icon(prefixIcon, color: ColorsApp.green),
         labelStyle: TextStyle(
-            fontFamily: fontFamilyLabel,
-            color: colorLabel,
-            fontSize:fontSizeLabel,
+          fontFamily: fontFamilyLabel,
+          color: colorLabel,
+          fontSize: fontSizeLabel,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),

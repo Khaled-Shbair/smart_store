@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'constants/routes.dart';
 import 'models/home_model.dart';
+import 'screens/address/create_address_screen.dart';
+import 'screens/address/list_addresses_screen.dart';
+import 'screens/address/update_address_screen.dart';
 import 'screens/auth_screen/change_password_screen.dart';
 import 'screens/auth_screen/forget_password.dart';
 import 'screens/auth_screen/login_screen.dart';
@@ -32,6 +35,15 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case updateAddressScreen:
+        return MaterialPageRoute(
+            builder: (context) => const UpdateAddressScreen());
+      case listAddressesScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ListAddressesScreen());
+      case createAddressScreen:
+        return MaterialPageRoute(
+            builder: (context) => const CreateAddressScreen());
       case notificationsScreen:
         return MaterialPageRoute(
             builder: (context) => const NotificationsScreen());
