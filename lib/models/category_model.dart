@@ -1,3 +1,5 @@
+import 'category.dart';
+
 class CategoryModel {
   bool? status;
   late String message;
@@ -14,7 +16,7 @@ class CategoryModel {
     }
   }
 }
-
+/*
 class Category {
   late int id;
   late String nameEn;
@@ -34,3 +36,4 @@ class Category {
     imageUrl = json['image_url'];
   }
 }
+*/

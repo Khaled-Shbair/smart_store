@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_store/models/address_model.dart';
 import 'constants/routes.dart';
 import 'models/home_model.dart';
+import 'models/product.dart';
 import 'screens/address/create_address_screen.dart';
 import 'screens/address/list_addresses_screen.dart';
 import 'screens/address/update_address_screen.dart';
@@ -35,9 +37,6 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
-      case updateAddressScreen:
-        return MaterialPageRoute(
-            builder: (context) => const UpdateAddressScreen());
       case listAddressesScreen:
         return MaterialPageRoute(
             builder: (context) => const ListAddressesScreen());
@@ -66,6 +65,10 @@ class AppRouters {
         final phone = settings.arguments as String;
         return MaterialPageRoute(
             builder: (context) => ResetPasswordScreen(phone: phone));
+      case updateAddressScreen:
+        final addressModel = settings.arguments as Address;
+        return MaterialPageRoute(
+            builder: (context) => UpdateAddressScreen(address: addressModel));
       case detailsProduct:
         final latestProducts = settings.arguments as Products;
         return MaterialPageRoute(

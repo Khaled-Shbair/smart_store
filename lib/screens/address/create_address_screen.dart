@@ -54,6 +54,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
         backgroundColor: Colors.transparent,
       ),
       body: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsetsDirectional.only(
           start: 20,
           end: 20,
@@ -63,7 +64,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
           InputFiled(
             controller: _nameController,
             labelText: 'Name address',
-            prefixIcon: Icons.add,
+            prefixIcon: Icons.note_alt_outlined,
             prefixText: '',
             maxLength: 35,
           ),

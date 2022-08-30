@@ -1,3 +1,6 @@
+import 'category.dart';
+import 'product.dart';
+
 class HomeModel {
   bool? status;
   late String message;
@@ -12,9 +15,11 @@ class HomeModel {
 
 class Data {
   List<Slider>? slider;
-  List<Categories>? categories;
+  List<Category>? category;
   List<Products>? latestProducts;
   List<Products>? famousProducts;
+
+  //List<Categories>? categories;
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['slider'] != null) {
@@ -23,10 +28,16 @@ class Data {
         slider!.add(Slider.fromJson(v));
       });
     }
+    //if (json['categories'] != null) {
+    //  categories = <Categories>[];
+    //  json['categories'].forEach((v) {
+    //    categories!.add(Categories.fromJson(v));
+    //  });
+    //}
     if (json['categories'] != null) {
-      categories = <Categories>[];
+      category = <Category>[];
       json['categories'].forEach((v) {
-        categories!.add(Categories.fromJson(v));
+        category!.add(Category.fromJson(v));
       });
     }
 
@@ -58,7 +69,7 @@ class Slider {
     imageUrl = json['image_url'];
   }
 }
-
+/*
 class Categories {
   late int id;
   late String nameEn;
@@ -74,35 +85,36 @@ class Categories {
     imageUrl = json['image_url'];
   }
 }
-
-class Products {
-  late int id;
-  late String nameEn;
-  late String nameAr;
-  late String infoEn;
-  late String infoAr;
-  late dynamic price;
-  late dynamic quantity;
-  late dynamic overalRate;
-  late dynamic subCategoryId;
-  late dynamic productRate;
-  late dynamic offerPrice;
-  late bool isFavorite;
-  late String imageUrl;
-
-  Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nameEn = json['name_en'];
-    nameAr = json['name_ar'];
-    infoEn = json['info_en'];
-    infoAr = json['info_ar'];
-    price = json['price'];
-    quantity = json['quantity'];
-    overalRate = json['overal_rate'];
-    subCategoryId = json['sub_category_id'];
-    productRate = json['product_rate'];
-    offerPrice = json['offer_price'];
-    isFavorite = json['is_favorite'];
-    imageUrl = json['image_url'];
-  }
-}
+*/
+//class Products {
+//  late int id;
+//  late String nameEn;
+//  late String nameAr;
+//  late String infoEn;
+//  late String infoAr;
+//  late dynamic price;
+//  late dynamic quantity;
+//  late dynamic overalRate;
+//  late dynamic subCategoryId;
+//  late dynamic productRate;
+//  late dynamic offerPrice;
+//  late bool isFavorite;
+//  late String imageUrl;
+//
+//  Products.fromJson(Map<String, dynamic> json) {
+//    id = json['id'];
+//    nameEn = json['name_en'];
+//    nameAr = json['name_ar'];
+//    infoEn = json['info_en'];
+//    infoAr = json['info_ar'];
+//    price = json['price'];
+//    quantity = json['quantity'];
+//    overalRate = json['overal_rate'];
+//    subCategoryId = json['sub_category_id'];
+//    productRate = json['product_rate'];
+//    offerPrice = json['offer_price'];
+//    isFavorite = json['is_favorite'];
+//    imageUrl = json['image_url'];
+//  }
+//}
+//

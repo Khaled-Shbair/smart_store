@@ -45,9 +45,6 @@ class AddressGetX extends GetxController {
     );
     if (response.statusCode == 201 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 201) {
-        getAddressData();
-      }
       return ApiResponse(
         message: jsonResponse['message'],
         status: jsonResponse['status'],
@@ -90,6 +87,37 @@ class AddressGetX extends GetxController {
       if (response.statusCode == 200) {
         getAddressData();
       }
+      return ApiResponse(message: jsonResponse['message'], status: true);
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> updateAddress({
+    required dynamic id,
+    required String newNameAddress,
+    required String newInfoAddress,
+    required String newContactNumber,
+    required dynamic newCityId,
+  }) async {
+    var uri = Uri.parse('${ApiPath.addresses}/$id');
+    var response = await http.put(
+      uri,
+      headers: {
+        'Authorization': PrefController().token,
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: {
+        'name': newNameAddress,
+        'info': newInfoAddress,
+        'contact_number': newContactNumber,
+        'city_id': newCityId,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
       return ApiResponse(message: jsonResponse['message'], status: true);
     }
     return ApiResponse(

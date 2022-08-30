@@ -1,20 +1,34 @@
+import 'product.dart';
+
 class FavoriteProductsModel {
   late bool status;
   late String message;
-  List<FavoriteProducts>? data;
+
+  //List<FavoriteProducts>? data;
+  List<Products>? data;
 
   FavoriteProductsModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['list'] != null) {
-      data = <FavoriteProducts>[];
+      data = <Products>[];
       json['list'].forEach((v) {
-        data!.add(FavoriteProducts.fromJson(v));
+        data!.add(Products.fromJson(v));
       });
     }
   }
 }
 
+class Pivot {
+  late String userId;
+  late String productId;
+
+  Pivot.fromJson(Map<String, dynamic> json) {
+    userId = json['user_id'];
+    productId = json['product_id'];
+  }
+}
+/*
 class FavoriteProducts {
   late int id;
   late String nameEn;
@@ -49,12 +63,4 @@ class FavoriteProducts {
   }
 }
 
-class Pivot {
-  late String userId;
-  late String productId;
-
-  Pivot.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
-    productId = json['product_id'];
-  }
-}
+ */

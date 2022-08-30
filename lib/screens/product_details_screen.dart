@@ -62,7 +62,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         childAspectRatio: .4 / .5,
       ),
       shrinkWrap: true,
-      itemCount: ProductDetailsGetX.to.productDetails!.data!.images.length,
+      itemCount: ProductDetailsGetX.to.productDetails!.data!.images!.length,
       itemBuilder: (context, index) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -71,7 +71,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             fit: BoxFit.fitWidth,
             image: NetworkImage(
               ProductDetailsGetX
-                  .to.productDetails!.data!.images[index].imageUrl,
+                  .to.productDetails!.data!.images![index].imageUrl,
             ),
           ),
         );

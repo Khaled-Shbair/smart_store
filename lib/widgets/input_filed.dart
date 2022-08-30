@@ -7,10 +7,12 @@ class InputFiled extends StatelessWidget {
   const InputFiled({
     Key? key,
     required this.controller,
-    required this.labelText,
+    this.labelText,
     required this.prefixIcon,
-    this.fontSizeLabel,
     required this.maxLength,
+    this.fontSizeLabel,
+    this.hintStyle,
+    this.hintText,
     this.prefixText = '0',
     this.colorLabel = ColorsApp.gery,
     this.fontFamilyLabel = FontsApp.fontRegular,
@@ -19,12 +21,14 @@ class InputFiled extends StatelessWidget {
 
   final TextEditingController controller;
   final TextInputType keyboard;
-  final String labelText;
+  final String? labelText;
   final String prefixText;
   final IconData prefixIcon;
   final Color colorLabel;
   final String? fontFamilyLabel;
   final double? fontSizeLabel;
+  final String? hintText;
+  final TextStyle? hintStyle;
   final int maxLength;
 
   @override
@@ -37,6 +41,8 @@ class InputFiled extends StatelessWidget {
       minLines: 1,
       decoration: InputDecoration(
         labelText: labelText,
+        hintText: hintText,
+        hintStyle: hintStyle,
         prefixText: prefixText,
         prefixStyle: const TextStyle(
           color: Colors.black,

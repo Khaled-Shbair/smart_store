@@ -4,6 +4,7 @@ import '../api/api_response.dart';
 import '../getX/rate_products_getX.dart';
 import '../getX/favorite-products_getX.dart';
 import '../models/home_model.dart';
+import '../models/product.dart';
 import '../utils/helpers.dart';
 import '../widgets/view_details.dart';
 

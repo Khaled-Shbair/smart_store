@@ -1,20 +1,22 @@
+import 'product.dart';
+
 class ProductCategoryModel {
   late bool status;
   late String message;
-  List<ProductCategory>? data;
+  List<Products>? data;
 
   ProductCategoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['list'] != null) {
-      data = <ProductCategory>[];
+      data = <Products>[];
       json['list'].forEach((v) {
-        data!.add(ProductCategory.fromJson(v));
+        data!.add(Products.fromJson(v));
       });
     }
   }
 }
-
+/*
 class ProductCategory {
   late int id;
   late String nameEn;
@@ -46,3 +48,4 @@ class ProductCategory {
     imageUrl = json['image_url'];
   }
 }
+*/

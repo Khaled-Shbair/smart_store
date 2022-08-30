@@ -38,10 +38,11 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
         backgroundColor: Colors.transparent,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, createAddressScreen);
-              },
-              icon: const Icon(Icons.add))
+            onPressed: () {
+              Navigator.pushNamed(context, createAddressScreen);
+            },
+            icon: const Icon(Icons.add_circle_outline),
+          )
         ],
       ),
       body: GetX<AddressGetX>(
@@ -66,7 +67,8 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
         itemCount: _addressGetX.addressModel!.data!.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: () => Navigator.pushNamed(context, updateAddressScreen),
+            onTap: () => Navigator.pushNamed(context, updateAddressScreen,
+                arguments: _addressGetX.addressModel!.data![index]),
             shape: const RoundedRectangleBorder(
               side: BorderSide(
                 color: ColorsApp.green,
