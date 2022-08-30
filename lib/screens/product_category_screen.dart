@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:smart_store/getX/product_category_getX.dart';
-
 import '../constants/routes.dart';
+import '../getX/product_category_getX.dart';
+import '../constants/colors.dart';
+import '../constants/fonts.dart';
 import '../getX/product_details_getX.dart';
+import '../widgets/loading.dart';
 import '../widgets/view_details.dart';
 
 class ProductCategoryScreen extends StatefulWidget {
@@ -20,31 +22,26 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white12,
+      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        titleTextStyle: const TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
+        title: const ViewDetails(
+          data: 'Product_Category',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
           fontSize: 24,
         ),
+        iconTheme: const IconThemeData(color: ColorsApp.green),
         centerTitle: true,
-        title: const Text('Product_Category'),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-        ),
       ),
       body: GetX<ProductCategoryGetX>(
         initState: (state) {
           state.controller!.getProductCategoryData();
         },
         builder: (controller) {
-          if (ProductCategoryGetX.to.loading.isTrue) {
-            const Center(child: CircularProgressIndicator());
+          if (_productDetails.loading.isTrue) {
+            return const Loading();
           }
           return listProduct();
         },
@@ -52,73 +49,20 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
     );
   }
 
-  Widget listProduct() {
-    if (ProductCategoryGetX.to.productCategory != null) {
-      return GridView.builder(
-        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 4 / 5.7,
-        ),
-        itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              setState(() {
-                _productDetails.id.value =
-                    ProductCategoryGetX.to.productCategory!.data![index].id;
-              });
-              Navigator.pushNamed(context, productDetailsScreen);
-            },
-            child: Container(
-              alignment: AlignmentDirectional.topStart,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  imageProduct(index),
-                  const SizedBox(height: 5),
-                  nameProduct(index),
-                  const SizedBox(height: 3),
-                  priceProduct(index),
-                  const SizedBox(height: 3),
-                  rating(index),
-                ],
-              ),
-            ),
-          );
-        },
-      );
-    }
-    return const Center(child: CircularProgressIndicator());
-  }
-
   Widget imageProduct(int index) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(12),
+        topRight: Radius.circular(12),
+      ),
       child: Image(
         image: NetworkImage(
           ProductCategoryGetX.to.productCategory!.data![index].imageUrl,
         ),
-        fit: BoxFit.fitHeight,
+        fit: BoxFit.cover,
         width: double.infinity,
         height: 180,
       ),
-    );
-  }
-
-  Widget nameProduct(int index) {
-    return ViewDetails(
-      data: ProductCategoryGetX.to.productCategory!.data![index].nameEn,
-      fontSize: 20,
-      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -132,32 +76,87 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             data:
                 ProductCategoryGetX.to.productCategory!.data![index].offerPrice,
             fontSize: 16,
+            fontFamily: FontsApp.fontMedium,
+            color: ColorsApp.green,
           ),
           const SizedBox(width: 10),
           ViewDetails(
             data: ProductCategoryGetX.to.productCategory!.data![index].price,
-            fontSize: 13,
             decoration: TextDecoration.lineThrough,
-            fontWeight: FontWeight.w500,
+            fontFamily: FontsApp.fontMedium,
+            color: ColorsApp.gery,
+            decorationThickness: 1,
+            fontSize: 13,
             height: 1.7,
-            decorationThickness: 2,
           ),
         ],
       );
     }
     return ViewDetails(
       data: ProductCategoryGetX.to.productCategory!.data![index].price,
+      fontFamily: FontsApp.fontMedium,
+      color: ColorsApp.green,
       fontSize: 16,
     );
   }
 
-  Widget rating(int index) {
-    return RatingBarIndicator(
-      itemSize: 18,
-      rating: double.parse(
-          ProductCategoryGetX.to.productCategory!.data![index].overalRate),
-      itemBuilder: (context, index) =>
-          const Icon(Icons.star, color: Colors.yellowAccent),
-    );
+  Widget listProduct() {
+    if (ProductCategoryGetX.to.productCategory != null) {
+      return InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, productDetailsScreen);
+        },
+        child: GridView.builder(
+          shrinkWrap: true,
+          primary: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 10,
+            childAspectRatio: 190 / 264,
+          ),
+          itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
+          itemBuilder: (context, index) {
+            return Container(
+              alignment: AlignmentDirectional.topStart,
+              decoration: BoxDecoration(
+                color: ColorsApp.background.withAlpha(117),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  imageProduct(index),
+                  const SizedBox(height: 5),
+                  ViewDetails(
+                    data: ProductCategoryGetX
+                        .to.productCategory!.data![index].nameEn,
+                    fontSize: 18,
+                    color: ColorsApp.black,
+                    fontFamily: FontsApp.fontMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 3),
+                  priceProduct(index),
+                  const SizedBox(height: 3),
+                  RatingBarIndicator(
+                    itemSize: 18,
+                    rating: double.parse(ProductCategoryGetX
+                        .to.productCategory!.data![index].overalRate),
+                    itemBuilder: (context, index) => const Icon(
+                      Icons.star,
+                      color: Colors.yellowAccent,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
+    return const Loading();
   }
 }

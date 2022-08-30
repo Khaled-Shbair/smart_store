@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../constants/colors.dart';
+import '../constants/fonts.dart';
 import '../constants/routes.dart';
 import '../getX/product_category_getX.dart';
 import '../getX/sub_category_model_getX.dart';
+import '../widgets/loading.dart';
 import '../widgets/view_details.dart';
 
 class SubCategoryScreen extends StatefulWidget {
@@ -18,15 +21,16 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white12,
+      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        titleTextStyle: const TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
+        title: const ViewDetails(
+          data: 'Sub category',
+          fontFamily: FontsApp.fontBold,
+          color: ColorsApp.green,
           fontSize: 24,
         ),
+        iconTheme: const IconThemeData(color: ColorsApp.green),
         centerTitle: true,
-        title: const Text('Sub_Category'),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -36,7 +40,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         },
         builder: (controller) {
           if (SubCategoryModelGetX.to.loading.isTrue) {
-            const Center(child: CircularProgressIndicator());
+            return const Loading();
           }
           return listCategories();
         },
@@ -53,7 +57,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 4 / 3.3,
+          childAspectRatio: 190 / 200,
         ),
         itemBuilder: (context, index) {
           return InkWell(
@@ -67,8 +71,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             child: Container(
               alignment: AlignmentDirectional.center,
               decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(15),
+                color: ColorsApp.background.withAlpha(117),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
@@ -88,7 +92,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                     width: double.infinity,
                     height: 30,
                     decoration: const BoxDecoration(
-                      color: Colors.white30,
+                      color: ColorsApp.green,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(15),
                         bottomRight: Radius.circular(15),
@@ -99,7 +103,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                           .to.subCategory!.data![index].nameEn,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      fontSize: 16,
+                      fontSize: 20,
+                      color: ColorsApp.black,
+                      fontFamily: FontsApp.fontMedium,
                       maxLines: 1,
                     ),
                   ),
@@ -110,6 +116,6 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         },
       );
     }
-    return const Center(child: CircularProgressIndicator());
+    return const Loading();
   }
 }
