@@ -1,4 +1,4 @@
-import 'city_model.dart';
+import 'city.dart';
 
 class UserModel {
   late bool status;

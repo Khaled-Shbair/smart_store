@@ -4,7 +4,7 @@ import '../../constants/routes.dart';
 import '../../getX/cities_getX.dart';
 import '../../api/api_response.dart';
 import '../../api/auth_api_controller.dart';
-import '../../models/city_model.dart';
+import '../../models/city.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/input_filed.dart';
 import '../../widgets/password_filed.dart';

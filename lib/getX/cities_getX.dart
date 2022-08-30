@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 
 import '../api/api_paths.dart';
+import '../models/city.dart';
 import '../models/city_model.dart';
 import 'package:http/http.dart' as http;
 

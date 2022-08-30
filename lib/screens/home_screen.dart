@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemCount: _homeGetX.homeModel!.data!.category!.length,
+                itemCount: _homeGetX.homeModel!.data!.categories!.length,
                 separatorBuilder: (context, index) => const SizedBox(width: 10),
                 itemBuilder: (context, index) {
                   return Container(
@@ -137,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                           child: Image(
                             image: NetworkImage(
                               _homeGetX
-                                  .homeModel!.data!.category![index].imageUrl,
+                                  .homeModel!.data!.categories![index].imageUrl,
                             ),
                             height: 50,
                             width: 50,
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                         const SizedBox(height: 10),
                         ViewDetails(
                           data: _homeGetX
-                              .homeModel!.data!.category![index].nameEn,
+                              .homeModel!.data!.categories![index].nameEn,
                           overflow: TextOverflow.ellipsis,
                           color: Colors.black,
                           textAlign: TextAlign.center,
