@@ -1,0 +1,12 @@
+{
+       "login" : "Login",
+       "welcome_back" : "Welcome back",
+       "login_to_start_using_app" : "Login to start using app",
+       "mobile" : "Mobile",
+       "password" : "Password",
+       "forget_password" : "Forget password?",
+       "create_now" : "Create now!",
+       "no_have_an_account" : "Don't have an account?",
+       "enter_required_data" : "Enter required data!"
+
+}

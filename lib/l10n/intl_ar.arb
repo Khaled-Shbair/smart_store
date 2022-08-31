@@ -1,0 +1,12 @@
+{
+       "login" : "تسجيل دخول",
+       "welcome_back" : "أهلا بعودتك",
+       "login_to_start_using_app" : "تسجيل الدخول لبدء استخدام التطبيق",
+       "mobile" : "الهاتف",
+       "password" : "كلمة المرور",
+       "forget_password" : "نسيت كلمة السر؟",
+       "create_now" : "انشئ الأن!",
+       "no_have_an_account" : "ليس لديك حساب؟",
+       "enter_required_data" : "أدخل البيانات المطلوبة!"
+
+}
