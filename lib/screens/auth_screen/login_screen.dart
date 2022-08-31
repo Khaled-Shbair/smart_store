@@ -9,7 +9,7 @@ import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
 import '../../api/auth_api_controller.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'LOGIN',
+        title:  ViewDetails(
+          data: AppLocalizations.of(context)!.login,////
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
