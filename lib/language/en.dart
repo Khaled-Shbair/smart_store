@@ -1,4 +1,4 @@
-{
+const Map<String, String> en = {
   "login": "Login",
   "welcome_back": "Welcome back",
   "login_to_start_using_app": "Login to start using app",
@@ -10,7 +10,8 @@
   "enter_required_data": "Enter required data!",
   "title_forget_password": "Enter your mobile number",
   "send": "Send",
-  "sub_title_forget_password": "Enter your phone number for the verification process, we will send 4 digits code to your phone.",
+  "sub_title_forget_password":
+      "Enter your phone number for the verification process, we will send 4 digits code to your phone.",
   "phone": "Phone",
   "change": "Change",
   "new_password": "New password",
@@ -19,7 +20,8 @@
   "reset_password": "Reset password",
   "enter_reset_code": "Enter reset code!",
   "title_reset_password": "Enter 4 Digits Code",
-  "sub_title_reset_password": "Enter the 4 digits code that you received on your phone.",
+  "sub_title_reset_password":
+      "Enter the 4 digits code that you received on your phone.",
   "update": "Update",
   "update_profile": "Update profile",
   "ok": "Ok",
@@ -53,5 +55,7 @@
   "logout": "Logout",
   "addresses": "Addresses",
   "change_password": "Change password",
-  "are_you_sure_you_want_to_logout": "Are you sure you want to logout?"
-}
+  "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
+  "change_languages": "Change languages",
+  "languages":"Languages",
+};

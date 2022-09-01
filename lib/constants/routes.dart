@@ -15,4 +15,5 @@ const String listAddressesScreen = '/listAddressesScreen';
 const String updateAddressScreen = '/updateAddressScreen';
 const String changePasswordScreen = '/changePasswordScreen';
 const String productDetailsScreen = '/productDetailsScreen';
+const String changeLanguageScreen = '/changeLanguageScreen';
 const String productCategoryScreen = '/productCategoryScreen';

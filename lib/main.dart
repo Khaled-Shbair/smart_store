@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app_routers.dart';
-import 'getX/language_getX.dart';
+import 'language/translation.dart';
 import 'shared_preferences/pref_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,20 +11,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({
+  const MyApp({
     Key? key,
     required this.appRouters,
   }) : super(key: key);
 
   final AppRouters appRouters;
-  LanguageGetX languageGetX = Get.put(LanguageGetX());
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(LanguageGetX.to.language.value),
+    return GetMaterialApp(
+      translations: Translation(),
+      locale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
     );

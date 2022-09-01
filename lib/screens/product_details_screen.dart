@@ -1,6 +1,4 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../getX/product_details_getX.dart';

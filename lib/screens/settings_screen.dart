@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import '../constants/routes.dart';
 import '../api/auth_api_controller.dart';
 import '../api/api_response.dart';
 import '../constants/fonts.dart';
 import '../constants/colors.dart';
-import '../getX/language_getX.dart';
 import '../utils/helpers.dart';
-import '../widgets/button_auth.dart';
 import '../widgets/list_settings.dart';
 import '../widgets/view_details.dart';
 
@@ -26,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
-          data: AppLocalizations.of(context)!.settings,
+          data: 'settings'.tr,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -41,45 +38,45 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           ListSettings(
             icon: Icons.person,
             backgroundColor: ColorsApp.iconBlue,
-            title: AppLocalizations.of(context)!.edit_profile,
+            title: 'edit_profile'.tr,
             onTap: () => Navigator.pushNamed(context, updateProfileScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.notifications_active,
             backgroundColor: ColorsApp.iconGreen,
-            title: AppLocalizations.of(context)!.notifications,
+            title: 'notifications'.tr,
             onTap: () => Navigator.pushNamed(context, notificationsScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.lock,
             backgroundColor: ColorsApp.iconRed,
-            title: AppLocalizations.of(context)!.change_password,
+            title: 'change_password'.tr,
             onTap: () => Navigator.pushNamed(context, changePasswordScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.add_home,
             backgroundColor: ColorsApp.iconOrange,
-            title: AppLocalizations.of(context)!.addresses,
+            title: 'addresses'.tr,
             onTap: () => Navigator.pushNamed(context, listAddressesScreen),
           ),
           divider(),
-          const SizedBox(height: 20),
-          ButtonAuth(
-            text: AppLocalizations.of(context)!.logout,
-            onPressed: () async => _logout(),
+          ListSettings(
+            icon: Icons.language,
+            backgroundColor: Colors.tealAccent,
+            title: 'languages'.tr,
+            onTap: () => Navigator.pushNamed(context, changeLanguageScreen),
           ),
-          const SizedBox(height: 20),
-          GetX<LanguageGetX>(
-
-              builder: (controller) {
-            return ButtonAuth(
-              text: 'change language',
-              onPressed: () => LanguageGetX.to.changeLanguage(),
-            );
-          }),
+          divider(),
+          ListSettings(
+            icon: Icons.logout,
+            backgroundColor: Colors.purple,
+            title: 'logout'.tr,
+            onTap: () async => _logout(),
+          ),
+          divider(),
         ],
       ),
     );
@@ -98,13 +95,13 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
             borderRadius: BorderRadius.circular(8),
           ),
           title: ViewDetails(
-            data: AppLocalizations.of(context)!.logout,
+            data: 'logout'.tr,
             fontSize: 26,
             color: ColorsApp.black,
             fontFamily: FontsApp.fontMedium,
           ),
           content: ViewDetails(
-            data: AppLocalizations.of(context)!.are_you_sure_you_want_to_logout,
+            data: 'are_you_sure_you_want_to_logout'.tr,
             fontSize: 17,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
@@ -113,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: ViewDetails(
-                data: AppLocalizations.of(context)!.cancel,
+                data: 'cancel'.tr,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
@@ -129,7 +126,7 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
                 }
               },
               child: ViewDetails(
-                data: AppLocalizations.of(context)!.ok,
+                data: 'ok'.tr,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,

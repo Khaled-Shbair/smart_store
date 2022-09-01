@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/loading.dart';
@@ -25,8 +24,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title:  ViewDetails(
-          data: AppLocalizations.of(context)!.category,
+        title: ViewDetails(
+          data: 'category'.tr,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,

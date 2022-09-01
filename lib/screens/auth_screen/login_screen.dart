@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../utils/helpers.dart';
 import '../../constants/fonts.dart';
 import '../../constants/colors.dart';
@@ -9,7 +10,6 @@ import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
 import '../../api/auth_api_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
-          data: AppLocalizations.of(context)!.login,
+          data: 'login'.tr,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -59,13 +59,13 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           ViewDetails(
-            data: AppLocalizations.of(context)!.welcome_back,
+            data: 'welcome_back'.tr,
             fontFamily: FontsApp.fontMedium,
             color: Colors.black,
             fontSize: 25,
           ),
           ViewDetails(
-            data: AppLocalizations.of(context)!.login_to_start_using_app,
+            data: 'login_to_start_using_app'.tr,
             fontFamily: FontsApp.fontRegular,
             color: ColorsApp.gery,
             fontSize: 17,
@@ -75,14 +75,14 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             controller: _mobileController,
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
-            labelText: AppLocalizations.of(context)!.phone,
+            labelText: 'phone'.tr,
             maxLength: 9,
           ),
           sizedBox(20),
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
-            labelText: AppLocalizations.of(context)!.password,
+            labelText: 'password'.tr,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           ),
           sizedBox(40),
           ButtonAuth(
-            text: AppLocalizations.of(context)!.login,
+            text: 'login'.tr,
             onPressed: () async => await _preformLogin(),
           ),
           sizedBox(20),
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                 Navigator.pushNamed(context, forgetPassword);
               },
               child: Text(
-                AppLocalizations.of(context)!.forget_password_button,
+                'forget_password_button'.tr,
                 style: const TextStyle(
                   fontFamily: FontsApp.fontRegular,
                   color: ColorsApp.green,
@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                AppLocalizations.of(context)!.no_have_an_account,
+                'no_have_an_account'.tr,
                 style: const TextStyle(
                   fontFamily: FontsApp.fontRegular,
                   color: ColorsApp.green,
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                   Navigator.pushNamed(context, registerScreen);
                 },
                 child: Text(
-                  AppLocalizations.of(context)!.create_now,
+                  'create_now'.tr,
                   style: const TextStyle(
                     fontFamily: FontsApp.fontBold,
                     color: ColorsApp.green,
@@ -153,9 +153,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         _passwordController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(
-        message: AppLocalizations.of(context)!.enter_required_data,
-        error: true);
+    showSnackBar(message: 'enter_required_data'.tr, error: true);
     return false;
   }
 

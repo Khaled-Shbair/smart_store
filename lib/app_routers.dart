@@ -12,6 +12,7 @@ import 'screens/auth_screen/register_screen.dart';
 import 'screens/auth_screen/reset_password_screen.dart';
 import 'screens/auth_screen/update_profile_screen.dart';
 import 'screens/category_screen.dart';
+import 'screens/change_languages_screen.dart';
 import 'screens/details product.dart';
 import 'screens/home_screen.dart';
 import 'screens/launch_screen.dart';
@@ -36,6 +37,9 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case changeLanguageScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ChangeLanguageScreen());
       case listAddressesScreen:
         return MaterialPageRoute(
             builder: (context) => const ListAddressesScreen());

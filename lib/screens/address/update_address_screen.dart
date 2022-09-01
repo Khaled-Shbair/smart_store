@@ -1,5 +1,5 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../models/address_model.dart';
 import '../../api/api_response.dart';
 import '../../constants/colors.dart';
@@ -49,7 +49,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
-          data: AppLocalizations.of(context)!.update_address,
+          data: 'update_address'.tr,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -92,7 +92,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
           const SizedBox(height: 50),
           //TODO: Choose City
           ButtonAuth(
-            text: AppLocalizations.of(context)!.update,
+            text: 'update'.tr,
             onPressed: () async => await update(),
           ),
         ],

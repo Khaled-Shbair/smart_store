@@ -1,5 +1,4 @@
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/user_model.dart';
 
 enum PrefKeys { id, token, image, password, phone, login, name, city, language }

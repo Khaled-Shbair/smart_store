@@ -1,5 +1,5 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import 'view_details.dart';
@@ -20,7 +20,7 @@ class NoData extends StatelessWidget {
             color: ColorsApp.green,
           ),
           ViewDetails(
-            data: AppLocalizations.of(context)!.no_data,
+            data: 'no_data'.tr,
             fontFamily: FontsApp.fontMedium,
             fontSize: 30,
             color: ColorsApp.green,

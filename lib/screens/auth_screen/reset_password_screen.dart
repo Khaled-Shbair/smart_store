@@ -1,5 +1,5 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../utils/helpers.dart';
 import '../../constants/fonts.dart';
 import '../../constants/colors.dart';
@@ -70,7 +70,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
-          data: AppLocalizations.of(context)!.reset_password,
+          data: 'reset_password'.tr,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -84,14 +84,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
         physics: const NeverScrollableScrollPhysics(),
         children: [
           ViewDetails(
-            data: AppLocalizations.of(context)!.title_forget_password,
+            data: 'title_forget_password'.tr,
             fontSize: 24,
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
           const SizedBox(height: 12),
           ViewDetails(
-            data: AppLocalizations.of(context)!.sub_title_forget_password,
+            data: 'sub_title_forget_password'.tr,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
@@ -148,7 +148,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           PasswordFiled(
             controller: _newPasswordController,
             obscureText: _obscureText,
-            labelText: AppLocalizations.of(context)!.new_password,
+            labelText: 'new_password'.tr,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
@@ -159,7 +159,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           PasswordFiled(
             controller: _passwordConfirmationController,
             obscureText: _obscureText,
-            labelText: AppLocalizations.of(context)!.new_password_confirmation,
+            labelText: 'new_password_confirmation'.tr,
             onPressed: () {
               setState(
                   () => _obscureConfirmationText = !_obscureConfirmationText);
@@ -167,7 +167,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
           ),
           const SizedBox(height: 30),
           ButtonAuth(
-            text: AppLocalizations.of(context)!.send,
+            text: 'send'.tr,
             onPressed: () async => await _preformSend(),
           ),
         ],
@@ -189,8 +189,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
       _getCode();
       return true;
     }
-    showSnackBar(
-        message: AppLocalizations.of(context)!.enter_reset_code, error: true);
+    showSnackBar(message: 'enter_reset_code'.tr, error: true);
     return false;
   }
 

@@ -1,4 +1,4 @@
-{
+const Map<String, String> ar = {
   "login": "تسجيل دخول",
   "welcome_back": "أهلا بعودتك",
   "login_to_start_using_app": "تسجيل الدخول لبدء استخدام التطبيق",
@@ -10,7 +10,8 @@
   "enter_required_data": "أدخل البيانات المطلوبة!",
   "title_forget_password": "أدخل رقم هاتفك المحمول",
   "send": "أرسل",
-  "sub_title_forget_password": "أدخل رقم هاتفك لعملية التحقق ، وسنرسل رمزًا مكونًا من 4 أرقام إلى هاتفك.",
+  "sub_title_forget_password":
+      "أدخل رقم هاتفك لعملية التحقق ، وسنرسل رمزًا مكونًا من 4 أرقام إلى هاتفك.",
   "phone": "الهاتف",
   "change_password": "تغيير كلمة المرور",
   "new_password": "كلمة السر الجديدة",
@@ -20,7 +21,8 @@
   "reset_password": "إعادة تعيين كلمة المرور",
   "enter_reset_code": "أدخل رمز إعادة التعيين!",
   "title_reset_password": "أدخل كود 4 أرقام",
-  "sub_title_reset_password": "أدخل الرمز المكون من 4 أرقام الذي تلقيته على هاتفك.",
+  "sub_title_reset_password":
+      "أدخل الرمز المكون من 4 أرقام الذي تلقيته على هاتفك.",
   "update": "تحديث",
   "update_profile": "تحديث الملف",
   "ok": "موافق",
@@ -53,5 +55,7 @@
   "edit_profile": "تعديل الملف الشخصي",
   "logout": "تسجيل الخروج",
   "addresses": "العناوين",
-  "are_you_sure_you_want_to_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
-}
+  "are_you_sure_you_want_to_logout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "change_languages": "تغيير اللغات",
+  "languages": "اللغات",
+};
