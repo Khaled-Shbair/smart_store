@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale('ar'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
     );

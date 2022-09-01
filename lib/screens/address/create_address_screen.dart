@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../api/api_response.dart';
 import '../../getX/address_getX.dart';
@@ -42,8 +43,8 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Create address',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.create_address,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -63,7 +64,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
         children: [
           InputFiled(
             controller: _nameController,
-            labelText: 'Name address',
+            labelText: AppLocalizations.of(context)!.name_address,
             prefixIcon: Icons.note_alt_outlined,
             prefixText: '',
             maxLength: 35,
@@ -71,7 +72,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
           const SizedBox(height: 20),
           InputFiled(
             controller: _infoController,
-            labelText: 'Info address',
+            labelText: AppLocalizations.of(context)!.info_address,
             prefixIcon: Icons.info_outline,
             prefixText: '',
             maxLength: 80,
@@ -79,14 +80,14 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
           const SizedBox(height: 20),
           InputFiled(
             controller: _phoneController,
-            labelText: 'Contact Number',
+            labelText: AppLocalizations.of(context)!.contact_number,
             prefixIcon: Icons.phone,
             maxLength: 9,
           ),
           const SizedBox(height: 50),
           //TODO: Choose City
           ButtonAuth(
-            text: 'Create',
+            text: AppLocalizations.of(context)!.create,
             onPressed: () async => await create(),
           ),
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../constants/routes.dart';
 import '../api/auth_api_controller.dart';
 import '../api/api_response.dart';
@@ -22,8 +23,8 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Settings',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.settings,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -38,34 +39,34 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           ListSettings(
             icon: Icons.person,
             backgroundColor: ColorsApp.iconBlue,
-            title: 'Edit profile',
+            title: AppLocalizations.of(context)!.edit_profile,
             onTap: () => Navigator.pushNamed(context, updateProfileScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.notifications_active,
             backgroundColor: ColorsApp.iconGreen,
-            title: 'Notifications',
+            title: AppLocalizations.of(context)!.notifications,
             onTap: () => Navigator.pushNamed(context, notificationsScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.lock,
             backgroundColor: ColorsApp.iconRed,
-            title: 'Change password',
+            title: AppLocalizations.of(context)!.change_password,
             onTap: () => Navigator.pushNamed(context, changePasswordScreen),
           ),
           divider(),
           ListSettings(
             icon: Icons.add_home,
             backgroundColor: ColorsApp.iconOrange,
-            title: 'Addresses',
+            title: AppLocalizations.of(context)!.addresses,
             onTap: () => Navigator.pushNamed(context, listAddressesScreen),
           ),
           divider(),
           const SizedBox(height: 20),
           ButtonAuth(
-            text: 'LOGOUT',
+            text: AppLocalizations.of(context)!.logout,
             onPressed: () async => _logout(),
           ),
         ],
@@ -85,14 +86,14 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          title: const ViewDetails(
-            data: 'Logout',
+          title: ViewDetails(
+            data: AppLocalizations.of(context)!.logout,
             fontSize: 26,
             color: ColorsApp.black,
             fontFamily: FontsApp.fontMedium,
           ),
-          content: const ViewDetails(
-            data: 'Are you sure you want to logout?',
+          content: ViewDetails(
+            data: AppLocalizations.of(context)!.are_you_sure_you_want_to_logout,
             fontSize: 17,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
@@ -100,8 +101,8 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const ViewDetails(
-                data: 'Cancel',
+              child: ViewDetails(
+                data: AppLocalizations.of(context)!.cancel,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
@@ -116,8 +117,8 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
                   navigator();
                 }
               },
-              child: const ViewDetails(
-                data: 'Ok',
+              child: ViewDetails(
+                data: AppLocalizations.of(context)!.ok,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,

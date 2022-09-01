@@ -1,4 +1,5 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,8 +32,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Home',
+        title:  ViewDetails(
+          data: AppLocalizations.of(context)!.home,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -106,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
         child: Column(
           children: [
             TitleList(
-              title: 'Categories',
+              title: AppLocalizations.of(context)!.category,
               onPressed: () {
                 Navigator.pushNamed(context, categoryScreen);
               },
@@ -173,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
         child: Column(
           children: [
             TitleList(
-              title: 'Products',
+              title: AppLocalizations.of(context)!.products,
               onPressed: () {
                 //TODO: later
                 //  Navigator.pushNamed(context, );
@@ -256,8 +257,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
           Container(
             padding: const EdgeInsetsDirectional.all(2),
             color: ColorsApp.red,
-            child: const ViewDetails(
-              data: 'Discount',
+            child:  ViewDetails(
+              data:AppLocalizations.of(context)!.discount ,
               fontFamily: FontsApp.fontBold,
               color: Colors.white,
               fontSize: 10,

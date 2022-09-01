@@ -1,5 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import '../widgets/no_data.dart';
@@ -13,8 +13,8 @@ class NotificationsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Notifications',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.notifications,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,

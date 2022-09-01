@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import '../../utils/helpers.dart';
 import '../../constants/fonts.dart';
@@ -36,12 +37,13 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'FORGET PASSWORD',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.forget_password,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
         ),
+        iconTheme: const IconThemeData(color: ColorsApp.green),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -50,16 +52,15 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const ViewDetails(
-            data: 'Enter your mobile number',
+           ViewDetails(
+            data: AppLocalizations.of(context)!.title_forget_password,
             fontSize: 24,
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
           const SizedBox(height: 12),
-          const ViewDetails(
-            data: 'Enter your phone number for the verification process, '
-                'we will send 4 digits code to your phone.',
+          ViewDetails(
+            data: AppLocalizations.of(context)!.sub_title_forget_password,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
@@ -69,12 +70,12 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             controller: _mobileController,
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
-            labelText: 'Phone',
+            labelText: AppLocalizations.of(context)!.phone,
             maxLength: 9,
           ),
           const SizedBox(height: 30),
           ButtonAuth(
-            text: 'Send',
+            text: AppLocalizations.of(context)!.send,
             onPressed: () async => await _preformForget(),
           ),
         ],
@@ -92,7 +93,9 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
     if (_mobileController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(message: 'Enter required data!', error: true);
+    showSnackBar(
+        message: AppLocalizations.of(context)!.enter_required_data,
+        error: true);
     return false;
   }
 

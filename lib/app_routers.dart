@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_store/models/address_model.dart';
 import 'constants/routes.dart';
-import 'models/home_model.dart';
 import 'models/product.dart';
 import 'screens/address/create_address_screen.dart';
 import 'screens/address/list_addresses_screen.dart';

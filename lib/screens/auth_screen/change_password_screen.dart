@@ -1,5 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
 import '../../api/api_response.dart';
 import '../../api/auth_api_controller.dart';
 import '../../constants/colors.dart';
@@ -41,27 +41,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
     super.dispose();
   }
 
-  Widget password(
-      TextEditingController controller, bool obscureText, String labelText) {
-    return PasswordFiled(
-      controller: controller,
-      obscureText: obscureText,
-      labelText: 'Password',
-      onPressed: () {
-        setState(() {
-          obscureText = !obscureText;
-        });
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Change password',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.change_password,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -78,26 +64,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
-            labelText: 'Password',
+            labelText: AppLocalizations.of(context)!.password,
             onPressed: () => setState(() => _obscureText = !_obscureText),
           ),
           const SizedBox(height: 20),
           PasswordFiled(
             controller: _newPasswordController,
             obscureText: obscureText1,
-            labelText: 'New password',
+            labelText: AppLocalizations.of(context)!.new_password,
             onPressed: () => setState(() => obscureText1 = !obscureText1),
           ),
           const SizedBox(height: 20),
           PasswordFiled(
             controller: _newPasswordConfirmationController,
             obscureText: obscureText2,
-            labelText: 'New password confirmation',
+            labelText: AppLocalizations.of(context)!.new_password_confirmation,
             onPressed: () => setState(() => obscureText2 = !obscureText2),
           ),
           const SizedBox(height: 50),
           ButtonAuth(
-            text: 'Change',
+            text: AppLocalizations.of(context)!.change,
             onPressed: () async => await _preformChangePassword(),
           ),
         ],
@@ -119,12 +105,17 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
           _newPasswordConfirmationController.text) {
         return true;
       } else {
-        showSnackBar(message: 'Password confirmation error!', error: true);
+        showSnackBar(
+            message: AppLocalizations.of(context)!.password_confirmation_error,
+            error: true);
         return false;
       }
     }
 
-    showSnackBar(message: 'Enter required data!', error: true);
+    showSnackBar(
+      message: AppLocalizations.of(context)!.enter_required_data,
+      error: true,
+    );
     return false;
   }
 

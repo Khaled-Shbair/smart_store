@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../constants/colors.dart';
@@ -23,8 +24,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Sub category',
+        title:  ViewDetails(
+          data:AppLocalizations.of(context)!.sub_category ,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,

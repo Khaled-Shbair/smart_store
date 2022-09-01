@@ -10,6 +10,7 @@ import '../../widgets/view_details.dart';
 import '../../widgets/password_filed.dart';
 import '../../api/auth_api_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -43,8 +44,8 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title:  ViewDetails(
-          data: AppLocalizations.of(context)!.login,////
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.login,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -57,14 +58,14 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const ViewDetails(
-            data: 'Welcome back',
+          ViewDetails(
+            data: AppLocalizations.of(context)!.welcome_back,
             fontFamily: FontsApp.fontMedium,
             color: Colors.black,
             fontSize: 25,
           ),
-          const ViewDetails(
-            data: 'Login to start using app',
+          ViewDetails(
+            data: AppLocalizations.of(context)!.login_to_start_using_app,
             fontFamily: FontsApp.fontRegular,
             color: ColorsApp.gery,
             fontSize: 17,
@@ -74,14 +75,14 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             controller: _mobileController,
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
-            labelText: 'Mobile',
+            labelText: AppLocalizations.of(context)!.phone,
             maxLength: 9,
           ),
           sizedBox(20),
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
-            labelText: 'Password',
+            labelText: AppLocalizations.of(context)!.password,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           ),
           sizedBox(40),
           ButtonAuth(
-            text: 'Login',
+            text: AppLocalizations.of(context)!.login,
             onPressed: () async => await _preformLogin(),
           ),
           sizedBox(20),
@@ -100,9 +101,9 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
               onPressed: () {
                 Navigator.pushNamed(context, forgetPassword);
               },
-              child: const Text(
-                'Forget password?',
-                style: TextStyle(
+              child: Text(
+                AppLocalizations.of(context)!.forget_password_button,
+                style: const TextStyle(
                   fontFamily: FontsApp.fontRegular,
                   color: ColorsApp.green,
                   decoration: TextDecoration.underline,
@@ -114,9 +115,9 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Don\'t have an account?',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.no_have_an_account,
+                style: const TextStyle(
                   fontFamily: FontsApp.fontRegular,
                   color: ColorsApp.green,
                 ),
@@ -125,9 +126,9 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
                 onPressed: () {
                   Navigator.pushNamed(context, registerScreen);
                 },
-                child: const Text(
-                  'Create now!',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.create_now,
+                  style: const TextStyle(
                     fontFamily: FontsApp.fontBold,
                     color: ColorsApp.green,
                     decoration: TextDecoration.underline,
@@ -152,7 +153,9 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
         _passwordController.text.isNotEmpty) {
       return true;
     }
-    showSnackBar(message: 'Enter required data!', error: true);
+    showSnackBar(
+        message: AppLocalizations.of(context)!.enter_required_data,
+        error: true);
     return false;
   }
 

@@ -1,5 +1,5 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
 import '../../api/api_response.dart';
 import '../../api/auth_api_controller.dart';
 import '../../constants/colors.dart';
@@ -40,7 +40,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     return Row(
       children: [
         ChooseGender(
-          title: 'Male',
+          title: AppLocalizations.of(context)!.male,
           value: 'M',
           groupValue: _gender,
           onChanged: (value) {
@@ -52,7 +52,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           },
         ),
         ChooseGender(
-          title: 'Female',
+          title: AppLocalizations.of(context)!.female,
           value: 'F',
           groupValue: _gender,
           onChanged: (value) {
@@ -72,8 +72,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const ViewDetails(
-            data: 'Enter your new name',
+          title: ViewDetails(
+            data: AppLocalizations.of(context)!.enter_new_name,
             fontSize: 20,
             color: ColorsApp.black,
             fontFamily: FontsApp.fontRegular,
@@ -81,7 +81,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           content: InputFiled(
             prefixText: '',
             controller: _nameController,
-            labelText: 'new name',
+            labelText: AppLocalizations.of(context)!.new_name,
             prefixIcon: Icons.person,
             colorLabel: ColorsApp.black,
             maxLength: 30,
@@ -89,8 +89,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const ViewDetails(
-                data: 'Cancel',
+              child: ViewDetails(
+                data: AppLocalizations.of(context)!.cancel,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
@@ -101,11 +101,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
                 if (_nameController.text.isNotEmpty) {
                   Navigator.pop(context);
                 } else {
-                  showSnackBar(message: 'Enter new name', error: true);
+                  showSnackBar(
+                      message: AppLocalizations.of(context)!.enter_new_name,
+                      error: true);
                 }
               },
-              child: const ViewDetails(
-                data: 'Ok',
+              child: ViewDetails(
+                data: AppLocalizations.of(context)!.ok,
                 fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
@@ -126,8 +128,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Update profile',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.update_profile,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -163,7 +165,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           updateGender(),
           const SizedBox(height: 50),
           ButtonAuth(
-            text: 'Update',
+            text: AppLocalizations.of(context)!.update,
             onPressed: () async => await updateProfile(),
           ),
         ],

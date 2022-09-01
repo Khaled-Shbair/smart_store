@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../api/api_response.dart';
@@ -26,8 +27,8 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'List addresses',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.list_addresses,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
@@ -84,15 +85,15 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
             horizontalTitleGap: 3,
             title: ViewDetails(
               data:
-                  'City: ${_addressGetX.addressModel!.data![index].city.nameEn}'
-                  '\nAddress: ${_addressGetX.addressModel!.data![index].name}',
+                  '${AppLocalizations.of(context)!.city}: ${_addressGetX.addressModel!.data![index].city.nameEn}'
+                  '\n${AppLocalizations.of(context)!.address}: ${_addressGetX.addressModel!.data![index].name}',
               fontSize: 18,
               fontFamily: FontsApp.fontMedium,
             ),
             subtitle: ViewDetails(
               data:
-                  'phone: ${_addressGetX.addressModel!.data![index].contactNumber}'
-                  '\nInfo: ${_addressGetX.addressModel!.data![index].info}',
+                  '${AppLocalizations.of(context)!.phone}: ${_addressGetX.addressModel!.data![index].contactNumber}'
+                  '\n${AppLocalizations.of(context)!.info}: ${_addressGetX.addressModel!.data![index].info}',
               fontSize: 18,
               fontFamily: FontsApp.fontMedium,
             ),

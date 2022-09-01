@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import '../constants/routes.dart';
@@ -24,8 +25,8 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Product_Category',
+        title: ViewDetails(
+          data: AppLocalizations.of(context)!.product_category,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,

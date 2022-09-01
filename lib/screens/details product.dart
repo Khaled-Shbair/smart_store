@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../api/api_response.dart';
 import '../getX/rate_products_getX.dart';
 import '../getX/favorite-products_getX.dart';
-import '../models/home_model.dart';
 import '../models/product.dart';
 import '../utils/helpers.dart';
 import '../widgets/view_details.dart';

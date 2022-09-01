@@ -1,4 +1,5 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utils/helpers.dart';
@@ -24,8 +25,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: const ViewDetails(
-          data: 'Favorite',
+        title:  ViewDetails(
+          data: AppLocalizations.of(context)!.favorite,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
           fontSize: 24,
