@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import '../constants/routes.dart';
 import '../api/auth_api_controller.dart';
 import '../api/api_response.dart';
 import '../constants/fonts.dart';
 import '../constants/colors.dart';
+import '../getX/language_getX.dart';
 import '../utils/helpers.dart';
 import '../widgets/button_auth.dart';
 import '../widgets/list_settings.dart';
@@ -69,6 +71,15 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
             text: AppLocalizations.of(context)!.logout,
             onPressed: () async => _logout(),
           ),
+          const SizedBox(height: 20),
+          GetX<LanguageGetX>(
+
+              builder: (controller) {
+            return ButtonAuth(
+              text: 'change language',
+              onPressed: () => LanguageGetX.to.changeLanguage(),
+            );
+          }),
         ],
       ),
     );

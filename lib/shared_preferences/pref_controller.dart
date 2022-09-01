@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user_model.dart';
 
-enum PrefKeys { id, token, image, password, phone, login, name, city }
+enum PrefKeys { id, token, image, password, phone, login, name, city, language }
 
 class PrefController {
   static final PrefController _prefController = PrefController._();
@@ -27,6 +27,14 @@ class PrefController {
         PrefKeys.token.toString(), 'Bearer ${user.token}');
   }
 
+  Future<bool> changeLanguage({required String language}) async {
+    return await _sharedPreferences.setString(
+        PrefKeys.language.toString(), language);
+  }
+
+  String get language =>
+      _sharedPreferences.getString(PrefKeys.language.toString()) ?? 'en';
+
   bool get login =>
       _sharedPreferences.getBool(PrefKeys.login.toString()) ?? false;
 
@@ -48,6 +56,12 @@ class PrefController {
   set name(String name) =>
       _sharedPreferences.setString(PrefKeys.name.toString(), name);
 
+  String get mobile =>
+      _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
+
+  set mobile(String mobile) =>
+      _sharedPreferences.setString(PrefKeys.phone.toString(), mobile);
+
   String get image =>
       _sharedPreferences.getString(PrefKeys.image.toString()) ?? '';
 
@@ -57,5 +71,12 @@ class PrefController {
   String get cityId =>
       _sharedPreferences.getString(PrefKeys.city.toString()) ?? '';
 
-  Future<bool> clear() async => await _sharedPreferences.clear();
+  Future<bool> remove({required dynamic key}) async {
+    if (_sharedPreferences.containsKey(key)) {
+      return await _sharedPreferences.remove(key);
+    }
+    return false;
+  }
+
+//Future<bool> clear() async => await _sharedPreferences.clear();
 }

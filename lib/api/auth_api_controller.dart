@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 import '../shared_preferences/pref_controller.dart';
 
 class AuthApiController {
-  final String lang = 'en';
-
   Future<ApiResponse> login({
     required String phone,
     required String password,
@@ -17,7 +15,7 @@ class AuthApiController {
       uri,
       body: {'mobile': phone, 'password': password},
       headers: {
-        'lang': lang,
+        'lang': PrefController().language,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     );
@@ -45,7 +43,7 @@ class AuthApiController {
   }) async {
     var uri = Uri.parse(ApiPath.resetPassword);
     var response = await http.post(uri, headers: {
-      'lang': lang,
+      'lang': PrefController().language,
       'Content-Type': 'application/x-www-form-urlencoded',
     }, body: {
       'mobile': phone,
@@ -73,7 +71,7 @@ class AuthApiController {
   }) async {
     var uri = Uri.parse(ApiPath.changePassword);
     var response = await http.post(uri, headers: {
-      'lang': lang,
+      'lang': PrefController().language,
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': PrefController().token,
@@ -101,7 +99,7 @@ class AuthApiController {
   Future<ApiResponse> forgetPassword({required String phone}) async {
     var uri = Uri.parse(ApiPath.forgetPassword);
     var response = await http.post(uri, headers: {
-      'lang': lang,
+      'lang': PrefController().language,
       'Content-Type': 'application/x-www-form-urlencoded'
     }, body: {
       'mobile': phone,
@@ -127,7 +125,7 @@ class AuthApiController {
     var response = await http.get(
       uri,
       headers: {
-        'lang': lang,
+        'lang': PrefController().language,
         'X-Requested-With': 'XMLHttpRequest',
         'Authorization': PrefController().token,
       },
@@ -135,7 +133,11 @@ class AuthApiController {
     if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        PrefController().clear();
+        PrefController().remove(key: PrefController().token);
+        PrefController().remove(key: PrefController().cityId);
+        PrefController().remove(key: PrefController().mobile);
+        PrefController().remove(key: PrefController().name);
+        PrefController().remove(key: PrefController().image);
       }
       return ApiResponse(
         message: jsonResponse['message'],
@@ -158,7 +160,7 @@ class AuthApiController {
     var response = await http.post(
       uri,
       headers: {
-        'lang': lang,
+        'lang': PrefController().language,
         'Authorization': PrefController().token,
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -227,7 +229,7 @@ class AuthApiController {
     var response = await http.post(
       uri,
       headers: {
-        'lang': lang,
+        'lang': PrefController().language,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: {

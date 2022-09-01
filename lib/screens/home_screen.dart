@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
     return Scaffold(
       backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title:  ViewDetails(
+        title: ViewDetails(
           data: AppLocalizations.of(context)!.home,
           fontFamily: FontsApp.fontBold,
           color: ColorsApp.green,
@@ -257,8 +257,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
           Container(
             padding: const EdgeInsetsDirectional.all(2),
             color: ColorsApp.red,
-            child:  ViewDetails(
-              data:AppLocalizations.of(context)!.discount ,
+            child: ViewDetails(
+              data: AppLocalizations.of(context)!.discount,
               fontFamily: FontsApp.fontBold,
               color: Colors.white,
               fontSize: 10,

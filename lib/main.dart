@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'app_routers.dart';
+import 'getX/language_getX.dart';
 import 'shared_preferences/pref_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -11,19 +12,20 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({
+  MyApp({
     Key? key,
     required this.appRouters,
   }) : super(key: key);
 
   final AppRouters appRouters;
+  LanguageGetX languageGetX = Get.put(LanguageGetX());
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale('ar'),
+      locale: Locale(LanguageGetX.to.language.value),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
     );

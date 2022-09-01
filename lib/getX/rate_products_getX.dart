@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:smart_store/getX/home_getX.dart';
-
+import '../getX/home_getX.dart';
 import '../api/api_paths.dart';
 import '../api/api_response.dart';
 import '../shared_preferences/pref_controller.dart';
@@ -21,7 +19,7 @@ class RateProductsGetX extends GetxController {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'lang': 'en',
+        'lang': PrefController().language,
         'Authorization': PrefController().token,
       },
       body: {
