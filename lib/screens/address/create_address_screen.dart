@@ -5,9 +5,7 @@ import '../../getX/address_getX.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import '../../constants/colors.dart';
-import '../../constants/fonts.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/view_details.dart';
 
 class CreateAddressScreen extends StatefulWidget {
   const CreateAddressScreen({Key? key}) : super(key: key);
@@ -41,18 +39,9 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'create_address'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('create_address'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),

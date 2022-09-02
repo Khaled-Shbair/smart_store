@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
+import '../widgets/button_auth.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import '../widgets/view_details.dart';
@@ -12,34 +14,36 @@ class ChangeLanguageScreen extends StatefulWidget {
 }
 
 class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
-  String _selectedLang = 'en';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'change_languages'.tr,
-          //   AppLocalizations.of(context)!.update_profile,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('change_languages'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        padding: const EdgeInsetsDirectional.only(
+          start: 20,
+          end: 20,
+          top: 50,
+        ),
+        physics: const NeverScrollableScrollPhysics(),
         children: [
-          Text("changeLanguages".tr),
-          ElevatedButton(
-              onPressed: () {
-                Get.updateLocale(Locale('ar'));
-              },
-              child: Text('change')),
+          ButtonAuth(
+            text: 'اللغة العربية',
+            onPressed: () {
+              Get.updateLocale(const Locale('ar'));
+              PrefController().changeLanguage(language: 'ar');
+            },
+          ),
+          const SizedBox(height: 20),
+          ButtonAuth(
+            text: 'English',
+            onPressed: () {
+              Get.updateLocale(const Locale('en'));
+              PrefController().changeLanguage(language: 'en');
+            },
+          ),
         ],
       ),
     );

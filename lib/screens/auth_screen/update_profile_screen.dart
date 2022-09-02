@@ -124,18 +124,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'update_profile'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('update_profile'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),

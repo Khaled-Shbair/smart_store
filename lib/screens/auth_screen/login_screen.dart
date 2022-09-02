@@ -42,18 +42,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
-      appBar: AppBar(
-        title: ViewDetails(
-          data: 'login'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('login'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),

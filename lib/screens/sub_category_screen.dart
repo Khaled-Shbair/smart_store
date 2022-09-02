@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import '../constants/routes.dart';
@@ -21,18 +22,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'sub_category'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('sub_category'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: GetX<SubCategoryModelGetX>(
         initState: (state) {
@@ -66,6 +58,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                 _productCategory.id.value =
                     SubCategoryModelGetX.to.subCategory!.data![index].id;
               });
+              ProductCategoryGetX.to.getProductCategoryData();
               Navigator.pushNamed(context, productCategoryScreen);
             },
             child: Container(
@@ -99,8 +92,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       ),
                     ),
                     child: ViewDetails(
-                      data: SubCategoryModelGetX
-                          .to.subCategory!.data![index].nameEn,
+                      data: PrefController().language == 'en'
+                          ? SubCategoryModelGetX
+                              .to.subCategory!.data![index].nameEn
+                          : SubCategoryModelGetX
+                              .to.subCategory!.data![index].nameAr,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       fontSize: 20,

@@ -1,6 +1,7 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../getX/product_details_getX.dart';
 import '../widgets/view_details.dart';
 
@@ -128,7 +129,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         Expanded(
           child: ViewDetails(
-            data: ProductDetailsGetX.to.productDetails!.data!.nameEn,
+            data: PrefController().language == 'en'
+                ? ProductDetailsGetX.to.productDetails!.data!.nameEn
+                : ProductDetailsGetX.to.productDetails!.data!.nameAr,
             fontSize: 24,
             height: 1.3,
           ),
@@ -148,7 +151,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         Expanded(
           child: SingleChildScrollView(
             child: ViewDetails(
-              data: ProductDetailsGetX.to.productDetails!.data!.infoEn,
+              data: PrefController().language == 'en'
+                  ? ProductDetailsGetX.to.productDetails!.data!.infoEn
+                  : ProductDetailsGetX.to.productDetails!.data!.infoAr,
               fontSize: 24,
               height: 1.3,
               maxLines: 3,

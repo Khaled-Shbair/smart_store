@@ -58,4 +58,5 @@ const Map<String, String> en = {
   "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
   "change_languages": "Change languages",
   "languages":"Languages",
+  "dark_mode":"Dark mode",
 };

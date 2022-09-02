@@ -17,21 +17,12 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> with Helpers {
+  bool isModel = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
-      appBar: AppBar(
-        title: ViewDetails(
-          data: 'settings'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('settings'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         children: [
@@ -75,6 +66,18 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
             backgroundColor: Colors.purple,
             title: 'logout'.tr,
             onTap: () async => _logout(),
+          ),
+          divider(),
+          ListSettings(
+            icon: Icons.brightness_4_outlined,
+            backgroundColor: isModel ? Colors.black : Colors.blueGrey,
+            title: 'dark_mode'.tr,
+            onTap: () {
+              setState(() {
+                Get.changeTheme(
+                    Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+              });
+            },
           ),
           divider(),
         ],

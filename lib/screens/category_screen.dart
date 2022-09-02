@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../widgets/loading.dart';
 import '../constants/fonts.dart';
 import '../constants/routes.dart';
@@ -22,18 +23,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'category'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
+        title: Text('category'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        backgroundColor: Colors.transparent,
       ),
       body: GetX<CategoryGetX>(
         builder: (controller) {
@@ -71,7 +63,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 image: NetworkImage(_category.category!.data![index].imageUrl),
               ),
               title: ViewDetails(
-                data: _category.category!.data![index].nameEn,
+                data: PrefController().language == 'en'
+                    ? _category.category!.data![index].nameEn
+                    : _category.category!.data![index].nameAr,
                 fontSize: 22,
                 fontFamily: FontsApp.fontMedium,
                 color: ColorsApp.black,

@@ -1,6 +1,7 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../utils/helpers.dart';
 import '../constants/fonts.dart';
 import '../api/api_response.dart';
@@ -18,22 +19,10 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
-      appBar: AppBar(
-        title:  ViewDetails(
-          data: 'favorite'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('favorite'.tr)),
       body: GetX<FavoriteProductsGetX>(
         initState: (state) {
           state.controller!.getFavoriteProductsData();
@@ -55,7 +44,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
           crossAxisCount: 2,
           mainAxisSpacing: 15,
           crossAxisSpacing: 10,
-          childAspectRatio: 190 / 264,
+          childAspectRatio: 190 / 272,
         ),
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
@@ -73,16 +62,17 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
                 imageProduct(index),
                 const SizedBox(height: 5),
                 ViewDetails(
-                  data: FavoriteProductsGetX
-                      .to.favoriteProducts!.data![index].nameEn,
+                  data: PrefController().language == 'en'
+                      ? FavoriteProductsGetX
+                          .to.favoriteProducts!.data![index].nameEn
+                      : FavoriteProductsGetX
+                          .to.favoriteProducts!.data![index].nameAr,
                   fontSize: 18,
                   color: ColorsApp.black,
                   fontFamily: FontsApp.fontMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 3),
                 priceProduct(index),
-                const SizedBox(height: 3),
                 RatingBarIndicator(
                   itemSize: 18,
                   rating: double.parse(FavoriteProductsGetX

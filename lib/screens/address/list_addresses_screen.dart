@@ -24,18 +24,9 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'list_addresses'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('list_addresses'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         actions: [
           IconButton(
             onPressed: () {

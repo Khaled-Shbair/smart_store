@@ -67,18 +67,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
-      appBar: AppBar(
-        title: ViewDetails(
-          data: 'reset_password'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('reset_password'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),

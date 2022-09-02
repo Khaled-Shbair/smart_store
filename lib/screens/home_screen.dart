@@ -2,6 +2,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../utils/helpers.dart';
 import '../getX/home_getX.dart';
 import '../constants/fonts.dart';
@@ -29,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
           data: 'home'.tr,
@@ -145,8 +145,11 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                         ),
                         const SizedBox(height: 10),
                         ViewDetails(
-                          data: _homeGetX
-                              .homeModel!.data!.categories![index].nameEn,
+                          data: PrefController().language == 'en'
+                              ? _homeGetX
+                                  .homeModel!.data!.categories![index].nameEn
+                              : _homeGetX
+                                  .homeModel!.data!.categories![index].nameAr,
                           overflow: TextOverflow.ellipsis,
                           color: Colors.black,
                           textAlign: TextAlign.center,
@@ -188,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
-                childAspectRatio: 190 / 264,
+                childAspectRatio: 190 / 271,
               ),
               itemCount: _homeGetX.homeModel!.data!.latestProducts!.length,
               itemBuilder: (context, index) {
@@ -202,18 +205,20 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       imageProduct(index),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 3),
                       ViewDetails(
-                        data: _homeGetX
-                            .homeModel!.data!.latestProducts![index].nameEn,
+                        data: PrefController().language == 'en'
+                            ? _homeGetX
+                                .homeModel!.data!.latestProducts![index].nameEn
+                            : _homeGetX
+                                .homeModel!.data!.latestProducts![index].nameAr,
                         fontSize: 18,
                         color: ColorsApp.black,
                         fontFamily: FontsApp.fontMedium,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 3),
                       priceProduct(index),
-                      const SizedBox(height: 3),
+                      const SizedBox(height: 2),
                       RatingBarIndicator(
                         itemSize: 18,
                         rating: double.parse(_homeGetX.homeModel!.data!

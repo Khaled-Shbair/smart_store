@@ -22,23 +22,11 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
-        title: ViewDetails(
-          data: 'product_category'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
+        title: Text('product_category'.tr),
         iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
       body: GetX<ProductCategoryGetX>(
-        initState: (state) {
-          state.controller!.getProductCategoryData();
-        },
         builder: (controller) {
           if (_productDetails.loading.isTrue) {
             return const Loading();

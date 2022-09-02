@@ -44,7 +44,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       appBar: AppBar(
         title: ViewDetails(
           data: 'change_password'.tr,

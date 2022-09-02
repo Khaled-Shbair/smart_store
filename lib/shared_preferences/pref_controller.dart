@@ -34,39 +34,34 @@ class PrefController {
   String get language =>
       _sharedPreferences.getString(PrefKeys.language.toString()) ?? 'en';
 
+  //set login(bool login) =>
+  //    _sharedPreferences.setBool(PrefKeys.login.toString(), login);
   bool get login =>
       _sharedPreferences.getBool(PrefKeys.login.toString()) ?? false;
 
-  //set login(bool login) =>
-  //    _sharedPreferences.setBool(PrefKeys.login.toString(), login);
-
-  String get token =>
-      _sharedPreferences.getString(PrefKeys.token.toString()) ?? '';
-
   //set token(String token) =>
   //    _sharedPreferences.setString(PrefKeys.token.toString(), token);
+  get token => _sharedPreferences.getString(PrefKeys.token.toString()) ?? '';
 
   String get phone =>
       _sharedPreferences.getString(PrefKeys.phone.toString()) ?? '';
 
-  String get name =>
-      _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
-
   set name(String name) =>
       _sharedPreferences.setString(PrefKeys.name.toString(), name);
 
-  String get mobile =>
+  String get name =>
       _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
 
-  set mobile(String mobile) =>
-      _sharedPreferences.setString(PrefKeys.phone.toString(), mobile);
+  //set mobile(String mobile) =>
+  // _sharedPreferences.setString(PrefKeys.phone.toString(), mobile);
+  String get mobile =>
+      _sharedPreferences.getString(PrefKeys.name.toString()) ?? '';
 
   String get image =>
       _sharedPreferences.getString(PrefKeys.image.toString()) ?? '';
 
-  set cityId(String cityId) =>
-      _sharedPreferences.setString(PrefKeys.city.toString(), cityId);
-
+  // set cityId(String cityId) =>
+  // _sharedPreferences.setString(PrefKeys.city.toString(), cityId);
   String get cityId =>
       _sharedPreferences.getString(PrefKeys.city.toString()) ?? '';
 
@@ -76,6 +71,4 @@ class PrefController {
     }
     return false;
   }
-
-//Future<bool> clear() async => await _sharedPreferences.clear();
 }

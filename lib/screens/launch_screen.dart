@@ -24,7 +24,6 @@ class _LaunchScreenState extends State<LaunchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsApp.scaffoldColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
