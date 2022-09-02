@@ -5,6 +5,7 @@ import '../api/auth_api_controller.dart';
 import '../api/api_response.dart';
 import '../constants/fonts.dart';
 import '../constants/colors.dart';
+import '../constants/theme_mode.dart';
 import '../utils/helpers.dart';
 import '../widgets/list_settings.dart';
 import '../widgets/view_details.dart';
@@ -17,8 +18,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> with Helpers {
-  bool isModel = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,14 +69,10 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           divider(),
           ListSettings(
             icon: Icons.brightness_4_outlined,
-            backgroundColor: isModel ? Colors.black : Colors.blueGrey,
+            //backgroundColor: isModel ? Colors.black : Colors.blueGrey,
+            backgroundColor: Colors.blueGrey,
             title: 'dark_mode'.tr,
-            onTap: () {
-              setState(() {
-                Get.changeTheme(
-                    Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
-              });
-            },
+            onTap: () => setState(() => ThemeModes().changeMode()),
           ),
           divider(),
         ],

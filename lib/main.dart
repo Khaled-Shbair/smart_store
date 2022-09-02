@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'app_routers.dart';
-import 'constants/colors.dart';
-import 'constants/fonts.dart';
+import 'constants/theme_mode.dart';
 import 'language/translation.dart';
 import 'shared_preferences/pref_controller.dart';
 
@@ -26,29 +24,9 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorsApp.scaffoldColorLightTheme,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-        ),
-      ),
-
-      darkTheme: ThemeData(
-        scaffoldBackgroundColor: ColorsApp.scaffoldColorDarkTheme,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          titleTextStyle: TextStyle(
-            fontFamily: FontsApp.fontBold,
-            color: ColorsApp.green,
-            fontSize: 24,
-          ),
-        ),
-      ),
-      themeMode: ThemeMode.dark,
+      theme: ThemeModes().lightTheme,
+      darkTheme: ThemeModes().darkTheme,
+      themeMode: ThemeModes().getThemeMode(),
     );
   }
 }

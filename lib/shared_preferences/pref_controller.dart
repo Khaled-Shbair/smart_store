@@ -1,7 +1,18 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 
-enum PrefKeys { id, token, image, password, phone, login, name, city, language }
+enum PrefKeys {
+  id,
+  token,
+  image,
+  password,
+  phone,
+  login,
+  name,
+  city,
+  language,
+  mode
+}
 
 class PrefController {
   static final PrefController _prefController = PrefController._();
@@ -25,6 +36,13 @@ class PrefController {
     await _sharedPreferences.setString(
         PrefKeys.token.toString(), 'Bearer ${user.token}');
   }
+
+  Future<void> saveDarkThemeMode(bool isDarkTheme) async {
+    await _sharedPreferences.setBool(PrefKeys.mode.toString(), isDarkTheme);
+  }
+
+  bool get mode =>
+      _sharedPreferences.getBool(PrefKeys.mode.toString()) ?? false;
 
   Future<bool> changeLanguage({required String language}) async {
     return await _sharedPreferences.setString(

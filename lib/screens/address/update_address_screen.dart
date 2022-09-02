@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import '../../models/address_model.dart';
 import '../../api/api_response.dart';
 import '../../constants/colors.dart';
-import '../../constants/fonts.dart';
 import '../../getX/address_getX.dart';
 import '../../utils/helpers.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
-import '../../widgets/view_details.dart';
 
 class UpdateAddressScreen extends StatefulWidget {
   const UpdateAddressScreen({
