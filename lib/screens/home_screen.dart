@@ -30,17 +30,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: ViewDetails(
-          data: 'home'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('home'.tr)),
       body: GetX<HomeGetX>(
         initState: (state) {
           state.controller!.getHomeData();
@@ -119,7 +109,9 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
                 itemCount: _homeGetX.homeModel!.data!.categories!.length,
-                separatorBuilder: (context, index) => const SizedBox(width: 10),
+                separatorBuilder: (context, index) {
+                  return const SizedBox(width: 10);
+                },
                 itemBuilder: (context, index) {
                   return Container(
                     width: 65,
@@ -187,11 +179,12 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
               shrinkWrap: true,
               primary: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
-                childAspectRatio: 190 / 271,
+                childAspectRatio: (MediaQuery.of(context).size.width * 190) /
+                    (MediaQuery.of(context).size.height * 271),
               ),
               itemCount: _homeGetX.homeModel!.data!.latestProducts!.length,
               itemBuilder: (context, index) {

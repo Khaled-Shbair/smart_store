@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ColorsApp {
   static const Color scaffoldColorDarkTheme = Colors.black54;
   static const Color scaffoldColorLightTheme = Colors.white;
+  static const Color colorDarkTheme = Colors.white; //text & icon &....
   static const Color background = Color(0XFFC6EFE5);
   static const Color geryBold = Color(0XFF858EA9);
   static const Color green = Color(0XFF0EBE7F);

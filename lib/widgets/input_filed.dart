@@ -10,7 +10,7 @@ class InputFiled extends StatelessWidget {
     this.labelText,
     required this.prefixIcon,
     required this.maxLength,
-    this.fontSizeLabel,
+    this.fontSizeLabel = 0,
     this.hintStyle,
     this.hintText,
     this.prefixText = '0',
@@ -25,8 +25,8 @@ class InputFiled extends StatelessWidget {
   final String prefixText;
   final IconData prefixIcon;
   final Color colorLabel;
-  final String? fontFamilyLabel;
-  final double? fontSizeLabel;
+  final String fontFamilyLabel;
+  final double fontSizeLabel;
   final String? hintText;
   final TextStyle? hintStyle;
   final int maxLength;
@@ -44,16 +44,16 @@ class InputFiled extends StatelessWidget {
         hintText: hintText,
         hintStyle: hintStyle,
         prefixText: prefixText,
-        prefixStyle: const TextStyle(
+        prefixStyle: TextStyle(
           color: Colors.black,
-          fontSize: 16,
+          fontSize: MediaQuery.of(context).textScaleFactor * 16,
         ),
         counterText: '',
         prefixIcon: Icon(prefixIcon, color: ColorsApp.green),
         labelStyle: TextStyle(
           fontFamily: fontFamilyLabel,
           color: colorLabel,
-          fontSize: fontSizeLabel,
+          fontSize: MediaQuery.of(context).textScaleFactor * fontSizeLabel,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),

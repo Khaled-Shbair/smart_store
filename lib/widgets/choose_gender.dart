@@ -1,5 +1,5 @@
+import '../shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 
@@ -22,10 +22,12 @@ class ChooseGender extends StatelessWidget {
       child: RadioListTile<String>(
         title: Text(
           title,
-          style: const TextStyle(
-            color: ColorsApp.black,
+          style: TextStyle(
+            color: PrefController().mode
+                ? ColorsApp.colorDarkTheme
+                : ColorsApp.black,
             fontFamily: FontsApp.fontRegular,
-            fontSize: 20,
+            fontSize: MediaQuery.of(context).textScaleFactor * 20,
           ),
         ),
         value: value,

@@ -1,9 +1,10 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../shared_preferences/pref_controller.dart';
 import '../getX/product_details_getX.dart';
+import 'package:flutter/material.dart';
 import '../widgets/view_details.dart';
+import '../widgets/loading.dart';
+import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({Key? key}) : super(key: key);
@@ -12,30 +13,19 @@ class ProductDetailsScreen extends StatefulWidget {
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
-PreferredSizeWidget appBar(BuildContext context) {
-  return AppBar(
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    leading: IconButton(
-      onPressed: () => Navigator.pop(context),
-      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-    ),
-  );
-}
-
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBar(context),
+      appBar: AppBar(),
       body: GetX<ProductDetailsGetX>(
         initState: (state) {
           state.controller!.getProductDetailsData();
         },
         builder: (controller) {
           if (ProductDetailsGetX.to.loading.isTrue) {
-            const Center(child: CircularProgressIndicator());
+            const Loading();
           }
           return Column(
             children: [
@@ -56,11 +46,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         start: 20,
         end: 20,
       ),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: .4 / .5,
+        childAspectRatio: (MediaQuery.of(context).size.width * .4) /
+            (MediaQuery.of(context).size.height * .5),
       ),
       shrinkWrap: true,
       itemCount: ProductDetailsGetX.to.productDetails!.data!.images!.length,
@@ -82,7 +73,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   Widget details() {
     return Container(
-      height: 400,
+      height: MediaQuery.of(context).size.height * 400,
       decoration: const BoxDecoration(
         color: Colors.grey,
         borderRadius: BorderRadius.only(
@@ -91,8 +82,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
       ),
       child: Padding(
-        padding:
-            const EdgeInsetsDirectional.only(top: 40, start: 20, bottom: 30),
+        padding: const EdgeInsetsDirectional.only(
+          top: 40,
+          start: 20,
+          bottom: 30,
+        ),
         child: Column(
           children: [
             nameProduct(),
@@ -109,7 +103,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 addToCart(),
-                const SizedBox(width: 20),
+                SizedBox(width: MediaQuery.of(context).size.width * 20),
                 addToFavorite(),
               ],
             ),
@@ -177,7 +171,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             fontSize: 24,
             height: 1.3,
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: MediaQuery.of(context).size.width * 10),
           ViewDetails(
             data: ProductDetailsGetX.to.productDetails!.data!.price,
             fontWeight: FontWeight.w500,
@@ -250,11 +244,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         primary: Colors.red,
         onPrimary: Colors.black,
         padding: EdgeInsetsDirectional.zero,
-        minimumSize: const Size(35, 40),
+        minimumSize: Size(
+          (MediaQuery.of(context).size.width * 35),
+          (MediaQuery.of(context).size.height * 40),
+        ),
       ),
       child: const Icon(Icons.favorite),
     );
   }
 
-  SizedBox sizedBox(double height) => SizedBox(height: height);
+  SizedBox sizedBox(double height) {
+    return SizedBox(height: MediaQuery.of(context).size.height * height);
+  }
 }

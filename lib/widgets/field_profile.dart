@@ -1,5 +1,5 @@
+import '../shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import 'view_details.dart';
@@ -24,11 +24,16 @@ class FieldProfile extends StatelessWidget {
         side: const BorderSide(color: ColorsApp.green),
       ),
       child: ListTile(
-        leading: Icon(icon, color: ColorsApp.green),
+        leading: Icon(
+          icon,
+          color: ColorsApp.green,
+        ),
         title: ViewDetails(
           data: title,
           fontFamily: FontsApp.fontRegular,
-          color: ColorsApp.black,
+          color: PrefController().mode
+              ? ColorsApp.colorDarkTheme
+              : ColorsApp.black,
           fontSize: 24,
         ),
         trailing: trailing,

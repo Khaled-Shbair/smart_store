@@ -38,7 +38,7 @@ class ViewDetails extends StatelessWidget {
         fontFamily: fontFamily,
         overflow: overflow,
         height: height,
-        fontSize: fontSize,
+        fontSize: MediaQuery.of(context).textScaleFactor * fontSize,
         color: color,
         fontWeight: fontWeight,
         decoration: decoration,

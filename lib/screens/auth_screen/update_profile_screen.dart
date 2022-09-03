@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../api/api_response.dart';
-import '../../api/auth_api_controller.dart';
-import '../../constants/colors.dart';
-import '../../constants/fonts.dart';
 import '../../shared_preferences/pref_controller.dart';
-import '../../utils/helpers.dart';
-import '../../widgets/button_auth.dart';
+import '../../api/auth_api_controller.dart';
 import '../../widgets/choose_gender.dart';
 import '../../widgets/field_profile.dart';
-import '../../widgets/input_filed.dart';
 import '../../widgets/view_details.dart';
+import '../../widgets/button_auth.dart';
+import '../../widgets/input_filed.dart';
+import 'package:flutter/material.dart';
+import '../../api/api_response.dart';
+import '../../constants/colors.dart';
+import '../../constants/fonts.dart';
+import '../../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -124,15 +124,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('update_profile'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('update_profile'.tr)),
       body: ListView(
-        padding: const EdgeInsetsDirectional.all(20),
+        padding: const EdgeInsetsDirectional.only(top: 50, start: 20, end: 20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const SizedBox(height: 50),
           FieldProfile(
             title: _nameController.text.isEmpty
                 ? PrefController().name

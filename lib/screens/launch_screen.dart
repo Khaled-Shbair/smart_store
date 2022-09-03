@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../constants/colors.dart';
 import '../shared_preferences/pref_controller.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
 import '../constants/routes.dart';
 
 class LaunchScreen extends StatefulWidget {
@@ -30,15 +29,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
           children: [
             SvgPicture.asset(
               'asset/images/shopping_logo.svg',
-              height: 100,
-              width: 100,
+              height: MediaQuery.of(context).size.height * 100,
+              width: MediaQuery.of(context).size.width * 100,
             ),
-            const SizedBox(height: 5),
-            const Text(
+            SizedBox(height: MediaQuery.of(context).size.height * 5),
+            Text(
               'Smart Store',
               style: TextStyle(
                 color: Colors.green,
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).textScaleFactor * 30,
                 fontWeight: FontWeight.bold,
               ),
             ),

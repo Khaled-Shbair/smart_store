@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en'),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouters.onGenerateRoute,
-      theme: ThemeModes().lightTheme,
-      darkTheme: ThemeModes().darkTheme,
-      themeMode: ThemeModes().getThemeMode(),
+      theme: ThemeModeApp.lightTheme,
+      darkTheme: ThemeModeApp.darkTheme,
+      themeMode: ThemeModeApp.getThemeMode(),
     );
   }
 }

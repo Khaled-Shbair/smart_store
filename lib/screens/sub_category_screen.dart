@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../shared_preferences/pref_controller.dart';
-import '../constants/colors.dart';
-import '../constants/fonts.dart';
-import '../constants/routes.dart';
-import '../getX/product_category_getX.dart';
 import '../getX/sub_category_model_getX.dart';
-import '../widgets/loading.dart';
+import '../getX/product_category_getX.dart';
+import 'package:flutter/material.dart';
 import '../widgets/view_details.dart';
+import '../constants/colors.dart';
+import '../constants/routes.dart';
+import '../constants/fonts.dart';
+import '../widgets/loading.dart';
+import 'package:get/get.dart';
 
 class SubCategoryScreen extends StatefulWidget {
   const SubCategoryScreen({Key? key}) : super(key: key);
@@ -22,10 +22,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('sub_category'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('sub_category'.tr)),
       body: GetX<SubCategoryModelGetX>(
         initState: (state) {
           state.controller!.getSubCategoryData();
@@ -45,11 +42,12 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       return GridView.builder(
         itemCount: SubCategoryModelGetX.to.subCategory!.data!.length,
         padding: const EdgeInsetsDirectional.all(20),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
-          childAspectRatio: 190 / 200,
+          childAspectRatio: (MediaQuery.of(context).size.width * 190) /
+              (MediaQuery.of(context).size.height * 200),
         ),
         itemBuilder: (context, index) {
           return InkWell(
@@ -83,7 +81,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   Container(
                     alignment: AlignmentDirectional.center,
                     width: double.infinity,
-                    height: 30,
+                    height: MediaQuery.of(context).size.height * 30,
                     decoration: const BoxDecoration(
                       color: ColorsApp.green,
                       borderRadius: BorderRadius.only(

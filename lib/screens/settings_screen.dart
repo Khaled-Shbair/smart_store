@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_store/shared_preferences/pref_controller.dart';
 import '../constants/routes.dart';
 import '../api/auth_api_controller.dart';
 import '../api/api_response.dart';
@@ -69,10 +70,11 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           divider(),
           ListSettings(
             icon: Icons.brightness_4_outlined,
-            //backgroundColor: isModel ? Colors.black : Colors.blueGrey,
-            backgroundColor: Colors.blueGrey,
+            iconColor: PrefController().mode ? Colors.black : Colors.white,
+            backgroundColor:
+                PrefController().mode ? Colors.white : Colors.black,
             title: 'dark_mode'.tr,
-            onTap: () => setState(() => ThemeModes().changeMode()),
+            onTap: () => setState(() => ThemeModeApp.changeMode()),
           ),
           divider(),
         ],
@@ -80,7 +82,12 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
     );
   }
 
-  Widget divider() => const Divider(color: ColorsApp.gery, thickness: 1);
+  Widget divider() {
+    return Divider(
+      color: PrefController().mode ? Colors.white : ColorsApp.gery,
+      thickness: 1,
+    );
+  }
 
   Future<void> _logout() async {
     showDialog(

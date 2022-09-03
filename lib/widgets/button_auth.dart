@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../widgets/view_details.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 
@@ -17,18 +17,19 @@ class ButtonAuth extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: Size(
+          double.infinity,
+          MediaQuery.of(context).textScaleFactor * 50,
+        ),
         primary: ColorsApp.green,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontFamily: FontsApp.fontMedium,
-          fontSize: 18,
-        ),
+      child: ViewDetails(
+        data: text,
+        fontFamily: FontsApp.fontMedium,
+        fontSize: 18,
       ),
     );
   }

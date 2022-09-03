@@ -49,7 +49,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
         ),
         fit: BoxFit.cover,
         width: double.infinity,
-        height: 180,
+        height: MediaQuery.of(context).size.height * 180,
       ),
     );
   }
@@ -67,7 +67,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: MediaQuery.of(context).size.width * 10),
           ViewDetails(
             data: ProductCategoryGetX.to.productCategory!.data![index].price,
             decoration: TextDecoration.lineThrough,
@@ -99,11 +99,12 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
           primary: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 15,
             crossAxisSpacing: 10,
-            childAspectRatio: 190 / 264,
+            childAspectRatio: (MediaQuery.of(context).size.width * 190) /
+                (MediaQuery.of(context).size.height * 264),
           ),
           itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
           itemBuilder: (context, index) {
@@ -117,7 +118,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   imageProduct(index),
-                  const SizedBox(height: 5),
+                  SizedBox(height: MediaQuery.of(context).size.height * 5),
                   ViewDetails(
                     data: ProductCategoryGetX
                         .to.productCategory!.data![index].nameEn,
@@ -126,9 +127,9 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                     fontFamily: FontsApp.fontMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 3),
+                  SizedBox(height: MediaQuery.of(context).size.height * 3),
                   priceProduct(index),
-                  const SizedBox(height: 3),
+                  SizedBox(height: MediaQuery.of(context).size.height * 3),
                   RatingBarIndicator(
                     itemSize: 18,
                     rating: double.parse(ProductCategoryGetX

@@ -21,7 +21,7 @@ class TitleList extends StatelessWidget {
         ViewDetails(
           data: title,
           fontFamily: FontsApp.fontMedium,
-          fontSize: 20,
+          fontSize: MediaQuery.of(context).textScaleFactor *20,
           color: ColorsApp.green,
         ),
         ElevatedButton(
@@ -34,7 +34,7 @@ class TitleList extends StatelessWidget {
           child: ViewDetails(
             data: 'see_all'.tr,
             fontFamily: FontsApp.fontRegular,
-            fontSize: 18,
+            fontSize: MediaQuery.of(context).textScaleFactor *18,
             color: ColorsApp.green,
           ),
         ),
