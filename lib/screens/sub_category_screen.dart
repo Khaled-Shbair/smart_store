@@ -47,7 +47,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           childAspectRatio: (MediaQuery.of(context).size.width * 190) /
-              (MediaQuery.of(context).size.height * 200),
+              (MediaQuery.of(context).size.height * 100),
         ),
         itemBuilder: (context, index) {
           return InkWell(
@@ -81,7 +81,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   Container(
                     alignment: AlignmentDirectional.center,
                     width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 30,
+                    height: const MediaQueryData().size.height * 30,
                     decoration: const BoxDecoration(
                       color: ColorsApp.green,
                       borderRadius: BorderRadius.only(

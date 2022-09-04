@@ -1,15 +1,15 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../shared_preferences/pref_controller.dart';
-import '../utils/helpers.dart';
-import '../constants/fonts.dart';
+import '../getX/favorite-products_getX.dart';
+import 'package:flutter/material.dart';
+import '../widgets/view_details.dart';
 import '../api/api_response.dart';
 import '../constants/colors.dart';
+import '../constants/fonts.dart';
 import '../widgets/loading.dart';
 import '../widgets/no_data.dart';
-import '../widgets/view_details.dart';
-import '../getX/favorite-products_getX.dart';
+import '../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({Key? key}) : super(key: key);
@@ -40,11 +40,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
   Widget listFavoriteProducts() {
     if (FavoriteProductsGetX.to.favoriteProducts!.data!.isNotEmpty) {
       return GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 15,
           crossAxisSpacing: 10,
-          childAspectRatio: 190 / 272,
+          childAspectRatio: (MediaQuery.of(context).size.width * 190) /
+              (MediaQuery.of(context).size.height * 130),
         ),
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
@@ -60,7 +61,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 imageProduct(index),
-                const SizedBox(height: 5),
+                SizedBox(height: MediaQuery.of(context).size.height / 150),
                 ViewDetails(
                   data: PrefController().language == 'en'
                       ? FavoriteProductsGetX
@@ -104,7 +105,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
             ),
             fit: BoxFit.cover,
             width: double.infinity,
-            height: 180,
+            height: MediaQuery.of(context).size.height / 4.4,
           ),
         ),
         IconButton(
@@ -133,7 +134,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
-          const SizedBox(width: 10),
           ViewDetails(
             data: FavoriteProductsGetX.to.favoriteProducts!.data![index].price,
             decoration: TextDecoration.lineThrough,

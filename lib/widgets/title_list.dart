@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'view_details.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
+import 'package:get/get.dart';
+import 'view_details.dart';
 
 class TitleList extends StatelessWidget {
   const TitleList({
@@ -21,7 +21,7 @@ class TitleList extends StatelessWidget {
         ViewDetails(
           data: title,
           fontFamily: FontsApp.fontMedium,
-          fontSize: MediaQuery.of(context).textScaleFactor *20,
+          fontSize: MediaQuery.of(context).textScaleFactor * 20,
           color: ColorsApp.green,
         ),
         ElevatedButton(
@@ -34,7 +34,7 @@ class TitleList extends StatelessWidget {
           child: ViewDetails(
             data: 'see_all'.tr,
             fontFamily: FontsApp.fontRegular,
-            fontSize: MediaQuery.of(context).textScaleFactor *18,
+            fontSize: MediaQuery.of(context).textScaleFactor * 18,
             color: ColorsApp.green,
           ),
         ),

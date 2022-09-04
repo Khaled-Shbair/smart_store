@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
             );
           }).toList(),
           options: CarouselOptions(
-            height: 250,
+            height: MediaQuery.of(context).size.height / 3.5,
             initialPage: 0,
             enableInfiniteScroll: true,
             reverse: false,
@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 },
                 itemBuilder: (context, index) {
                   return Container(
-                    width: 65,
+                    width: MediaQuery.of(context).size.width / 6,
                     alignment: AlignmentDirectional.center,
                     decoration: BoxDecoration(
                       color: ColorsApp.background.withAlpha(117),
@@ -124,18 +124,19 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          radius: 25,
+                          radius: MediaQuery.of(context).size.aspectRatio * 50,
                           backgroundColor: Colors.white,
                           child: Image(
                             image: NetworkImage(
                               _homeGetX
                                   .homeModel!.data!.categories![index].imageUrl,
                             ),
-                            height: 50,
-                            width: 50,
+                            height: MediaQuery.of(context).size.height * 50,
+                            width: MediaQuery.of(context).size.width * 50,
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 70),
                         ViewDetails(
                           data: PrefController().language == 'en'
                               ? _homeGetX
@@ -174,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 //  Navigator.pushNamed(context, );
               },
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.height / 100),
             GridView.builder(
               shrinkWrap: true,
               primary: true,
@@ -184,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
                 childAspectRatio: (MediaQuery.of(context).size.width * 190) /
-                    (MediaQuery.of(context).size.height * 271),
+                    (MediaQuery.of(context).size.height * 130),
               ),
               itemCount: _homeGetX.homeModel!.data!.latestProducts!.length,
               itemBuilder: (context, index) {
@@ -198,7 +199,8 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       imageProduct(index),
-                      const SizedBox(height: 3),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height / 130),
                       ViewDetails(
                         data: PrefController().language == 'en'
                             ? _homeGetX
@@ -211,7 +213,6 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                         overflow: TextOverflow.ellipsis,
                       ),
                       priceProduct(index),
-                      const SizedBox(height: 2),
                       RatingBarIndicator(
                         itemSize: 18,
                         rating: double.parse(_homeGetX.homeModel!.data!
@@ -248,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
               ),
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 180,
+              height: MediaQuery.of(context).size.height / 4.4,
             ),
           ),
           Container(
@@ -303,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
             ),
             fit: BoxFit.cover,
             width: double.infinity,
-            height: 180,
+            height: MediaQuery.of(context).size.height / 4.4,
           ),
         ),
         IconButton(

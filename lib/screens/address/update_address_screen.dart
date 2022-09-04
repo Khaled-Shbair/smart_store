@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../models/address_model.dart';
-import '../../api/api_response.dart';
-import '../../constants/colors.dart';
-import '../../getX/address_getX.dart';
-import '../../utils/helpers.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
+import 'package:flutter/material.dart';
+import '../../getX/address_getX.dart';
+import '../../api/api_response.dart';
+import '../../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class UpdateAddressScreen extends StatefulWidget {
   const UpdateAddressScreen({
@@ -44,10 +43,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('update_address'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('update_address'.tr)),
       body: ListView(
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsetsDirectional.only(
@@ -63,14 +59,14 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
             prefixText: '',
             maxLength: 35,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           InputFiled(
             controller: _phoneController,
             hintText: widget.address.contactNumber,
             prefixIcon: Icons.phone,
             maxLength: 9,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           InputFiled(
             controller: _infoController,
             hintText: widget.address.info,
@@ -78,7 +74,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
             prefixText: '',
             maxLength: 80,
           ),
-          const SizedBox(height: 50),
+          SizedBox(height: MediaQuery.of(context).size.height / 15),
           //TODO: Choose City
           ButtonAuth(
             text: 'update'.tr,

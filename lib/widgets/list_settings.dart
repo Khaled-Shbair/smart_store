@@ -1,6 +1,5 @@
+import '../shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_store/shared_preferences/pref_controller.dart';
-
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import 'view_details.dart';

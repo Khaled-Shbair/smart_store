@@ -1,9 +1,9 @@
+import 'shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'app_routers.dart';
 import 'constants/theme_mode.dart';
 import 'language/translation.dart';
-import 'shared_preferences/pref_controller.dart';
+import 'package:get/get.dart';
+import 'app_routers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

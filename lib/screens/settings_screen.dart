@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:smart_store/shared_preferences/pref_controller.dart';
-import '../constants/routes.dart';
+import '../shared_preferences/pref_controller.dart';
 import '../api/auth_api_controller.dart';
-import '../api/api_response.dart';
-import '../constants/fonts.dart';
-import '../constants/colors.dart';
-import '../constants/theme_mode.dart';
-import '../utils/helpers.dart';
+import 'package:flutter/material.dart';
 import '../widgets/list_settings.dart';
 import '../widgets/view_details.dart';
+import '../constants/theme_mode.dart';
+import '../constants/routes.dart';
+import '../api/api_response.dart';
+import '../constants/colors.dart';
+import '../constants/fonts.dart';
+import '../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -116,7 +116,7 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
               onPressed: () => Navigator.pop(context),
               child: ViewDetails(
                 data: 'cancel'.tr,
-                fontSize: 16,
+                fontSize: MediaQuery.of(context).textScaleFactor * 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
               ),

@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../shared_preferences/pref_controller.dart';
-import '../widgets/loading.dart';
-import '../constants/fonts.dart';
+import '../../getX/sub_category_model_getX.dart';
+import 'package:flutter/material.dart';
+import '../widgets/view_details.dart';
+import '../getX/category_getX.dart';
 import '../constants/routes.dart';
 import '../constants/colors.dart';
-import '../getX/category_getX.dart';
-import '../widgets/view_details.dart';
-import '../../getX/sub_category_model_getX.dart';
+import '../widgets/loading.dart';
+import '../constants/fonts.dart';
+import 'package:get/get.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -23,10 +23,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('category'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('category'.tr)),
       body: GetX<CategoryGetX>(
         builder: (controller) {
           if (_category.loading.isTrue) {

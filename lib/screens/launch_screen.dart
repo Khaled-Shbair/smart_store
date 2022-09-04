@@ -29,15 +29,15 @@ class _LaunchScreenState extends State<LaunchScreen> {
           children: [
             SvgPicture.asset(
               'asset/images/shopping_logo.svg',
-              height: MediaQuery.of(context).size.height * 100,
-              width: MediaQuery.of(context).size.width * 100,
+              height: MediaQuery.of(context).size.height / 5,
+              width: MediaQuery.of(context).size.width / 5,
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 5),
+            SizedBox(height: MediaQuery.of(context).size.height / 90),
             Text(
               'Smart Store',
               style: TextStyle(
                 color: Colors.green,
-                fontSize: MediaQuery.of(context).textScaleFactor * 30,
+                fontSize: const MediaQueryData().textScaleFactor * 45,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
-import '../constants/routes.dart';
 import '../getX/product_category_getX.dart';
+import '../getX/product_details_getX.dart';
+import 'package:flutter/material.dart';
+import '../widgets/view_details.dart';
+import '../constants/routes.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
-import '../getX/product_details_getX.dart';
 import '../widgets/loading.dart';
-import '../widgets/view_details.dart';
+import 'package:get/get.dart';
 
 class ProductCategoryScreen extends StatefulWidget {
   const ProductCategoryScreen({Key? key}) : super(key: key);
@@ -22,10 +22,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('product_category'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('product_category'.tr)),
       body: GetX<ProductCategoryGetX>(
         builder: (controller) {
           if (_productDetails.loading.isTrue) {
@@ -49,7 +46,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
         ),
         fit: BoxFit.cover,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 180,
+        height: MediaQuery.of(context).size.height / 4.3,
       ),
     );
   }
@@ -67,7 +64,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
-          SizedBox(width: MediaQuery.of(context).size.width * 10),
+          SizedBox(width: const MediaQueryData().size.width * 10),
           ViewDetails(
             data: ProductCategoryGetX.to.productCategory!.data![index].price,
             decoration: TextDecoration.lineThrough,
@@ -103,8 +100,8 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             crossAxisCount: 2,
             mainAxisSpacing: 15,
             crossAxisSpacing: 10,
-            childAspectRatio: (MediaQuery.of(context).size.width * 190) /
-                (MediaQuery.of(context).size.height * 264),
+            childAspectRatio: (MediaQuery.of(context).size.width * 264) /
+                (MediaQuery.of(context).size.height * 180),
           ),
           itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
           itemBuilder: (context, index) {
@@ -118,7 +115,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   imageProduct(index),
-                  SizedBox(height: MediaQuery.of(context).size.height * 5),
+                  SizedBox(height: const MediaQueryData().size.height * 5),
                   ViewDetails(
                     data: ProductCategoryGetX
                         .to.productCategory!.data![index].nameEn,
@@ -127,9 +124,8 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                     fontFamily: FontsApp.fontMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 3),
+                  SizedBox(height: const MediaQueryData().size.height * 3),
                   priceProduct(index),
-                  SizedBox(height: MediaQuery.of(context).size.height * 3),
                   RatingBarIndicator(
                     itemSize: 18,
                     rating: double.parse(ProductCategoryGetX

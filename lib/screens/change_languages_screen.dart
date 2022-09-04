@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../shared_preferences/pref_controller.dart';
+import 'package:flutter/material.dart';
 import '../widgets/button_auth.dart';
-import '../constants/colors.dart';
-import '../constants/fonts.dart';
-import '../widgets/view_details.dart';
+import 'package:get/get.dart';
 
 class ChangeLanguageScreen extends StatefulWidget {
   const ChangeLanguageScreen({Key? key}) : super(key: key);
@@ -17,10 +14,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('change_languages'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('change_languages'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.only(
           start: 20,
@@ -36,7 +30,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
               PrefController().changeLanguage(language: 'ar');
             },
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           ButtonAuth(
             text: 'English',
             onPressed: () {
