@@ -91,7 +91,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               onPressed: () => Navigator.pop(context),
               child: ViewDetails(
                 data: 'cancel'.tr,
-                fontSize: 16,
+                fontSize: MediaQuery.of(context).textScaleFactor * 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
               ),
@@ -139,14 +139,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               onPressed: updateName,
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           FieldProfile(
             icon: Icons.phone_android,
             title: '0${PrefController().phone}',
           ),
-          //const SizedBox(height: 20),
+          //           SizedBox(height:MediaQuery.of(context).size.height/ 50),
           //TODO: Choose City
-          const SizedBox(height: 20),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           updateGender(),
           const SizedBox(height: 50),
           ButtonAuth(
