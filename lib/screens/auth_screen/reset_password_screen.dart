@@ -1,14 +1,14 @@
+import '../../api/auth_api_controller.dart';
+import '../../widgets/password_filed.dart';
+import '../../widgets/view_details.dart';
+import '../../widgets/button_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../utils/helpers.dart';
-import '../../constants/fonts.dart';
+import '../../widgets/code_field.dart';
 import '../../constants/colors.dart';
 import '../../api/api_response.dart';
-import '../../widgets/code_field.dart';
-import '../../widgets/button_auth.dart';
-import '../../widgets/view_details.dart';
-import '../../widgets/password_filed.dart';
-import '../../api/auth_api_controller.dart';
+import '../../constants/fonts.dart';
+import '../../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen({Key? key, required this.phone}) : super(key: key);
@@ -78,14 +78,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
           ViewDetails(
             data: 'sub_title_forget_password'.tr,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: MediaQuery.of(context).size.height / 40),
           Row(
             children: [
               CodeField(

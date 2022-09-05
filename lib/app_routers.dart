@@ -1,26 +1,25 @@
-import 'package:flutter/material.dart';
+import 'screens/auth_screen/change_password_screen.dart';
+import 'screens/auth_screen/reset_password_screen.dart';
+import 'screens/auth_screen/update_profile_screen.dart';
 import 'package:smart_store/models/address_model.dart';
-import 'constants/routes.dart';
-import 'models/product.dart';
 import 'screens/address/create_address_screen.dart';
 import 'screens/address/list_addresses_screen.dart';
 import 'screens/address/update_address_screen.dart';
-import 'screens/auth_screen/change_password_screen.dart';
 import 'screens/auth_screen/forget_password.dart';
-import 'screens/auth_screen/login_screen.dart';
 import 'screens/auth_screen/register_screen.dart';
-import 'screens/auth_screen/reset_password_screen.dart';
-import 'screens/auth_screen/update_profile_screen.dart';
-import 'screens/category_screen.dart';
+import 'screens/auth_screen/login_screen.dart';
 import 'screens/change_languages_screen.dart';
-import 'screens/details product.dart';
-import 'screens/home_screen.dart';
-import 'screens/launch_screen.dart';
-import 'screens/notifications_screen.dart';
 import 'screens/product_category_screen.dart';
 import 'screens/product_details_screen.dart';
-import 'screens/app_layout.dart';
+import 'screens/notifications_screen.dart';
 import 'screens/sub_category_screen.dart';
+import 'package:flutter/material.dart';
+import 'screens/category_screen.dart';
+import 'screens/launch_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/app_layout.dart';
+import 'constants/routes.dart';
+import 'models/product.dart';
 
 class AppRouters {
   Route onGenerateRoute(RouteSettings settings) {
@@ -62,8 +61,9 @@ class AppRouters {
         return MaterialPageRoute(
             builder: (context) => const ProductCategoryScreen());
       case productDetailsScreen:
+        final product = settings.arguments as Products;
         return MaterialPageRoute(
-            builder: (context) => const ProductDetailsScreen());
+            builder: (context) => ProductDetailsScreen(product: product));
       case resetPasswordScreen:
         final phone = settings.arguments as String;
         return MaterialPageRoute(
@@ -72,10 +72,6 @@ class AppRouters {
         final addressModel = settings.arguments as Address;
         return MaterialPageRoute(
             builder: (context) => UpdateAddressScreen(address: addressModel));
-      case detailsProduct:
-        final latestProducts = settings.arguments as Products;
-        return MaterialPageRoute(
-            builder: (context) => DetailsProduct(product: latestProducts));
       default:
         return MaterialPageRoute(builder: (context) => const LaunchScreen());
     }

@@ -87,25 +87,27 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
 
   Widget listProduct() {
     if (ProductCategoryGetX.to.productCategory != null) {
-      return InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, productDetailsScreen);
-        },
-        child: GridView.builder(
-          shrinkWrap: true,
-          primary: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 15,
-            crossAxisSpacing: 10,
-            childAspectRatio: (MediaQuery.of(context).size.width * 264) /
-                (MediaQuery.of(context).size.height * 180),
-          ),
-          itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
-          itemBuilder: (context, index) {
-            return Container(
+      return GridView.builder(
+        shrinkWrap: true,
+        primary: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 10,
+          childAspectRatio: (MediaQuery.of(context).size.width * 264) /
+              (MediaQuery.of(context).size.height * 180),
+        ),
+        itemCount: ProductCategoryGetX.to.productCategory!.data!.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, productDetailsScreen,
+                  arguments:
+                      ProductCategoryGetX.to.productCategory!.data![index]);
+            },
+            child: Container(
               alignment: AlignmentDirectional.topStart,
               decoration: BoxDecoration(
                 color: ColorsApp.background.withAlpha(117),
@@ -137,9 +139,9 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                   ),
                 ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       );
     }
     return const Loading();

@@ -81,7 +81,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   Container(
                     alignment: AlignmentDirectional.center,
                     width: double.infinity,
-                    height: const MediaQueryData().size.height * 30,
+                    height: MediaQuery.of(context).size.height / 30,
                     decoration: const BoxDecoration(
                       color: ColorsApp.green,
                       borderRadius: BorderRadius.only(

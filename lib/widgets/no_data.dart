@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'view_details.dart';
 
 class NoData extends StatelessWidget {
-  const NoData({Key? key}) : super(key: key);
+  const NoData({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

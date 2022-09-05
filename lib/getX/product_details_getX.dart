@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'package:get/get.dart';
+import '../shared_preferences/pref_controller.dart';
+import '../models/product_details_model.dart';
 import 'package:http/http.dart' as http;
 import '../api/api_paths.dart';
-import '../models/product_details_model.dart';
-import '../shared_preferences/pref_controller.dart';
+import 'package:get/get.dart';
+import 'dart:convert';
 
 class ProductDetailsGetX extends GetxController {
   static ProductDetailsGetX get to => Get.find();
