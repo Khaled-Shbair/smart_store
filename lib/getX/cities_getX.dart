@@ -1,10 +1,8 @@
-import 'dart:convert';
-import 'package:get/get.dart';
-
-import '../api/api_paths.dart';
-import '../models/city.dart';
-import '../models/city_model.dart';
 import 'package:http/http.dart' as http;
+import '../models/city_model.dart';
+import '../api/api_paths.dart';
+import 'package:get/get.dart';
+import 'dart:convert';
 
 class CitiesGetX extends GetxController {
   static CitiesGetX get to => Get.find();
@@ -24,7 +22,7 @@ class CitiesGetX extends GetxController {
     readCities();
   }
 
-  Future<List<City>> readCities() async {
+  Future<void> readCities() async {
     loading.value = true;
     var uri = Uri.parse(ApiPath.cities);
     var response = await http.get(uri, headers: {'Accept': 'application/json'});
@@ -32,8 +30,6 @@ class CitiesGetX extends GetxController {
       var jsonResponse = jsonDecode(response.body);
       cityModel = CityModel.fromJson(jsonResponse);
       loading.value = false;
-      return cityModel!.list;
     }
-    return [];
   }
 }

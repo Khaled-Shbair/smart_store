@@ -57,6 +57,10 @@ const Map<String, String> en = {
   "change_password": "Change password",
   "are_you_sure_you_want_to_logout": "Are you sure you want to logout?",
   "change_languages": "Change languages",
-  "languages":"Languages",
-  "dark_mode":"Dark mode",
+  "languages": "Languages",
+  "dark_mode": "Dark mode",
+  "register": "Register",
+  "create_new_account": "Create new account",
+  "create_account_to_start_app": "Create account to start app",
+  "do_you_have_an_account": "Do you have an account?",
 };

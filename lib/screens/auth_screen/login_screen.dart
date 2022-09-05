@@ -104,24 +104,20 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'no_have_an_account'.tr,
-                style: const TextStyle(
-                  fontFamily: FontsApp.fontRegular,
-                  color: ColorsApp.green,
-                ),
+              ViewDetails(
+                data: 'no_have_an_account'.tr,
+                fontFamily: FontsApp.fontRegular,
+                color: ColorsApp.green,
+                fontSize: 17,
               ),
               TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, registerScreen);
-                },
-                child: Text(
-                  'create_now'.tr,
-                  style: const TextStyle(
-                    fontFamily: FontsApp.fontBold,
-                    color: ColorsApp.green,
-                    decoration: TextDecoration.underline,
-                  ),
+                onPressed: () => Navigator.pushNamed(context, registerScreen),
+                child: ViewDetails(
+                  data: 'create_now'.tr,
+                  fontFamily: FontsApp.fontBold,
+                  decoration: TextDecoration.underline,
+                  color: ColorsApp.green,
+                  fontSize: 15,
                 ),
               ),
             ],

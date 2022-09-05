@@ -30,6 +30,7 @@ class ButtonAuth extends StatelessWidget {
         data: text,
         fontFamily: FontsApp.fontMedium,
         fontSize: 18,
+        color: Colors.white,
       ),
     );
   }

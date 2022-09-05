@@ -59,4 +59,10 @@ const Map<String, String> ar = {
   "change_languages": "تغيير اللغات",
   "languages": "اللغات",
   "dark_mode": "الوضع المظلم",
+  "create_new_account":"انشاء حساب جديد",
+  "create_account_to_start_app":"إنشاء حساب لبدء التطبيق",
+  "do_you_have_an_account":"هل لديك حساب؟",
+
+
+
 };
