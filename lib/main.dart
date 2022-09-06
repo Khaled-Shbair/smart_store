@@ -2,6 +2,7 @@ import 'shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
 import 'constants/theme_mode.dart';
 import 'language/translation.dart';
+import 'getX/cities_getX.dart';
 import 'package:get/get.dart';
 import 'app_routers.dart';
 
@@ -12,9 +13,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key, required this.appRouters}) : super(key: key);
+  MyApp({Key? key, required this.appRouters}) : super(key: key);
 
   final AppRouters appRouters;
+  final CitiesGetX citiesGetX = Get.put(CitiesGetX());
 
   @override
   Widget build(BuildContext context) {

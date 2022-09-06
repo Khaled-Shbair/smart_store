@@ -1,9 +1,11 @@
+import '../../shared_preferences/pref_controller.dart';
 import '../../api/auth_api_controller.dart';
-import '../../widgets/choose_gender.dart';
 import '../../widgets/password_filed.dart';
+import '../../widgets/choose_gender.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
+import '../../widgets/select_city.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/routes.dart';
@@ -22,14 +24,15 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> with Helpers {
-  final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
+//  final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
 
   late TextEditingController _nameController;
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
   bool _obscureText = true;
   String _gender = 'M';
-  String? selectedCityId = '1';
+  String? selectedCityId;
+  String selected = 'city'.tr;
 
   @override
   void initState() {
@@ -81,29 +84,30 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   Widget selectCity() {
     return GetX<CitiesGetX>(
       builder: (controller) {
-        if (_citiesGetX.loading.isTrue) {
+        if (CitiesGetX.to.loading.isTrue) {
           return const Loading();
         }
-        return DropdownButton<String>(
-          borderRadius: BorderRadius.circular(20),
-          dropdownColor: Colors.red,
-          items: _citiesGetX.cityModel!.list
-              .map(
-                (list) => DropdownMenuItem(
-                  value: list.id.toString(),
-                  child: Text(_citiesGetX.cityModel!.list[0].nameAr),
-                ),
-              )
-              .toList(),
-          hint: Text(_citiesGetX.cityModel!.list[0].nameAr),
-          //const Text('City'),
-          onChanged: (String? value) {
-            setState(() => selectedCityId = value!);
-          },
+        return SelectCity(
+          selected: selected,
+          onChanged: (String? value) => setState(() => selectedCityId = value!),
+          items: CitiesGetX.to.cityModel!.list.map((list) {
+            return DropdownMenuItem(
+                value: list.id.toString(),
+                child: Text(language() ? list.nameEn : list.nameAr),
+                onTap: () {
+                  setState(() {
+                    language()
+                        ? selected = list.nameEn
+                        : selected = list.nameAr;
+                  });
+                });
+          }).toList(),
         );
       },
     );
   }
+
+  bool language() => PrefController().language == 'en' ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +135,9 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             controller: _nameController,
             keyboard: TextInputType.name,
             prefixIcon: Icons.person,
-            labelText: 'Name',
+            labelText: 'name'.tr,
+            fontSizeLabel: 16,
+            prefixText: '',
             maxLength: 8,
           ),
           const SizedBox(height: 20),
@@ -139,14 +145,15 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             controller: _mobileController,
             keyboard: TextInputType.phone,
             prefixIcon: Icons.phone_android,
-            labelText: 'Mobile',
+            labelText: 'phone'.tr,
+            fontSizeLabel: 16,
             maxLength: 9,
           ),
           const SizedBox(height: 20),
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
-            labelText: 'Password',
+            labelText: 'password'.tr,
             onPressed: () {
               setState(() {
                 _obscureText = !_obscureText;
@@ -213,37 +220,14 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
       gender: _gender,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
-    // if (apiResponse.status) {
-    //   navigator();
-    // }
+    if (apiResponse.status) {
+      navigator();
+    }
   }
 
-  void navigator() => Navigator.pop(context);
+  void navigator() => Navigator.pushNamed(
+        context,
+        activateAccountScreen,
+        arguments: _mobileController.text,
+      );
 }
-/*
-Widget selectCity() {
-    return GetX<CitiesGetX>(
-      builder: (controller) {
-        if (_citiesGetX.loading.isTrue) {
-          return const Loading();
-        }
-        return DropdownButton<String>(
-          borderRadius: BorderRadius.circular(20),
-          dropdownColor: Colors.red,
-          items: _city
-              .map(
-                (list) => DropdownMenuItem(
-                  value: list.id.toString(),
-                  child: Text(_city[1].nameAr),
-                ),
-              )
-              .toList(),
-          hint: const Text('City'),
-          onChanged: (String? value) {
-            setState(() => selectedCityId = value!);
-          },
-        );
-      },
-    );
-  }
- */

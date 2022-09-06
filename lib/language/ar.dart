@@ -20,9 +20,9 @@ const Map<String, String> ar = {
   "change": "تغيير",
   "reset_password": "إعادة تعيين كلمة المرور",
   "enter_reset_code": "أدخل رمز إعادة التعيين!",
-  "title_reset_password": "أدخل كود 4 أرقام",
+  "title_reset_password": "أدخل الرمز المكون من 4 أرقام وكلمة المرور الجديدة",
   "sub_title_reset_password":
-      "أدخل الرمز المكون من 4 أرقام الذي تلقيته على هاتفك.",
+      "أدخل الرمز المكون من 4 أرقام الذي تلقيته على هاتفك وقم بتعيين كلمة المرور الجديدة لحسابك حتى تتمكن من تسجيل الدخول والوصول إلى جميع الميزات.",
   "update": "تحديث",
   "update_profile": "تحديث الملف",
   "ok": "موافق",
@@ -59,10 +59,9 @@ const Map<String, String> ar = {
   "change_languages": "تغيير اللغات",
   "languages": "اللغات",
   "dark_mode": "الوضع المظلم",
-  "create_new_account":"انشاء حساب جديد",
-  "create_account_to_start_app":"إنشاء حساب لبدء التطبيق",
-  "do_you_have_an_account":"هل لديك حساب؟",
-
-
-
+  "create_new_account": "انشاء حساب جديد",
+  "create_account_to_start_app": "إنشاء حساب لبدء التطبيق",
+  "do_you_have_an_account": "هل لديك حساب؟",
+  "name": "الاسم",
+  "activate_account": "تفعيل حساب",
 };

@@ -4,10 +4,12 @@ import '../../widgets/choose_gender.dart';
 import '../../widgets/field_profile.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/button_auth.dart';
+import '../../widgets/select_city.dart';
 import '../../widgets/input_filed.dart';
 import 'package:flutter/material.dart';
 import '../../api/api_response.dart';
 import '../../constants/colors.dart';
+import '../../getX/cities_getX.dart';
 import '../../constants/fonts.dart';
 import '../../utils/helpers.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,11 @@ class UpdateProfileScreen extends StatefulWidget {
 class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     with Helpers {
   late TextEditingController _nameController;
-  String _gender = 'M';
+  String _gender = PrefController().gender;
+  String selectedAr = PrefController().cityAr;
+  String selectedEn = PrefController().cityEn;
+  String name = PrefController().name;
+  String? selectedCityId = PrefController().cityId;
 
   @override
   void initState() {
@@ -118,8 +124,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
   }
 
   Widget updateCity() {
-    return Text(''); //TODO : Update city
+    return SelectCity(
+      selected: PrefController().language == 'en' ? selectedEn : selectedAr,
+      onChanged: (String? value) => setState(() => selectedCityId = value!),
+      items: CitiesGetX.to.cityModel!.list.map((list) {
+        return DropdownMenuItem(
+            value: list.id.toString(),
+            child: Text(language() ? list.nameEn : list.nameAr),
+            onTap: () {
+              setState(() {
+                selectedAr = list.nameAr;
+                selectedEn = list.nameEn;
+              });
+            });
+      }).toList(),
+    );
   }
+
+  bool language() => PrefController().language == 'en' ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +152,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
         physics: const NeverScrollableScrollPhysics(),
         children: [
           FieldProfile(
-            title: _nameController.text.isEmpty
-                ? PrefController().name
-                : _nameController.text,
+            title: _nameController.text.isEmpty ? name : _nameController.text,
             icon: Icons.person,
             trailing: IconButton(
               icon: const Icon(Icons.edit, color: ColorsApp.green),
@@ -141,11 +161,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
           FieldProfile(
-            icon: Icons.phone_android,
-            title: '0${PrefController().phone}',
-          ),
-          //           SizedBox(height:MediaQuery.of(context).size.height/ 50),
-          //TODO: Choose City
+              icon: Icons.phone_android, title: '0${PrefController().phone}'),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          updateCity(),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
           updateGender(),
           const SizedBox(height: 50),
@@ -160,14 +178,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
 
   Future<void> updateProfile() async {
     ApiResponse apiResponse = await AuthApiController().updateProfile(
-      name: _nameController.text,
-      cityOd: 1.toString(), //TODO
+      name: _nameController.text.isNotEmpty ? _nameController.text : name,
+      cityId: selectedCityId.toString(),
       gender: _gender,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
-      PrefController().name = _nameController.text;
-      //PrefController().city = _nameController.text;
+      PrefController().name =
+          _nameController.text.isNotEmpty ? _nameController.text : name;
+      PrefController().cityEn = selectedEn;
+      PrefController().cityAr = selectedAr;
+      PrefController().gender = _gender;
+      PrefController().cityId = selectedCityId!;
+
       navigator();
     }
   }

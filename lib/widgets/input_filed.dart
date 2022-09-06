@@ -6,16 +6,16 @@ class InputFiled extends StatelessWidget {
   const InputFiled({
     Key? key,
     required this.controller,
-    this.labelText,
     required this.prefixIcon,
     required this.maxLength,
-    this.fontSizeLabel = 0,
+    this.labelText,
     this.hintStyle,
     this.hintText,
+    this.fontSizeLabel = 0,
     this.prefixText = '0',
     this.colorLabel = ColorsApp.gery,
-    this.fontFamilyLabel = FontsApp.fontRegular,
     this.keyboard = TextInputType.text,
+    this.fontFamilyLabel = FontsApp.fontRegular,
   }) : super(key: key);
 
   final TextEditingController controller;
