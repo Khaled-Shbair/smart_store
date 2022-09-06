@@ -1,9 +1,12 @@
+import '../../shared_preferences/pref_controller.dart';
 import '../../models/address_model.dart';
+import '../../widgets/select_city.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import 'package:flutter/material.dart';
 import '../../getX/address_getX.dart';
 import '../../api/api_response.dart';
+import '../../getX/cities_getX.dart';
 import '../../utils/helpers.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +26,8 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
   late TextEditingController _nameController;
   late TextEditingController _infoController;
   late TextEditingController _phoneController;
+  String? selectedCityId;
+  String? selected;
 
   @override
   void initState() {
@@ -39,6 +44,29 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
     _phoneController.dispose();
     super.dispose();
   }
+
+  Widget updateCity() {
+    return SelectCity(
+      selected: selected!.isEmpty
+          ? language()
+              ? widget.address.city.nameEn
+              : widget.address.city.nameAr
+          : selected!,
+      onChanged: (String? value) => setState(() => selectedCityId = value!),
+      items: CitiesGetX.to.cityModel!.list.map((list) {
+        return DropdownMenuItem(
+            value: list.id.toString(),
+            child: Text(language() ? list.nameEn : list.nameAr),
+            onTap: () {
+              setState(() {
+                language() ? selected = list.nameEn : selected = list.nameAr;
+              });
+            });
+      }).toList(),
+    );
+  }
+
+  bool language() => PrefController().language == 'en' ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +102,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
             prefixText: '',
             maxLength: 80,
           ),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          updateCity(),
           SizedBox(height: MediaQuery.of(context).size.height / 15),
-          //TODO: Choose City
           ButtonAuth(
             text: 'update'.tr,
             onPressed: () async => await update(),
@@ -96,7 +125,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
       newContactNumber: _phoneController.text.isEmpty
           ? widget.address.contactNumber
           : _phoneController.text,
-      newCityId: widget.address.cityId.toString(),
+      newCityId: selectedCityId!.isEmpty
+          ? widget.address.cityId.toString()
+          : selectedCityId,
       id: widget.address.id,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);

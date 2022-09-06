@@ -1,3 +1,4 @@
+import 'screens/auth_screen/activate_account_screen.dart';
 import 'screens/auth_screen/change_password_screen.dart';
 import 'screens/auth_screen/reset_password_screen.dart';
 import 'screens/auth_screen/update_profile_screen.dart';
@@ -60,6 +61,10 @@ class AppRouters {
       case productCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => const ProductCategoryScreen());
+      case activateAccountScreen:
+        final phone = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (context) => ActivateAccountScreen(phone: phone));
       case productDetailsScreen:
         final product = settings.arguments as Products;
         return MaterialPageRoute(

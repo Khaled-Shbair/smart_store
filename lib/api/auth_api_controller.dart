@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'api_paths.dart';
-import 'api_response.dart';
-import '../../models/user_model.dart';
-import 'package:http/http.dart' as http;
 import '../shared_preferences/pref_controller.dart';
+import 'package:http/http.dart' as http;
+import '../../models/user_model.dart';
+import 'api_response.dart';
+import 'api_paths.dart';
+import 'dart:convert';
 
 class AuthApiController {
   Future<ApiResponse> login({
@@ -104,7 +104,7 @@ class AuthApiController {
     }, body: {
       'mobile': phone,
     });
-    if (response.statusCode == 200 || response.statusCode == 400) {
+    if (response.statusCode == 200 || response.statusCode == 400||response.statusCode == 403) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
         print(jsonResponse['code']);
@@ -133,11 +133,15 @@ class AuthApiController {
     if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        PrefController().remove(key: PrefController().token);
-        PrefController().remove(key: PrefController().cityId);
-        PrefController().remove(key: PrefController().mobile);
-        PrefController().remove(key: PrefController().name);
-        PrefController().remove(key: PrefController().image);
+        PrefController().token = '';
+        PrefController().login = false;
+        PrefController().cityId = '';
+        PrefController().gender = '';
+        PrefController().cityEn = '';
+        PrefController().cityAr = '';
+        PrefController().phone = '';
+        PrefController().name = '';
+        PrefController().image = '';
       }
       return ApiResponse(
         message: jsonResponse['message'],
@@ -150,9 +154,8 @@ class AuthApiController {
     );
   }
 
-///////////////////////////////////////////////////////////////////////////////
   Future<ApiResponse> updateProfile({
-    required dynamic cityOd,
+    required dynamic cityId,
     required String name,
     required String gender,
   }) async {
@@ -166,7 +169,7 @@ class AuthApiController {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: {
-        'city_id': cityOd,
+        'city_id': cityId,
         'name': name,
         'gender': gender,
       },
@@ -184,7 +187,6 @@ class AuthApiController {
     );
   }
 
-///////////////////////////////////////////////////////////////////////////////
   Future<ApiResponse> register({
     required String name,
     required String phone,
@@ -208,7 +210,7 @@ class AuthApiController {
     if (response.statusCode == 201 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 201) {
-        // UserModel userModel = UserModel.fromJson(jsonResponse);
+        print(jsonResponse['code'].toString());
       }
       return ApiResponse(
         message: jsonResponse['message'],

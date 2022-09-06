@@ -1,7 +1,10 @@
+import '../../shared_preferences/pref_controller.dart';
+import '../../widgets/select_city.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
 import 'package:flutter/material.dart';
 import '../../getX/address_getX.dart';
+import '../../getX/cities_getX.dart';
 import '../../api/api_response.dart';
 import '../../utils/helpers.dart';
 import 'package:get/get.dart';
@@ -18,6 +21,8 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
   late TextEditingController _nameController;
   late TextEditingController _infoController;
   late TextEditingController _phoneController;
+  String? selectedCityId;
+  String selected = 'city'.tr;
 
   @override
   void initState() {
@@ -34,6 +39,25 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
     _phoneController.dispose();
     super.dispose();
   }
+
+  Widget selectCity() {
+    return SelectCity(
+      selected: selected,
+      onChanged: (String? value) => setState(() => selectedCityId = value!),
+      items: CitiesGetX.to.cityModel!.list.map((list) {
+        return DropdownMenuItem(
+            value: list.id.toString(),
+            child: Text(language() ? list.nameEn : list.nameAr),
+            onTap: () {
+              setState(() {
+                language() ? selected = list.nameEn : selected = list.nameAr;
+              });
+            });
+      }).toList(),
+    );
+  }
+
+  bool language() => PrefController().language == 'en' ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +77,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             prefixIcon: Icons.note_alt_outlined,
             prefixText: '',
             maxLength: 35,
+            fontSizeLabel: 16,
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
           InputFiled(
@@ -60,6 +85,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             labelText: 'info_address'.tr,
             prefixIcon: Icons.info_outline,
             prefixText: '',
+            fontSizeLabel: 16,
             maxLength: 80,
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 50),
@@ -68,9 +94,11 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             labelText: 'contact_number'.tr,
             prefixIcon: Icons.phone,
             maxLength: 9,
+            fontSizeLabel: 16,
           ),
+          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          selectCity(),
           SizedBox(height: MediaQuery.of(context).size.height / 15),
-          //TODO: Choose City
           ButtonAuth(
             text: 'create'.tr,
             onPressed: () async => await create(),
@@ -85,7 +113,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
       nameAddress: _nameController.text,
       infoAddress: _infoController.text,
       contactNumber: _phoneController.text,
-      cityId: 1.toString(),
+      cityId: selectedCityId.toString(),
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
