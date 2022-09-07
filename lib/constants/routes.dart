@@ -16,3 +16,4 @@ const String productDetailsScreen = '/productDetailsScreen';
 const String changeLanguageScreen = '/changeLanguageScreen';
 const String productCategoryScreen = '/productCategoryScreen';
 const String activateAccountScreen = '/activateAccountScreen';
+const String createPaymentCardScreen = '/createPaymentCardScreen';

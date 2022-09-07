@@ -9,11 +9,15 @@ class PasswordFiled extends StatelessWidget {
     required this.labelText,
     required this.onPressed,
     this.obscureText = false,
+    this.prefixIcon = Icons.lock_outline,
+    this.maxLength,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String labelText;
   final bool obscureText;
+  final IconData prefixIcon;
+  final int? maxLength;
   final Function() onPressed;
 
   @override
@@ -22,10 +26,12 @@ class PasswordFiled extends StatelessWidget {
       controller: controller,
       keyboardType: TextInputType.visiblePassword,
       obscureText: obscureText,
+      maxLength: maxLength,
       decoration: InputDecoration(
+        counterText: '',
         labelText: labelText,
-        prefixIcon: const Icon(
-          Icons.lock_outline,
+        prefixIcon: Icon(
+          prefixIcon,
           color: ColorsApp.green,
         ),
         suffixIcon: IconButton(

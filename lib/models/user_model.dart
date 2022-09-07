@@ -82,7 +82,7 @@ class Store {
     verified = json['verified'];
     firebaseKey = json['firebase_key'];
     image = json['image'];
-    address = json['address'];
+    address = json['address_screen'];
     facebook = json['facebook'];
     instagram = json['instagram'];
     createdAt = json['created_at'];

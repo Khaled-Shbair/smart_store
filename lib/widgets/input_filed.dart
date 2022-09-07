@@ -11,6 +11,8 @@ class InputFiled extends StatelessWidget {
     this.labelText,
     this.hintStyle,
     this.hintText,
+    this.onTap,
+    this.readOnly = false,
     this.fontSizeLabel = 0,
     this.prefixText = '0',
     this.colorLabel = ColorsApp.gery,
@@ -29,6 +31,8 @@ class InputFiled extends StatelessWidget {
   final String? hintText;
   final TextStyle? hintStyle;
   final int maxLength;
+  final Function()? onTap;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,8 @@ class InputFiled extends StatelessWidget {
       maxLength: maxLength,
       maxLines: 3,
       minLines: 1,
+      onTap: onTap,
+      readOnly: readOnly,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

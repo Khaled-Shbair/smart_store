@@ -1,15 +1,16 @@
+import 'screens/address_screen/create_address_screen.dart';
+import 'screens/address_screen/list_addresses_screen.dart';
+import 'screens/address_screen/update_address_screen.dart';
 import 'screens/auth_screen/activate_account_screen.dart';
 import 'screens/auth_screen/change_password_screen.dart';
 import 'screens/auth_screen/reset_password_screen.dart';
 import 'screens/auth_screen/update_profile_screen.dart';
 import 'package:smart_store/models/address_model.dart';
-import 'screens/address/create_address_screen.dart';
-import 'screens/address/list_addresses_screen.dart';
-import 'screens/address/update_address_screen.dart';
 import 'screens/auth_screen/forget_password.dart';
 import 'screens/auth_screen/register_screen.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/change_languages_screen.dart';
+import 'screens/payment_ways_screen/create_payment_card_screen.dart';
 import 'screens/product_category_screen.dart';
 import 'screens/product_details_screen.dart';
 import 'screens/notifications_screen.dart';
@@ -37,6 +38,9 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case createPaymentCardScreen:
+        return MaterialPageRoute(
+            builder: (context) => const CreatePaymentCardScreen());
       case changeLanguageScreen:
         return MaterialPageRoute(
             builder: (context) => const ChangeLanguageScreen());

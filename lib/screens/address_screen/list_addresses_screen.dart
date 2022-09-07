@@ -73,7 +73,7 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
               title: ViewDetails(
                 data:
                     '${'city'.tr}: ${_addressGetX.addressModel!.data![index].city.nameEn}'
-                    '\n${'address'.tr}: ${_addressGetX.addressModel!.data![index].name}',
+                    '\n${'address_screen'.tr}: ${_addressGetX.addressModel!.data![index].name}',
                 fontSize: 18,
                 fontFamily: FontsApp.fontMedium,
               ),

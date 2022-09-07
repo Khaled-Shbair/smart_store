@@ -1,3 +1,5 @@
+import 'package:smart_store/screens/payment_ways_screen/create_payment_card_screen.dart';
+
 import 'shared_preferences/pref_controller.dart';
 import 'package:flutter/material.dart';
 import 'constants/theme_mode.dart';
@@ -25,10 +27,11 @@ class MyApp extends StatelessWidget {
       locale: Locale(PrefController().language),
       fallbackLocale: const Locale('en'),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: appRouters.onGenerateRoute,
+     // onGenerateRoute: appRouters.onGenerateRoute,
       theme: ThemeModeApp.lightTheme,
       darkTheme: ThemeModeApp.darkTheme,
       themeMode: ThemeModeApp.getThemeMode(),
+    home: CreatePaymentCardScreen(),
     );
   }
 }

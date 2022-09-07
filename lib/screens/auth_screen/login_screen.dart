@@ -1,15 +1,15 @@
+import '../../api/auth_api_controller.dart';
+import '../../widgets/password_filed.dart';
+import '../../widgets/view_details.dart';
+import '../../widgets/button_auth.dart';
+import '../../widgets/input_filed.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../utils/helpers.dart';
-import '../../constants/fonts.dart';
 import '../../constants/colors.dart';
 import '../../api/api_response.dart';
 import '../../constants/routes.dart';
-import '../../widgets/button_auth.dart';
-import '../../widgets/input_filed.dart';
-import '../../widgets/view_details.dart';
-import '../../widgets/password_filed.dart';
-import '../../api/auth_api_controller.dart';
+import '../../constants/fonts.dart';
+import '../../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
