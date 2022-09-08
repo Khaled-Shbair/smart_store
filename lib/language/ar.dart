@@ -71,4 +71,6 @@ const Map<String, String> ar = {
   "master": "ماستر",
   "cvv": "رمز الحماية",
   "exp_date": "تاريخ انتهاء الصلاحية",
+  "create_payment_card": "إنشاء بطاقة دفع",
+  "update_payment_card": "تعديل بطاقة دفع",
 };

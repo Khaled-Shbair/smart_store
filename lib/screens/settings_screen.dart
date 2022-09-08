@@ -62,10 +62,10 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
           ),
           divider(),
           ListSettings(
-            icon: Icons.logout,
-            backgroundColor: Colors.purple,
-            title: 'logout'.tr,
-            onTap: () async => _logout(),
+            icon: Icons.payment,
+            backgroundColor: Colors.brown,
+            title: 'payment_card'.tr,
+            onTap: () => Navigator.pushNamed(context, listPaymentCardsScreen),
           ),
           divider(),
           ListSettings(
@@ -75,6 +75,13 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
                 PrefController().mode ? Colors.white : Colors.black,
             title: 'dark_mode'.tr,
             onTap: () => setState(() => ThemeModeApp.changeMode()),
+          ),
+          divider(),
+          ListSettings(
+            icon: Icons.logout,
+            backgroundColor: Colors.purple,
+            title: 'logout'.tr,
+            onTap: () async => _logout(),
           ),
           divider(),
         ],

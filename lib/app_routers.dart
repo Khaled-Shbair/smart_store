@@ -11,6 +11,8 @@ import 'screens/auth_screen/register_screen.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/change_languages_screen.dart';
 import 'screens/payment_ways_screen/create_payment_card_screen.dart';
+import 'screens/payment_ways_screen/list_payment_cards_screen.dart';
+import 'screens/payment_ways_screen/update_payment_card_screen.dart';
 import 'screens/product_category_screen.dart';
 import 'screens/product_details_screen.dart';
 import 'screens/notifications_screen.dart';
@@ -38,6 +40,12 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case updatePaymentCardScreen:
+        return MaterialPageRoute(
+            builder: (context) => const UpdatePaymentCardScreen());
+      case listPaymentCardsScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ListPaymentCardsScreen());
       case createPaymentCardScreen:
         return MaterialPageRoute(
             builder: (context) => const CreatePaymentCardScreen());

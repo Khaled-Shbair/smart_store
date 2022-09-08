@@ -72,4 +72,7 @@ const Map<String, String> en = {
   "master":"Master",
   "cvv":"Cvv",
   "exp_date":"Exp date",
+  "create_payment_card": "Create Payment card",
+  "update_payment_card": "Update Payment card",
+
 };
