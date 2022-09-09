@@ -17,7 +17,6 @@ class OrdersModel {
   }
 }
 
-//TODO:Later
 class Order {
   late int id;
   late String total;

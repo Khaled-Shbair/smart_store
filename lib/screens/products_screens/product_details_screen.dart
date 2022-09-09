@@ -1,9 +1,12 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../../constants/colors.dart';
 import '../../shared_preferences/pref_controller.dart';
 import '../../getX/favorite-products_getX.dart';
 import '../../getX/product_details_getX.dart';
+import '../../widgets/choose_gender.dart';
 import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
+import '../../getX/orders_getX.dart';
 import '../../api/api_response.dart';
 import '../../widgets/no_data.dart';
 import '../../widgets/loading.dart';
@@ -22,6 +25,10 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     with Helpers {
+  final OrdersGetX _ordersGetX = Get.put(OrdersGetX());
+  String _type = 'visa'.tr;
+  int _quantity = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,20 +101,87 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
         ),
         child: Column(
           children: [
-            nameProduct(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ViewDetails(
+                  data: 'Name: ',
+                  color: Colors.black,
+                ),
+                Expanded(
+                  child: ViewDetails(
+                    data: PrefController().language == 'en'
+                        ? widget.product.nameEn
+                        : widget.product.nameAr,
+                    fontSize: 24,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
             sizedBox(10),
-            infoProduct(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ViewDetails(
+                  data: 'Info: ',
+                  color: Colors.black,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: ViewDetails(
+                      data: PrefController().language == 'en'
+                          ? widget.product.infoEn
+                          : widget.product.infoAr,
+                      fontSize: 24,
+                      height: 1.3,
+                      maxLines: 3,
+                    ),
+                  ),
+                ),
+              ],
+            ),
             sizedBox(10),
             priceProduct(),
             sizedBox(10),
-            quantityProduct(),
+            Row(
+              children: [
+                const ViewDetails(
+                  data: 'Quantity: ',
+                  color: Colors.black,
+                ),
+                ViewDetails(
+                  data: widget.product.quantity,
+                  fontSize: 24,
+                  height: 1.3,
+                ),
+              ],
+            ),
             sizedBox(10),
-            rating(),
+            Row(
+              children: [
+                const ViewDetails(
+                  data: 'Evaluation: ',
+                  color: Colors.black,
+                ),
+                RatingBarIndicator(
+                  itemSize: 22,
+                  rating: double.parse(
+                    widget.product.overalRate,
+                  ),
+                  itemBuilder: (context, index) =>
+                      const Icon(Icons.star, color: Colors.yellowAccent),
+                ),
+              ],
+            ),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                addToCart(),
+                ElevatedButton(
+                  onPressed: () => order(),
+                  child: const Text('Add to Cart'),
+                ),
                 const SizedBox(width: 20),
                 addToFavorite(),
               ],
@@ -115,51 +189,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           ],
         ),
       ),
-    );
-  }
-
-  Widget nameProduct() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const ViewDetails(
-          data: 'Name: ',
-          color: Colors.black,
-        ),
-        Expanded(
-          child: ViewDetails(
-            data: PrefController().language == 'en'
-                ? widget.product.nameEn
-                : widget.product.nameAr,
-            fontSize: 24,
-            height: 1.3,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget infoProduct() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const ViewDetails(
-          data: 'Info: ',
-          color: Colors.black,
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: ViewDetails(
-              data: PrefController().language == 'en'
-                  ? widget.product.infoEn
-                  : widget.product.infoAr,
-              fontSize: 24,
-              height: 1.3,
-              maxLines: 3,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -203,45 +232,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     );
   }
 
-  Widget quantityProduct() {
-    return Row(
-      children: [
-        const ViewDetails(
-          data: 'Quantity: ',
-          color: Colors.black,
-        ),
-        ViewDetails(
-          data: widget.product.quantity,
-          fontSize: 24,
-          height: 1.3,
-        ),
-      ],
-    );
-  }
-
-  Widget rating() {
-    return Row(
-      children: [
-        const ViewDetails(
-          data: 'Evaluation: ',
-          color: Colors.black,
-        ),
-        RatingBarIndicator(
-          itemSize: 22,
-          rating: double.parse(
-            widget.product.overalRate,
-          ),
-          itemBuilder: (context, index) =>
-              const Icon(Icons.star, color: Colors.yellowAccent),
-        ),
-      ],
-    );
-  }
-
-  Widget addToCart() {
-    return ElevatedButton(onPressed: () {}, child: const Text('Add to Cart'));
-  }
-
   Widget addToFavorite() {
     return ElevatedButton(
       onPressed: () async {
@@ -262,7 +252,88 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     );
   }
 
-  SizedBox sizedBox(double height) {
-    return SizedBox(height: height);
+  SizedBox sizedBox(double height) => SizedBox(height: height);
+
+  Future<void> addToCard() async {
+    ApiResponse apiResponse = await _ordersGetX.createOrder(
+      productId: widget.product.id,
+      quantity: 2,
+      paymentType: _type,
+      addressId: 2,
+      cardId: 2,
+    );
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
+  }
+
+  void order() {
+    showModalBottomSheet(
+      context: context,
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black87,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: 30,
+                    alignment: AlignmentDirectional.center,
+                    color: Colors.grey,
+                    child: ViewDetails(
+                      data: '$_quantity',
+                      color: ColorsApp.red,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _quantity++;
+                      });
+                    },
+                    icon: const Icon(Icons.add),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  ChooseGender(
+                    title: 'visa'.tr,
+                    value: 'Visa',
+                    groupValue: _type,
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _type = value;
+                        });
+                      }
+                    },
+                  ),
+                  ChooseGender(
+                    title: 'master'.tr,
+                    value: 'Master',
+                    groupValue: _type,
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          _type = value;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
