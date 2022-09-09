@@ -8,16 +8,15 @@ class ProductsOffersModel {
     message = json['message'];
     if (json['list'] != null) {
       data = <ProductsOffers>[];
-      json['list'].forEach((v) {
-        data!.add(ProductsOffers.fromJson(v));
-      });
+      json['list'].forEach((v) => data!.add(ProductsOffers.fromJson(v)));
     }
   }
 }
 
+//TODO:Later
 class ProductsOffers {
   late int id;
-  late bool expired; //
+  late bool expired;
   late String nameEn;
   late String nameAr;
   late String infoEn;

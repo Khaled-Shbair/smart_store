@@ -22,28 +22,22 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     if (json['slider'] != null) {
       slider = <Slider>[];
-      json['slider'].forEach((v) {
-        slider!.add(Slider.fromJson(v));
-      });
+      json['slider'].forEach((v) => slider!.add(Slider.fromJson(v)));
     }
     if (json['categories'] != null) {
       categories = <Category>[];
-      json['categories'].forEach((v) {
-        categories!.add(Category.fromJson(v));
-      });
+      json['categories'].forEach((v) => categories!.add(Category.fromJson(v)));
     }
 
     if (json['latest_products'] != null) {
       latestProducts = <Products>[];
-      json['latest_products'].forEach((v) {
-        latestProducts!.add(Products.fromJson(v));
-      });
+      json['latest_products']
+          .forEach((v) => latestProducts!.add(Products.fromJson(v)));
     }
     if (json['famous_products'] != null) {
       famousProducts = <Products>[];
-      json['famous_products'].forEach((v) {
-        famousProducts!.add(Products.fromJson(v));
-      });
+      json['famous_products']
+          .forEach((v) => famousProducts!.add(Products.fromJson(v)));
     }
   }
 }

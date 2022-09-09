@@ -1,12 +1,12 @@
-import '../shared_preferences/pref_controller.dart';
-import '../getX/sub_category_model_getX.dart';
-import '../getX/product_category_getX.dart';
+import '../../shared_preferences/pref_controller.dart';
+import '../../getX/sub_category_model_getX.dart';
+import '../../getX/product_category_getX.dart';
+import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
-import '../widgets/view_details.dart';
-import '../constants/colors.dart';
-import '../constants/routes.dart';
-import '../constants/fonts.dart';
-import '../widgets/loading.dart';
+import '../../constants/colors.dart';
+import '../../constants/routes.dart';
+import '../../constants/fonts.dart';
+import '../../widgets/loading.dart';
 import 'package:get/get.dart';
 
 class SubCategoryScreen extends StatefulWidget {

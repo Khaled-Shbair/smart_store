@@ -1,5 +1,4 @@
 import '../../shared_preferences/pref_controller.dart';
-import '../../models/address_model.dart';
 import '../../widgets/select_city.dart';
 import '../../widgets/button_auth.dart';
 import '../../widgets/input_filed.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../getX/address_getX.dart';
 import '../../api/api_response.dart';
 import '../../getX/cities_getX.dart';
+import '../../models/address.dart';
 import '../../utils/helpers.dart';
 import 'package:get/get.dart';
 

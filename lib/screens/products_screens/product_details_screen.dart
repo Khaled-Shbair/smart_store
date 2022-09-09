@@ -1,14 +1,14 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../shared_preferences/pref_controller.dart';
-import '../getX/favorite-products_getX.dart';
-import '../getX/product_details_getX.dart';
+import '../../shared_preferences/pref_controller.dart';
+import '../../getX/favorite-products_getX.dart';
+import '../../getX/product_details_getX.dart';
+import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
-import '../widgets/view_details.dart';
-import '../api/api_response.dart';
-import '../widgets/no_data.dart';
-import '../widgets/loading.dart';
-import '../models/product.dart';
-import '../utils/helpers.dart';
+import '../../api/api_response.dart';
+import '../../widgets/no_data.dart';
+import '../../widgets/loading.dart';
+import '../../models/product.dart';
+import '../../utils/helpers.dart';
 import 'package:get/get.dart';
 
 class ProductDetailsScreen extends StatefulWidget {

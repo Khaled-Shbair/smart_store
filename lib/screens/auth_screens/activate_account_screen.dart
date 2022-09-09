@@ -1,5 +1,4 @@
 import 'package:smart_store/constants/routes.dart';
-
 import '../../api/auth_api_controller.dart';
 import '../../widgets/view_details.dart';
 import '../../widgets/button_auth.dart';

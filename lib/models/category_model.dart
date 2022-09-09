@@ -10,9 +10,7 @@ class CategoryModel {
     message = json['message'];
     if (json['list'] != null) {
       data = <Category>[];
-      json['list'].forEach((v) {
-        data!.add(Category.fromJson(v));
-      });
+      json['list'].forEach((v) => data!.add(Category.fromJson(v)));
     }
   }
 }

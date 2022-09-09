@@ -1,5 +1,5 @@
-import 'favorite-products_model.dart';
 import 'product_details_model.dart';
+import 'pivot.dart';
 
 class Products {
   late int id;
@@ -15,11 +15,12 @@ class Products {
   late dynamic offerPrice;
   late bool isFavorite;
   late String imageUrl;
-   Pivot? pivot;
-   List<Images>? images;
-
+  Pivot? pivot;
+  List<Images>? images;
+  String? orderQuantity;
 
   Products.fromJson(Map<String, dynamic> json) {
+    orderQuantity = json['order_quantity'];
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];
@@ -33,12 +34,10 @@ class Products {
     offerPrice = json['offer_price'];
     isFavorite = json['is_favorite'];
     imageUrl = json['image_url'];
-    pivot =json['pivot']!=null? Pivot.fromJson(json['pivot']):null;
+    pivot = json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null;
     if (json['images'] != null) {
       images = <Images>[];
-      json['images'].forEach((v) {
-        images!.add(Images.fromJson(v));
-      });
+      json['images'].forEach((v) => images!.add(Images.fromJson(v)));
     }
   }
 }

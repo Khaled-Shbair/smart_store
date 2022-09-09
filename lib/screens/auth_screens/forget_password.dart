@@ -1,14 +1,14 @@
+import '../../api/auth_api_controller.dart';
+import '../../widgets/view_details.dart';
+import '../../widgets/button_auth.dart';
+import '../../widgets/input_filed.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../utils/helpers.dart';
-import '../../constants/fonts.dart';
 import '../../api/api_response.dart';
 import '../../constants/routes.dart';
 import '../../constants/colors.dart';
-import '../../widgets/button_auth.dart';
-import '../../widgets/input_filed.dart';
-import '../../widgets/view_details.dart';
-import '../../api/auth_api_controller.dart';
+import '../../constants/fonts.dart';
+import '../../utils/helpers.dart';
+import 'package:get/get.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);

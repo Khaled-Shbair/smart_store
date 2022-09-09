@@ -1,12 +1,12 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../getX/product_category_getX.dart';
-import '../getX/product_details_getX.dart';
+import '../../getX/product_category_getX.dart';
+import '../../getX/product_details_getX.dart';
+import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
-import '../widgets/view_details.dart';
-import '../constants/routes.dart';
-import '../constants/colors.dart';
-import '../constants/fonts.dart';
-import '../widgets/loading.dart';
+import '../../constants/routes.dart';
+import '../../constants/colors.dart';
+import '../../constants/fonts.dart';
+import '../../widgets/loading.dart';
 import 'package:get/get.dart';
 
 class ProductCategoryScreen extends StatefulWidget {

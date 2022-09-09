@@ -8,9 +8,7 @@ class NotificationModel {
     message = json['message'];
     if (json['list'] != null) {
       data = <Notification>[];
-      json['list'].forEach((v) {
-        data!.add(Notification.fromJson(v));
-      });
+      json['list'].forEach((v) => data!.add(Notification.fromJson(v)));
     }
   }
 }

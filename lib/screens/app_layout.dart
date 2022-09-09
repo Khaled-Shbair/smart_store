@@ -1,10 +1,10 @@
 import '../shared_preferences/pref_controller.dart';
+import 'products_screens/category_screen.dart';
+import 'products_screens/favorite_screen.dart';
+import 'products_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
-import 'category_screen.dart';
-import 'favorite_screen.dart';
 import 'settings_screen.dart';
-import 'home_screen.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({Key? key}) : super(key: key);

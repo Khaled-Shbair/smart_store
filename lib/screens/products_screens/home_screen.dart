@@ -1,19 +1,19 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../../shared_preferences/pref_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../getX/favorite-products_getX.dart';
+import '../../getX/rate_products_getX.dart';
+import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/title_list.dart';
+import '../../api/api_response.dart';
+import '../../constants/colors.dart';
+import '../../constants/routes.dart';
+import '../../constants/fonts.dart';
+import '../../widgets/loading.dart';
+import '../../getX/home_getX.dart';
+import '../../utils/helpers.dart';
 import 'package:get/get.dart';
-import '../shared_preferences/pref_controller.dart';
-import '../utils/helpers.dart';
-import '../getX/home_getX.dart';
-import '../constants/fonts.dart';
-import '../widgets/loading.dart';
-import '../api/api_response.dart';
-import '../constants/colors.dart';
-import '../constants/routes.dart';
-import '../widgets/title_list.dart';
-import '../widgets/view_details.dart';
-import '../getX/rate_products_getX.dart';
-import '../getX/favorite-products_getX.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

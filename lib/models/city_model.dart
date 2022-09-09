@@ -10,9 +10,7 @@ class CityModel {
     message = json['message'];
     if (json['list'] != null) {
       list = <City>[];
-      json['list'].forEach((v) {
-        list.add(City.fromJson(v));
-      });
+      json['list'].forEach((v) => list.add(City.fromJson(v)));
     }
   }
 }

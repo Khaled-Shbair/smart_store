@@ -8,9 +8,7 @@ class PaymentModel {
     message = json['message'];
     if (json['list'] != null) {
       date = <Payment>[];
-      json['list'].forEach((v) {
-        date!.add(Payment.fromJson(v));
-      });
+      json['list'].forEach((v) => date!.add(Payment.fromJson(v)));
     }
   }
 }

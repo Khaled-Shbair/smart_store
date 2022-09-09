@@ -8,9 +8,7 @@ class FaqsModel {
     message = json['message'];
     if (json['list'] != null) {
       data = <Faqs>[];
-      json['list'].forEach((v) {
-        data!.add(Faqs.fromJson(v));
-      });
+      json['list'].forEach((v) => data!.add(Faqs.fromJson(v)));
     }
   }
 }

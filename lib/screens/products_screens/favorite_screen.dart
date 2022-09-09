@@ -1,14 +1,14 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../shared_preferences/pref_controller.dart';
-import '../getX/favorite-products_getX.dart';
+import '../../shared_preferences/pref_controller.dart';
+import '../../getX/favorite-products_getX.dart';
+import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
-import '../widgets/view_details.dart';
-import '../api/api_response.dart';
-import '../constants/colors.dart';
-import '../constants/fonts.dart';
-import '../widgets/loading.dart';
-import '../widgets/no_data.dart';
-import '../utils/helpers.dart';
+import '../../api/api_response.dart';
+import '../../constants/colors.dart';
+import '../../constants/fonts.dart';
+import '../../widgets/loading.dart';
+import '../../widgets/no_data.dart';
+import '../../utils/helpers.dart';
 import 'package:get/get.dart';
 
 class FavoriteScreen extends StatefulWidget {

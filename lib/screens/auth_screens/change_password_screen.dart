@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../api/api_response.dart';
 import '../../api/auth_api_controller.dart';
+import '../../widgets/password_filed.dart';
+import '../../widgets/view_details.dart';
+import '../../widgets/button_auth.dart';
+import 'package:flutter/material.dart';
+import '../../api/api_response.dart';
 import '../../constants/colors.dart';
 import '../../constants/fonts.dart';
 import '../../utils/helpers.dart';
-import '../../widgets/button_auth.dart';
-import '../../widgets/password_filed.dart';
-import '../../widgets/view_details.dart';
+import 'package:get/get.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({Key? key}) : super(key: key);

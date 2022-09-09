@@ -38,7 +38,7 @@ const Map<String, String> ar = {
   "create": "إنشاء",
   "list_addresses": "قائمة العناوين",
   "city": "المدينة",
-  "address_screen": "العنوان",
+  "address_screens": "العنوان",
   "info": "معلومات",
   "update_address": "تحديث العنوان",
   "see_all": "اظهار الكل >",

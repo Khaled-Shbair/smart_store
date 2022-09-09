@@ -104,7 +104,9 @@ class AuthApiController {
     }, body: {
       'mobile': phone,
     });
-    if (response.statusCode == 200 || response.statusCode == 400||response.statusCode == 403) {
+    if (response.statusCode == 200 ||
+        response.statusCode == 400 ||
+        response.statusCode == 403) {
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode == 200) {
         print(jsonResponse['code']);
@@ -237,6 +239,34 @@ class AuthApiController {
       body: {
         'code': code,
         'mobile': phone,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> refreshFcmToken({
+    required String fcmToken,
+  }) async {
+    var uri = Uri.parse(ApiPath.refreshFcmToken);
+    var response = await http.post(
+      uri,
+      headers: {
+        'lang': PrefController().language,
+        'Authorization': PrefController().token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: {
+        'fcm_token': fcmToken,
       },
     );
     if (response.statusCode == 200 || response.statusCode == 400) {
