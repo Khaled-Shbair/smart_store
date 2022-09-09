@@ -96,6 +96,9 @@ flutter:
     - family: Rubik-Regular
       fonts:
         - asset: asset/fonts/Rubik-Regular.ttf
+    - family: CourierPrime-Regular
+      fonts:
+        - asset: asset/fonts/CourierPrime-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

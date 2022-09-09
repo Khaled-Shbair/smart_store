@@ -14,4 +14,6 @@ class ColorsApp {
   static const Color iconBlue = Color(0XFF56CCF2);
   static const Color iconGreen = Color(0XFF219653);
   static const Color iconOrange = Color(0XFFF2994A);
+  static const Color blueVisa = Color(0xFF090943);
+  static const Color blackVisa = Color(0xFF000000);
 }

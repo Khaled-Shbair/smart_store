@@ -67,12 +67,11 @@ const Map<String, String> en = {
   "activate_account": "Activate account",
   "payment_card": "Payment card",
   "holder_name": "Holder name",
-  "card_number":"Card number",
-  "visa":"Visa",
-  "master":"Master",
-  "cvv":"Cvv",
-  "exp_date":"Exp date",
+  "card_number": "Card number",
+  "visa": "VISA",
+  "master": "MASTER",
+  "cvv": "Cvv",
+  "exp_date": "Exp date",
   "create_payment_card": "Create Payment card",
   "update_payment_card": "Update Payment card",
-
 };

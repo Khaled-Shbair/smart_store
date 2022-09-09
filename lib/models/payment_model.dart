@@ -1,16 +1,22 @@
 class PaymentModel {
   late bool status;
   late String message;
-  Payment? payment;
+  List<Payment>? date;
 
   PaymentModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    payment = json['object'] != null ? Payment.fromJson(json['object']) : null;
+    if (json['list'] != null) {
+      date = <Payment>[];
+      json['list'].forEach((v) {
+        date!.add(Payment.fromJson(v));
+      });
+    }
   }
 }
 
 class Payment {
+  late int id;
   late String holderName;
   late String cardNumber;
   late String expDate;
@@ -18,8 +24,7 @@ class Payment {
   late String type;
   late String updatedAt;
   late String createdAt;
-  late int id;
-  late int userId;
+  late String userId;
 
   Payment.fromJson(Map<String, dynamic> json) {
     holderName = json['holder_name'];

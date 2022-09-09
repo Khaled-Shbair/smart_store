@@ -19,7 +19,7 @@ class PaymentCardGetX extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // getCategoryData();
+    getPaymentData();
   }
 
   Future<ApiResponse> create({
@@ -49,8 +49,34 @@ class PaymentCardGetX extends GetxController {
         response.statusCode == 400 ||
         response.statusCode == 401) {
       var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 201) {
-        // payment = PaymentModel.fromJson(jsonResponse);//TODO: later
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> getPaymentData() async {
+    loading.value = true;
+    var uri = Uri.parse(ApiPath.paymentCards);
+    var response = await http.get(
+      uri,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': PrefController().token,
+      },
+    );
+    if (response.statusCode == 200 ||
+        response.statusCode == 401 ||
+        response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        payment = PaymentModel.fromJson(jsonResponse);
+        loading.value = false;
       }
       return ApiResponse(
         message: jsonResponse['message'],
