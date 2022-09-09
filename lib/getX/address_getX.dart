@@ -1,10 +1,10 @@
-import 'dart:convert';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import '../api/api_paths.dart';
-import '../api/api_response.dart';
-import '../models/address_model.dart';
 import '../shared_preferences/pref_controller.dart';
+import 'package:http/http.dart' as http;
+import '../models/address_model.dart';
+import '../api/api_response.dart';
+import '../api/api_paths.dart';
+import 'package:get/get.dart';
+import 'dart:convert';
 
 class AddressGetX extends GetxController {
   static AddressGetX get to => Get.find();

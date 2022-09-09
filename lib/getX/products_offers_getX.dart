@@ -15,6 +15,12 @@ class ProductsOffersGetX extends GetxController {
   set productsOffers(ProductsOffersModel? value) =>
       _productsOffers.value = value;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getProductsOffers();
+  }
+
   Future<void> getProductsOffers() async {
     loading.value = true;
     var uri = Uri.parse(ApiPath.offers);
