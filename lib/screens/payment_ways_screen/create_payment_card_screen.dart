@@ -153,7 +153,7 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
   }
 
   Future<void> createPayment() async {
-    ApiResponse apiResponse = await _paymentGetX.create(
+    ApiResponse apiResponse = await _paymentGetX.createPayment(
       holderName: nameController.text,
       cardNumber: cardNumberController.text,
       cvv: cvvController.text,

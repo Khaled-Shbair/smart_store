@@ -22,7 +22,7 @@ class PaymentCardGetX extends GetxController {
     getPaymentData();
   }
 
-  Future<ApiResponse> create({
+  Future<ApiResponse> createPayment({
     required String holderName,
     required String cardNumber,
     required String expDate,
@@ -60,6 +60,46 @@ class PaymentCardGetX extends GetxController {
     );
   }
 
+  Future<ApiResponse> updateData({
+    required String holderName,
+    required String cardNumber,
+    required String expDate,
+    required String cvv,
+    required String type,
+    required int id,
+  }) async {
+    var uri = Uri.parse('${ApiPath.paymentCards}/$id');
+    var response = await http.put(
+      uri,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': PrefController().token,
+      },
+      body: {
+        'holder_name': holderName,
+        'card_number': cardNumber,
+        'exp_date': expDate,
+        'cvv': cvv,
+        'type': type,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        getPaymentData();
+      }
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
   Future<ApiResponse> getPaymentData() async {
     loading.value = true;
     var uri = Uri.parse(ApiPath.paymentCards);
@@ -77,6 +117,33 @@ class PaymentCardGetX extends GetxController {
       if (response.statusCode == 200) {
         payment = PaymentModel.fromJson(jsonResponse);
         loading.value = false;
+      }
+      return ApiResponse(
+        message: jsonResponse['message'],
+        status: jsonResponse['status'],
+      );
+    }
+    return ApiResponse(
+      message: 'Something went wrong, try again',
+      status: false,
+    );
+  }
+
+  Future<ApiResponse> deletePayment({
+    required int id,
+  }) async {
+    var uri = Uri.parse('${ApiPath.paymentCards}/$id');
+    var response = await http.delete(
+      uri,
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Authorization': PrefController().token,
+      },
+    );
+    if (response.statusCode == 200 || response.statusCode == 401) {
+      var jsonResponse = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        getPaymentData();
       }
       return ApiResponse(
         message: jsonResponse['message'],

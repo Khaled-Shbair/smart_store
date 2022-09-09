@@ -1,3 +1,6 @@
+import 'screens/payment_ways_screen/create_payment_card_screen.dart';
+import 'screens/payment_ways_screen/update_payment_card_screen.dart';
+import 'screens/payment_ways_screen/list_payment_cards_screen.dart';
 import 'screens/address_screen/create_address_screen.dart';
 import 'screens/address_screen/list_addresses_screen.dart';
 import 'screens/address_screen/update_address_screen.dart';
@@ -10,9 +13,6 @@ import 'screens/auth_screen/forget_password.dart';
 import 'screens/auth_screen/register_screen.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/change_languages_screen.dart';
-import 'screens/payment_ways_screen/create_payment_card_screen.dart';
-import 'screens/payment_ways_screen/list_payment_cards_screen.dart';
-import 'screens/payment_ways_screen/update_payment_card_screen.dart';
 import 'screens/product_category_screen.dart';
 import 'screens/product_details_screen.dart';
 import 'screens/notifications_screen.dart';
@@ -20,6 +20,7 @@ import 'screens/sub_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/category_screen.dart';
 import 'screens/launch_screen.dart';
+import 'models/payment_model.dart';
 import 'screens/home_screen.dart';
 import 'screens/app_layout.dart';
 import 'constants/routes.dart';
@@ -40,9 +41,6 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
-      case updatePaymentCardScreen:
-        return MaterialPageRoute(
-            builder: (context) => const UpdatePaymentCardScreen());
       case listPaymentCardsScreen:
         return MaterialPageRoute(
             builder: (context) => const ListPaymentCardsScreen());
@@ -73,6 +71,10 @@ class AppRouters {
       case productCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => const ProductCategoryScreen());
+      case updatePaymentCardScreen:
+        final payment = settings.arguments as Payment;
+        return MaterialPageRoute(
+            builder: (context) => UpdatePaymentCardScreen(payment: payment));
       case activateAccountScreen:
         final phone = settings.arguments as String;
         return MaterialPageRoute(

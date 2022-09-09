@@ -6,15 +6,17 @@ class PasswordFiled extends StatelessWidget {
   const PasswordFiled({
     Key? key,
     required this.controller,
-    required this.labelText,
     required this.onPressed,
     this.obscureText = false,
     this.prefixIcon = Icons.lock_outline,
     this.maxLength,
+    this.labelText,
+    this.hintText,
   }) : super(key: key);
 
   final TextEditingController controller;
-  final String labelText;
+  final String? labelText;
+  final String? hintText;
   final bool obscureText;
   final IconData prefixIcon;
   final int? maxLength;
@@ -30,6 +32,12 @@ class PasswordFiled extends StatelessWidget {
       decoration: InputDecoration(
         counterText: '',
         labelText: labelText,
+        hintText: hintText,
+        hintStyle: TextStyle(
+          fontFamily: FontsApp.fontRegular,
+          color: ColorsApp.gery,
+          fontSize: MediaQuery.of(context).textScaleFactor * 16,
+        ),
         prefixIcon: Icon(
           prefixIcon,
           color: ColorsApp.green,
