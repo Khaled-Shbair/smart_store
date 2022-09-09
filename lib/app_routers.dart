@@ -14,6 +14,7 @@ import 'screens/auth_screen/register_screen.dart';
 import 'screens/auth_screen/login_screen.dart';
 import 'screens/change_languages_screen.dart';
 import 'screens/product_category_screen.dart';
+import 'screens/contact_requests_screen.dart';
 import 'screens/product_details_screen.dart';
 import 'screens/notifications_screen.dart';
 import 'screens/sub_category_screen.dart';
@@ -22,6 +23,7 @@ import 'screens/category_screen.dart';
 import 'screens/launch_screen.dart';
 import 'models/payment_model.dart';
 import 'screens/home_screen.dart';
+import 'screens/faqs_screen.dart';
 import 'screens/app_layout.dart';
 import 'constants/routes.dart';
 import 'models/product.dart';
@@ -41,6 +43,13 @@ class AppRouters {
         return MaterialPageRoute(builder: (context) => const CategoryScreen());
       case appLayout:
         return MaterialPageRoute(builder: (context) => const AppLayout());
+      case faqsScreen:
+        return MaterialPageRoute(builder: (context) => const FaqsScreen());
+      case notificationsScreen:
+        return MaterialPageRoute(builder: (context) => NotificationsScreen());
+      case contactRequestsScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ContactRequestsScreen());
       case listPaymentCardsScreen:
         return MaterialPageRoute(
             builder: (context) => const ListPaymentCardsScreen());
@@ -56,9 +65,6 @@ class AppRouters {
       case createAddressScreen:
         return MaterialPageRoute(
             builder: (context) => const CreateAddressScreen());
-      case notificationsScreen:
-        return MaterialPageRoute(
-            builder: (context) => const NotificationsScreen());
       case updateProfileScreen:
         return MaterialPageRoute(
             builder: (context) => const UpdateProfileScreen());

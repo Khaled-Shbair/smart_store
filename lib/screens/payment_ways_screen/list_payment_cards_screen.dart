@@ -56,18 +56,25 @@ class _ListPaymentCardsScreenState extends State<ListPaymentCardsScreen>
         separatorBuilder: (context, index) => const SizedBox(height: 20),
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () => Navigator.pushNamed(
-              context,
-              updatePaymentCardScreen,
-              arguments: _paymentGetX.payment!.date![index],
-            ),
+            onTap: () =>
+                Navigator.pushNamed(
+                  context,
+                  updatePaymentCardScreen,
+                  arguments: _paymentGetX.payment!.date![index],
+                ),
             child: Dismissible(
               key: Key(_paymentGetX.payment!.date![index].id.toString()),
               onDismissed: (direction) =>
                   deletePayment(_paymentGetX.payment!.date![index].id),
               background: Container(
-                height: MediaQuery.of(context).size.height / 4,
-                width: MediaQuery.of(context).size.width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 4,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.circular(14),
@@ -82,8 +89,14 @@ class _ListPaymentCardsScreenState extends State<ListPaymentCardsScreen>
                   end: 16,
                   bottom: 22,
                 ),
-                height: MediaQuery.of(context).size.height / 4,
-                width: MediaQuery.of(context).size.width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 4,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                   color: _paymentGetX.payment!.date![index].type == 'Visa'
                       ? ColorsApp.blueVisa
@@ -139,7 +152,7 @@ class _ListPaymentCardsScreenState extends State<ListPaymentCardsScreen>
                           children: [
                             ViewDetails(
                               data:
-                                  _paymentGetX.payment!.date![index].holderName,
+                              _paymentGetX.payment!.date![index].holderName,
                               color: Colors.white,
                               fontSize: 15,
                               fontFamily: FontsApp.fontBold,

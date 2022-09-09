@@ -19,4 +19,8 @@ class ApiPath {
   static const String addresses = '${_baseUrl}addresses';
   static const String paymentCards = '${_baseUrl}payment-cards';
   static const String offers = '${_baseUrl}offers';
+  static const String notifications = '${_baseUrl}notifications';
+  static const String faqs = '${_baseUrl}faqs';
+  static const String contactRequests = '${_baseUrl}contact-requests';
+  static const String orders = '${_baseUrl}orders';
 }

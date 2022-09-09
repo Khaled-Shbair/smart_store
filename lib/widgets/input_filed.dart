@@ -7,7 +7,7 @@ class InputFiled extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.prefixIcon,
-    required this.maxLength,
+    this.maxLength,
     this.labelText,
     this.hintStyle,
     this.hintText,
@@ -30,7 +30,7 @@ class InputFiled extends StatelessWidget {
   final double fontSizeLabel;
   final String? hintText;
   final TextStyle? hintStyle;
-  final int maxLength;
+  final int? maxLength;
   final Function()? onTap;
   final bool readOnly;
 

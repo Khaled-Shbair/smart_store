@@ -73,4 +73,9 @@ const Map<String, String> ar = {
   "exp_date": "تاريخ انتهاء الصلاحية",
   "create_payment_card": "إنشاء بطاقة دفع",
   "update_payment_card": "تعديل بطاقة دفع",
+  "faqs": "الأسئلة الشائعة",
+  "contact_requests": "طلبات الاتصال",
+  "subject":"الموضوع",
+  "message":"الرسالة",
+
 };

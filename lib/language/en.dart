@@ -74,4 +74,8 @@ const Map<String, String> en = {
   "exp_date": "Exp date",
   "create_payment_card": "Create Payment card",
   "update_payment_card": "Update Payment card",
+  "faqs": "Faqs",
+  "contact_requests": "Contact requests",
+  "subject": "Subject",
+  "message": "Message",
 };

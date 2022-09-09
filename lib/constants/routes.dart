@@ -1,5 +1,6 @@
 const String appLayout = '/appLayout';
 const String mainScreen = '/mainScreen';
+const String faqsScreen = '/faqsScreen';
 const String loginScreen = '/loginScreen';
 const String registerScreen = '/registerScreen';
 const String forgetPassword = '/forgetPassword';
@@ -14,6 +15,7 @@ const String updateAddressScreen = '/updateAddressScreen';
 const String changePasswordScreen = '/changePasswordScreen';
 const String productDetailsScreen = '/productDetailsScreen';
 const String changeLanguageScreen = '/changeLanguageScreen';
+const String contactRequestsScreen = '/contactRequestsScreen';
 const String productCategoryScreen = '/productCategoryScreen';
 const String activateAccountScreen = '/activateAccountScreen';
 const String listPaymentCardsScreen = '/listPaymentCardsScreen';

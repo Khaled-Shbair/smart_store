@@ -1,34 +1,41 @@
-import '../getX/notifications_getX.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
 import '../widgets/loading.dart';
 import '../widgets/no_data.dart';
+import '../getX/faqs_getX.dart';
 import 'package:get/get.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  NotificationsScreen({Key? key}) : super(key: key);
-  final NotificationsGetX _notificationsGetX = Get.put(NotificationsGetX());
+class FaqsScreen extends StatefulWidget {
+  const FaqsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FaqsScreen> createState() => _FaqsScreenState();
+}
+
+class _FaqsScreenState extends State<FaqsScreen> {
+  final FaqsGetX _faqsGetX = Get.put(FaqsGetX());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('notifications'.tr)),
-      body: GetX<NotificationsGetX>(
+      appBar: AppBar(title: Text('faqs'.tr)),
+      body: GetX<FaqsGetX>(
         builder: (controller) {
-          if (_notificationsGetX.loading.isTrue) {
+          if (_faqsGetX.loading.isTrue) {
             return const Loading();
           }
           return const NoData();
           // TODO: Processing later
-          // return listNotifications();
+
+          //return listFaqs();
         },
       ),
     );
   }
 
-  Widget listNotifications() {
-    if (_notificationsGetX.notification!.data!.isNotEmpty) {
+  Widget listFaqs() {
+    if (_faqsGetX.faqs!.data!.isNotEmpty) {
       return const SizedBox();
     } else {
       return const NoData();
