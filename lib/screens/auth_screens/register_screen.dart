@@ -24,8 +24,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> with Helpers {
-//  final CitiesGetX _citiesGetX = Get.put(CitiesGetX());
-
   late TextEditingController _nameController;
   late TextEditingController _mobileController;
   late TextEditingController _passwordController;
@@ -112,7 +110,6 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(title: Text('register'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
@@ -130,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             fontWeight: FontWeight.w300,
             fontSize: 17,
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           InputFiled(
             controller: _nameController,
             keyboard: TextInputType.name,
@@ -140,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             prefixText: '',
             maxLength: 8,
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           InputFiled(
             controller: _mobileController,
             keyboard: TextInputType.phone,
@@ -149,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
             fontSizeLabel: 16,
             maxLength: 9,
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
@@ -160,15 +157,15 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
               });
             },
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           selectCity(),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           gender(),
           ButtonAuth(
-            onPressed: () async => await _preformLogin(),
+            onPressed: () async => await _register(),
             text: 'create'.tr,
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -195,21 +192,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
     );
   }
 
-  Future<void> _preformLogin() async {
-    if (_checkData()) {
-      await _register();
-    }
-  }
-
-  bool _checkData() {
-    if (_mobileController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty &&
-        _nameController.text.isNotEmpty) {
-      return true;
-    }
-    showSnackBar(message: 'Enter required data!', error: true);
-    return false;
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> _register() async {
     ApiResponse apiResponse = await AuthApiController().register(

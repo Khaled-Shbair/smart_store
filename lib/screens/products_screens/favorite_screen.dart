@@ -61,7 +61,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 imageProduct(index),
-                SizedBox(height: MediaQuery.of(context).size.height / 150),
+                sizeBoxHeight(150),
                 ViewDetails(
                   data: PrefController().language == 'en'
                       ? FavoriteProductsGetX
@@ -161,4 +161,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> with Helpers {
                 .toString());
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 }

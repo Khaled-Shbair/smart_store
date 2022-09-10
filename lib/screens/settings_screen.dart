@@ -150,5 +150,6 @@ class _SettingsScreenState extends State<SettingsScreen> with Helpers {
     );
   }
 
-  void navigator() => Navigator.pushReplacementNamed(context, loginScreen);
+  void navigator() =>
+      Navigator.pushNamedAndRemoveUntil(context, loginScreen, (route) => false);
 }

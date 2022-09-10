@@ -64,7 +64,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
-          SizedBox(width: const MediaQueryData().size.width * 10),
+          sizeBoxWidth(10),
           ViewDetails(
             data: ProductCategoryGetX.to.productCategory!.data![index].price,
             decoration: TextDecoration.lineThrough,
@@ -117,7 +117,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   imageProduct(index),
-                  SizedBox(height: const MediaQueryData().size.height * 5),
+                  sizeBoxHeight(5),
                   ViewDetails(
                     data: ProductCategoryGetX
                         .to.productCategory!.data![index].nameEn,
@@ -126,7 +126,7 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
                     fontFamily: FontsApp.fontMedium,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: const MediaQueryData().size.height * 3),
+                  sizeBoxHeight(3),
                   priceProduct(index),
                   RatingBarIndicator(
                     itemSize: 18,
@@ -146,4 +146,10 @@ class _ProductCategoryScreenState extends State<ProductCategoryScreen> {
     }
     return const Loading();
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: const MediaQueryData().size.height * height);
+
+  Widget sizeBoxWidth(double width) =>
+      SizedBox(width: const MediaQueryData().size.width * width);
 }

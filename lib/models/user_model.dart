@@ -62,7 +62,7 @@ class Store {
   late String verified;
   late String firebaseKey;
   String? image;
-  late String address;
+  dynamic address;
   dynamic facebook;
   dynamic instagram;
   late String createdAt;

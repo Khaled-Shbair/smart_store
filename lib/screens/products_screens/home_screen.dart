@@ -199,8 +199,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       imageProduct(index),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height / 130),
+                      sizeBoxHeight(130),
                       ViewDetails(
                         data: PrefController().language == 'en'
                             ? _homeGetX
@@ -343,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
-          const SizedBox(width: 10),
+          sizeBoxWidth(40),
           ViewDetails(
             data: _homeGetX.homeModel!.data!.famousProducts![index].price,
             decoration: TextDecoration.lineThrough,
@@ -363,6 +362,12 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
       fontSize: 16,
     );
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
+
+  Widget sizeBoxWidth(double width) =>
+      SizedBox(width: MediaQuery.of(context).size.width / width);
 
   void addFavorite(int index) async {
     ApiResponse apiResponse = await favoriteProducts.postFavoriteProductsData(

@@ -31,7 +31,6 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
   late FocusNode _twoNode;
   late FocusNode _threeNode;
   late FocusNode _fourNode;
-  String code = '';
 
   @override
   void initState() {
@@ -73,14 +72,14 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           ViewDetails(
             data: 'sub_title_forget_password'.tr,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 30),
+          sizeBoxHeight(30),
           Row(
             children: [
               CodeField(
@@ -92,7 +91,7 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _twoNode,
                 controller: _twoController,
@@ -104,7 +103,7 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _threeNode,
                 controller: _threeController,
@@ -116,7 +115,7 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _fourNode,
                 controller: _fourController,
@@ -124,51 +123,35 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
                   if (value.isEmpty) {
                     _threeNode.requestFocus();
                   } else {
-                    _preformSend();
+                    _activateAccount();
                   }
                 },
               ),
             ],
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 20),
+          sizeBoxHeight(20),
           ButtonAuth(
             text: 'send'.tr,
-            onPressed: () async => await _preformSend(),
+            onPressed: () async => await _activateAccount(),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _preformSend() async {
-    if (_checkData()) {
-      await _activateAccount();
-    }
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
-  bool _checkData() {
-    if (_oneController.text.isNotEmpty &&
-        _twoController.text.isNotEmpty &&
-        _threeController.text.isNotEmpty &&
-        _fourController.text.isNotEmpty) {
-      _getCode();
-      return true;
-    }
-    showSnackBar(message: 'enter_reset_code'.tr, error: true);
-    return false;
-  }
-
-  void _getCode() {
-    code = _oneController.text +
-        _twoController.text +
-        _threeController.text +
-        _fourController.text;
-  }
+  Widget sizeBoxWidth(double width) =>
+      SizedBox(width: MediaQuery.of(context).size.width / width);
 
   Future<void> _activateAccount() async {
     ApiResponse apiResponse = await AuthApiController().activateAccount(
       phone: widget.phone,
-      code: code,
+      code: _oneController.text +
+          _twoController.text +
+          _threeController.text +
+          _fourController.text,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
@@ -176,7 +159,6 @@ class _ActivateAccountScreenState extends State<ActivateAccountScreen>
     }
   }
 
-  void navigator() {
-    Navigator.pushNamedAndRemoveUntil(context, loginScreen, (route) => false);
-  }
+  void navigator() =>
+      Navigator.pushNamedAndRemoveUntil(context, loginScreen, (route) => false);
 }

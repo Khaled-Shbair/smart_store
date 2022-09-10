@@ -122,7 +122,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                 ),
               ],
             ),
-            sizedBox(10),
+            sizedBoxHeight(100),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -144,9 +144,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                 ),
               ],
             ),
-            sizedBox(10),
+            sizedBoxHeight(100),
             priceProduct(),
-            sizedBox(10),
+            sizedBoxHeight(100),
             Row(
               children: [
                 const ViewDetails(
@@ -160,7 +160,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                 ),
               ],
             ),
-            sizedBox(10),
+            sizedBoxHeight(100),
             Row(
               children: [
                 const ViewDetails(
@@ -185,7 +185,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   onPressed: () => order(),
                   child: const Text('Add to Cart'),
                 ),
-                const SizedBox(width: 20),
+                sizedBoxWidth(20),
                 addToFavorite(),
               ],
             ),
@@ -208,7 +208,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
             fontSize: 24,
             height: 1.3,
           ),
-          const SizedBox(width: 10),
+          sizedBoxHeight(100),
           ViewDetails(
             data: widget.product.price,
             fontWeight: FontWeight.w500,
@@ -238,9 +238,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
   Widget addToFavorite() {
     return ElevatedButton(
       onPressed: () async {
-        setState(() {
-          widget.product.isFavorite = !widget.product.isFavorite;
-        });
+        setState(() => widget.product.isFavorite = !widget.product.isFavorite);
         ApiResponse apiResponse = await FavoriteProductsGetX.to
             .postFavoriteProductsData(id: widget.product.id.toString());
         showSnackBar(message: apiResponse.message, error: !apiResponse.status);
@@ -255,7 +253,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     );
   }
 
-  SizedBox sizedBox(double height) => SizedBox(height: height);
+  Widget sizedBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
+
+  Widget sizedBoxWidth(double width) =>
+      SizedBox(width: MediaQuery.of(context).size.width / width);
 
   Future<void> addToCard() async {
     ApiResponse apiResponse = await _ordersGetX.createOrder(
@@ -361,3 +363,4 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     );
   }
 }
+//TODO: Order only later ... << void order() >> and Image details Product

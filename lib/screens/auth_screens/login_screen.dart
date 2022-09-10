@@ -37,8 +37,6 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     super.dispose();
   }
 
-  Widget sizedBox(double height) => SizedBox(height: height);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             color: ColorsApp.gery,
             fontSize: 17,
           ),
-          sizedBox(20),
+          sizeBoxHeight(40),
           InputFiled(
             controller: _mobileController,
             keyboard: TextInputType.phone,
@@ -68,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
             fontSizeLabel: 16,
             maxLength: 9,
           ),
-          sizedBox(20),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: _passwordController,
             obscureText: _obscureText,
@@ -79,12 +77,12 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
               });
             },
           ),
-          sizedBox(40),
+          sizeBoxHeight(20),
           ButtonAuth(
             text: 'login'.tr,
-            onPressed: () async => await _preformLogin(),
+            onPressed: () async => await _login(),
           ),
-          sizedBox(20),
+          sizeBoxHeight(40),
           Align(
             alignment: AlignmentDirectional.centerEnd,
             child: TextButton(
@@ -101,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
               ),
             ),
           ),
-          sizedBox(15),
+          sizeBoxHeight(100),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -128,31 +126,20 @@ class _LoginScreenState extends State<LoginScreen> with Helpers {
     );
   }
 
-  Future<void> _preformLogin() async {
-    if (_checkData()) {
-      await _login();
-    }
-  }
-
-  bool _checkData() {
-    if (_mobileController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty) {
-      return true;
-    }
-    showSnackBar(message: 'enter_required_data'.tr, error: true);
-    return false;
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> _login() async {
     ApiResponse apiResponse = await AuthApiController().login(
-        phone: _mobileController.text, password: _passwordController.text);
+      phone: _mobileController.text,
+      password: _passwordController.text,
+    );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
       navigator();
     }
   }
 
-  void navigator() {
-    Navigator.pushReplacementNamed(context, appLayout);
-  }
+  void navigator() =>
+      Navigator.pushNamedAndRemoveUntil(context, appLayout, (route) => false);
 }

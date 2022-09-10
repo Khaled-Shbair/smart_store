@@ -19,7 +19,6 @@ class ListAddressesScreen extends StatefulWidget {
 
 class _ListAddressesScreenState extends State<ListAddressesScreen>
     with Helpers {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

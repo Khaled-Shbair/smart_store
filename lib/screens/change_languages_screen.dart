@@ -30,7 +30,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
               PrefController().changeLanguage(language: 'ar');
             },
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizedBoxHeight(50),
           ButtonAuth(
             text: 'English',
             onPressed: () {
@@ -42,4 +42,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
       ),
     );
   }
+  Widget sizedBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
+
 }

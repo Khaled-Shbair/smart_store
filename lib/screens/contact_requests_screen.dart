@@ -56,36 +56,24 @@ class _ContactRequestsScreenState extends State<ContactRequestsScreen>
           labelText: 'subject'.tr,
           fontSizeLabel: 16,
         ),
-        const SizedBox(height: 20),
+        sizedBoxHeight(20),
         InputFiled(
           controller: _messageController,
           prefixIcon: Icons.phone_android,
           labelText: 'message'.tr,
           fontSizeLabel: 16,
         ),
-        const SizedBox(height: 50),
+        sizedBoxHeight(50),
         ButtonAuth(
           text: 'create'.tr,
-          onPressed: () async => await _preformCreateRequest(),
+          onPressed: () async => await _createRequest(),
         ),
       ],
     );
   }
 
-  Future<void> _preformCreateRequest() async {
-    if (_checkData()) {
-      await _createRequest();
-    }
-  }
-
-  bool _checkData() {
-    if (_subjectController.text.isNotEmpty &&
-        _messageController.text.isNotEmpty) {
-      return true;
-    }
-    showSnackBar(message: 'enter_required_data'.tr, error: true);
-    return false;
-  }
+  Widget sizedBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> _createRequest() async {
     ApiResponse apiResponse = await _contactRGetX.createContactRequest(
@@ -98,7 +86,5 @@ class _ContactRequestsScreenState extends State<ContactRequestsScreen>
     }
   }
 
-  void navigator() {
-    Navigator.pop(context);
-  }
+  void navigator() => Navigator.pop(context);
 }

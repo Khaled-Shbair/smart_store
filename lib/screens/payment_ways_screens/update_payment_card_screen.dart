@@ -102,7 +102,7 @@ class _UpdatePaymentCardScreenState extends State<UpdatePaymentCardScreen>
               fontSize: MediaQuery.of(context).textScaleFactor * 16,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           InputFiled(
             keyboard: TextInputType.number,
             controller: cardNumberController,
@@ -116,7 +116,7 @@ class _UpdatePaymentCardScreenState extends State<UpdatePaymentCardScreen>
             ),
             prefixText: '',
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           InputFiled(
             keyboard: TextInputType.number,
             controller: dateController,
@@ -148,7 +148,7 @@ class _UpdatePaymentCardScreenState extends State<UpdatePaymentCardScreen>
               );
             },
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: cvvController,
             prefixIcon: Icons.security,
@@ -161,14 +161,17 @@ class _UpdatePaymentCardScreenState extends State<UpdatePaymentCardScreen>
               });
             },
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           paymentType(),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           ButtonAuth(text: 'update'.tr, onPressed: () => createPayment()),
         ],
       ),
     );
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> createPayment() async {
     ApiResponse apiResponse = await PaymentCardGetX.to.updateData(

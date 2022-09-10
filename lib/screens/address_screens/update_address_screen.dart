@@ -83,14 +83,14 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
             prefixText: '',
             maxLength: 35,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           InputFiled(
             controller: _phoneController,
             hintText: widget.address.contactNumber,
             prefixIcon: Icons.phone,
             maxLength: 9,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           InputFiled(
             controller: _infoController,
             hintText: widget.address.info,
@@ -98,9 +98,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
             prefixText: '',
             maxLength: 80,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           updateCity(),
-          SizedBox(height: MediaQuery.of(context).size.height / 15),
+          sizeBoxHeight(15),
           ButtonAuth(
             text: 'update'.tr,
             onPressed: () async => await update(),
@@ -109,6 +109,9 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
       ),
     );
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> update() async {
     ApiResponse apiResponse = await AddressGetX().updateAddress(

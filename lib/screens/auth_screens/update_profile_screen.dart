@@ -94,10 +94,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => navigator(),
               child: ViewDetails(
                 data: 'cancel'.tr,
-                fontSize: MediaQuery.of(context).textScaleFactor * 16,
+                fontSize: 16,
                 color: ColorsApp.green,
                 fontFamily: FontsApp.fontMedium,
               ),
@@ -105,7 +105,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
             TextButton(
               onPressed: () {
                 if (_nameController.text.isNotEmpty) {
-                  Navigator.pop(context);
+                  navigator();
                 } else {
                   showSnackBar(message: 'enter_new_name'.tr, error: true);
                 }
@@ -159,14 +159,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
               onPressed: updateName,
             ),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           FieldProfile(
-              icon: Icons.phone_android, title: '0${PrefController().phone}'),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+            icon: Icons.phone_android,
+            title: '0${PrefController().phone}',
+          ),
+          sizeBoxHeight(50),
           updateCity(),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           updateGender(),
-          const SizedBox(height: 50),
+          sizeBoxHeight(20),
           ButtonAuth(
             text: 'update'.tr,
             onPressed: () async => await updateProfile(),
@@ -195,7 +197,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen>
     }
   }
 
-  void navigator() {
-    Navigator.pop(context);
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
+
+  void navigator() => Navigator.pop(context);
 }

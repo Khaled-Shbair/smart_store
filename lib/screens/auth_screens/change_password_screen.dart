@@ -1,11 +1,8 @@
 import '../../api/auth_api_controller.dart';
 import '../../widgets/password_filed.dart';
-import '../../widgets/view_details.dart';
 import '../../widgets/button_auth.dart';
 import 'package:flutter/material.dart';
 import '../../api/api_response.dart';
-import '../../constants/colors.dart';
-import '../../constants/fonts.dart';
 import '../../utils/helpers.dart';
 import 'package:get/get.dart';
 
@@ -44,18 +41,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: ViewDetails(
-          data: 'change_password'.tr,
-          fontFamily: FontsApp.fontBold,
-          color: ColorsApp.green,
-          fontSize: 24,
-        ),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: Text('change_password'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.only(top: 60, start: 20, end: 20),
         physics: const NeverScrollableScrollPhysics(),
@@ -66,60 +52,38 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
             labelText: 'password'.tr,
             onPressed: () => setState(() => _obscureText = !_obscureText),
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: _newPasswordController,
             obscureText: obscureText1,
             labelText: 'new_password'.tr,
             onPressed: () => setState(() => obscureText1 = !obscureText1),
           ),
-          const SizedBox(height: 20),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: _newPasswordConfirmationController,
             obscureText: obscureText2,
             labelText: 'new_password_confirmation'.tr,
             onPressed: () => setState(() => obscureText2 = !obscureText2),
           ),
-          const SizedBox(height: 50),
+          sizeBoxHeight(15),
           ButtonAuth(
             text: 'change'.tr,
-            onPressed: () async => await _preformChangePassword(),
+            onPressed: () async => await _changePassword(),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _preformChangePassword() async {
-    if (_checkData()) {
-      await _changePassword();
-    }
-  }
-
-  bool _checkData() {
-    if (_passwordController.text.isNotEmpty &&
-        _newPasswordController.text.isNotEmpty &&
-        _newPasswordConfirmationController.text.isNotEmpty) {
-      if (_newPasswordController.text ==
-          _newPasswordConfirmationController.text) {
-        return true;
-      } else {
-        showSnackBar(message: 'password_confirmation_error'.tr, error: true);
-        return false;
-      }
-    }
-
-    showSnackBar(
-      message: 'enter_required_data'.tr,
-      error: true,
-    );
-    return false;
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> _changePassword() async {
     ApiResponse apiResponse = await AuthApiController().changePassword(
       password: _passwordController.text,
       newPassword: _newPasswordController.text,
+      newPasswordConfirmation: _newPasswordConfirmationController.text,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {

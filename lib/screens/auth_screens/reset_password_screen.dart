@@ -4,6 +4,7 @@ import '../../widgets/view_details.dart';
 import '../../widgets/button_auth.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/code_field.dart';
+import '../../constants/routes.dart';
 import '../../constants/colors.dart';
 import '../../api/api_response.dart';
 import '../../constants/fonts.dart';
@@ -30,7 +31,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
   late FocusNode _twoNode;
   late FocusNode _threeNode;
   late FocusNode _fourNode;
-  String code = '';
   bool _obscureText = true;
   bool _obscureConfirmationText = true;
 
@@ -78,15 +78,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(60),
           ViewDetails(
             data: 'sub_title_reset_password'.tr,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CodeField(
                 focusNode: _oneNode,
@@ -97,7 +98,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _twoNode,
                 controller: _twoController,
@@ -109,7 +110,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _threeNode,
                 controller: _threeController,
@@ -121,7 +122,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
                   }
                 },
               ),
-              const SizedBox(width: 10),
+              sizeBoxWidth(20),
               CodeField(
                 focusNode: _fourNode,
                 controller: _fourController,
@@ -133,7 +134,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               ),
             ],
           ),
-          const SizedBox(height: 30),
+          sizeBoxHeight(30),
           PasswordFiled(
             controller: _newPasswordController,
             obscureText: _obscureText,
@@ -144,64 +145,45 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen>
               });
             },
           ),
-          const SizedBox(height: 30),
+          sizeBoxHeight(30),
           PasswordFiled(
             controller: _passwordConfirmationController,
             obscureText: _obscureText,
             labelText: 'new_password_confirmation'.tr,
-            onPressed: () {
-              setState(
-                  () => _obscureConfirmationText = !_obscureConfirmationText);
-            },
+            onPressed: () => setState(
+                () => _obscureConfirmationText = !_obscureConfirmationText),
           ),
-          const SizedBox(height: 30),
+          sizeBoxHeight(15),
           ButtonAuth(
             text: 'send'.tr,
-            onPressed: () async => await _preformSend(),
+            onPressed: () async => await _sendCode(),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _preformSend() async {
-    if (_checkData()) {
-      await _sendCode();
-    }
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
-  bool _checkData() {
-    if (_oneController.text.isNotEmpty &&
-        _twoController.text.isNotEmpty &&
-        _threeController.text.isNotEmpty &&
-        _fourController.text.isNotEmpty) {
-      _getCode();
-      return true;
-    }
-    showSnackBar(message: 'enter_reset_code'.tr, error: true);
-    return false;
-  }
-
-  void _getCode() {
-    code = _oneController.text +
-        _twoController.text +
-        _threeController.text +
-        _fourController.text;
-  }
+  Widget sizeBoxWidth(double width) =>
+      SizedBox(width: MediaQuery.of(context).size.width / width);
 
   Future<void> _sendCode() async {
     ApiResponse apiResponse = await AuthApiController().resetPassword(
       phone: widget.phone,
       password: _newPasswordController.text,
-      code: code,
+      code: _oneController.text +
+          _twoController.text +
+          _threeController.text +
+          _fourController.text,
     );
-    showSnackBar(message: apiResponse.message, error: apiResponse.status);
+    showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
       navigator();
     }
   }
 
-  void navigator() {
-    Navigator.popUntil(context, ModalRoute.withName('/'));
-  }
+  void navigator() =>
+      Navigator.pushNamedAndRemoveUntil(context, loginScreen, (route) => false);
 }

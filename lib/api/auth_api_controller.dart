@@ -68,6 +68,7 @@ class AuthApiController {
   Future<ApiResponse> changePassword({
     required String password,
     required String newPassword,
+    required String newPasswordConfirmation,
   }) async {
     var uri = Uri.parse(ApiPath.changePassword);
     var response = await http.post(uri, headers: {
@@ -78,7 +79,7 @@ class AuthApiController {
     }, body: {
       'current_password': password,
       'new_password': newPassword,
-      'new_password_confirmation': newPassword,
+      'new_password_confirmation': newPasswordConfirmation,
     });
     if (response.statusCode == 200 ||
         response.statusCode == 201 ||

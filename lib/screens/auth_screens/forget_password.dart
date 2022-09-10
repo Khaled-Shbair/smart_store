@@ -35,10 +35,7 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('forget_password'.tr),
-        iconTheme: const IconThemeData(color: ColorsApp.green),
-      ),
+      appBar: AppBar(title: Text('forget_password'.tr)),
       body: ListView(
         padding: const EdgeInsetsDirectional.all(20),
         physics: const NeverScrollableScrollPhysics(),
@@ -49,14 +46,14 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             color: Colors.black,
             fontFamily: FontsApp.fontMedium,
           ),
-          const SizedBox(height: 12),
+          sizeBoxHeight(50),
           ViewDetails(
             data: 'sub_title_forget_password'.tr,
             fontSize: 15,
             color: ColorsApp.gery,
             fontFamily: FontsApp.fontRegular,
           ),
-          const SizedBox(height: 30),
+          sizeBoxHeight(30),
           InputFiled(
             controller: _mobileController,
             keyboard: TextInputType.phone,
@@ -64,31 +61,20 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
             labelText: 'phone'.tr,
             maxLength: 9,
           ),
-          const SizedBox(height: 30),
+          sizeBoxHeight(20),
           ButtonAuth(
             text: 'send'.tr,
-            onPressed: () async => await _preformForget(),
+            onPressed: () async => await _forgetPassword(),
           ),
         ],
       ),
     );
   }
 
-  Future<void> _preformForget() async {
-    if (_checkData()) {
-      await _forget();
-    }
-  }
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
-  bool _checkData() {
-    if (_mobileController.text.isNotEmpty) {
-      return true;
-    }
-    showSnackBar(message: 'enter_required_data'.tr, error: true);
-    return false;
-  }
-
-  Future<void> _forget() async {
+  Future<void> _forgetPassword() async {
     ApiResponse apiResponse =
         await AuthApiController().forgetPassword(phone: _mobileController.text);
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
@@ -98,7 +84,10 @@ class _ForgetPasswordState extends State<ForgetPassword> with Helpers {
   }
 
   void navigator() {
-    Navigator.pushNamed(context, resetPasswordScreen,
-        arguments: _mobileController.text);
+    Navigator.pushNamed(
+      context,
+      resetPasswordScreen,
+      arguments: _mobileController.text,
+    );
   }
 }

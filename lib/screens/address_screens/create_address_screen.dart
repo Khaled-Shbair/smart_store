@@ -79,7 +79,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             maxLength: 35,
             fontSizeLabel: 16,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           InputFiled(
             controller: _infoController,
             labelText: 'info_address'.tr,
@@ -88,7 +88,7 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             fontSizeLabel: 16,
             maxLength: 80,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           InputFiled(
             controller: _phoneController,
             labelText: 'contact_number'.tr,
@@ -96,9 +96,9 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
             maxLength: 9,
             fontSizeLabel: 16,
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 50),
+          sizeBoxHeight(50),
           selectCity(),
-          SizedBox(height: MediaQuery.of(context).size.height / 15),
+          sizeBoxHeight(15),
           ButtonAuth(
             text: 'create'.tr,
             onPressed: () async => await create(),
@@ -107,6 +107,9 @@ class _CreateAddressScreenState extends State<CreateAddressScreen>
       ),
     );
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> create() async {
     ApiResponse apiResponse = await AddressGetX().createAddress(

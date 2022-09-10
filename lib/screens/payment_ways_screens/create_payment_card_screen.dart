@@ -92,7 +92,7 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
             fontSizeLabel: 16,
             prefixText: '',
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           InputFiled(
             keyboard: TextInputType.number,
             controller: cardNumberController,
@@ -102,7 +102,7 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
             fontSizeLabel: 16,
             prefixText: '',
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           InputFiled(
             keyboard: TextInputType.number,
             controller: dateController,
@@ -130,7 +130,7 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
               );
             },
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           PasswordFiled(
             controller: cvvController,
             prefixIcon: Icons.security,
@@ -143,14 +143,17 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
               });
             },
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           paymentType(),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          sizeBoxHeight(40),
           ButtonAuth(text: 'create'.tr, onPressed: () => createPayment()),
         ],
       ),
     );
   }
+
+  Widget sizeBoxHeight(double height) =>
+      SizedBox(height: MediaQuery.of(context).size.height / height);
 
   Future<void> createPayment() async {
     ApiResponse apiResponse = await _paymentGetX.createPayment(
