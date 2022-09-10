@@ -75,7 +75,7 @@ const Map<String, String> ar = {
   "update_payment_card": "تعديل بطاقة دفع",
   "faqs": "الأسئلة الشائعة",
   "contact_requests": "طلبات الاتصال",
-  "subject":"الموضوع",
-  "message":"الرسالة",
-
+  "subject": "الموضوع",
+  "message": "الرسالة",
+  "address": "العنوان",
 };

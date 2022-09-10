@@ -1,11 +1,13 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../../constants/colors.dart';
 import '../../shared_preferences/pref_controller.dart';
 import '../../getX/favorite-products_getX.dart';
 import '../../getX/product_details_getX.dart';
 import '../../widgets/choose_gender.dart';
 import '../../widgets/view_details.dart';
+import '../../widgets/select_city.dart';
 import 'package:flutter/material.dart';
+import '../../getX/address_getX.dart';
+import '../../constants/colors.dart';
 import '../../getX/orders_getX.dart';
 import '../../api/api_response.dart';
 import '../../widgets/no_data.dart';
@@ -27,7 +29,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
     with Helpers {
   final OrdersGetX _ordersGetX = Get.put(OrdersGetX());
   String _type = 'visa'.tr;
-  int _quantity = 0;
+  String? addressId;
+  String selected = 'address'.tr;
 
   @override
   Widget build(BuildContext context) {
@@ -256,10 +259,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
 
   Future<void> addToCard() async {
     ApiResponse apiResponse = await _ordersGetX.createOrder(
-      productId: widget.product.id,
-      quantity: 2,
+      productId: widget.product.id.toString(),
+      quantity: _ordersGetX.quantity.toString(),
       paymentType: _type,
-      addressId: 2,
+      addressId: addressId,
       cardId: 2,
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
@@ -279,28 +282,32 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
           ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Container(
-                    height: 30,
-                    width: 30,
-                    alignment: AlignmentDirectional.center,
-                    color: Colors.grey,
-                    child: ViewDetails(
-                      data: '$_quantity',
-                      color: ColorsApp.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _quantity++;
-                      });
-                    },
-                    icon: const Icon(Icons.add),
-                  )
-                ],
+              GetX<OrdersGetX>(
+                builder: (controller) {
+                  return Row(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        alignment: AlignmentDirectional.center,
+                        color: Colors.grey,
+                        child: ViewDetails(
+                          data: '${_ordersGetX.quantity}',
+                          color: ColorsApp.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => _ordersGetX.add(),
+                        icon: const Icon(Icons.add),
+                      ),
+                      IconButton(
+                        onPressed: () => setState(() => _ordersGetX.decrease()),
+                        icon: const Icon(Icons.minimize),
+                      ),
+                    ],
+                  );
+                },
               ),
               Row(
                 children: [
@@ -330,10 +337,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>
                   ),
                 ],
               ),
+              selectAddress(),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget selectAddress() {
+    return SelectCity(
+      selected: selected,
+      onChanged: (String? value) => setState(() => addressId = value!),
+      items: AddressGetX.to.addressModel!.data!
+          .map(
+            (list) => DropdownMenuItem(
+              value: list.id.toString(),
+              child: Text(list.name),
+              onTap: () => setState(() => selected = list.name),
+            ),
+          )
+          .toList(),
     );
   }
 }

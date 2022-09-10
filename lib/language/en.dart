@@ -78,4 +78,5 @@ const Map<String, String> en = {
   "contact_requests": "Contact requests",
   "subject": "Subject",
   "message": "Message",
+  "address": "Address",
 };

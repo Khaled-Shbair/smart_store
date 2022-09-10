@@ -19,7 +19,6 @@ class ListAddressesScreen extends StatefulWidget {
 
 class _ListAddressesScreenState extends State<ListAddressesScreen>
     with Helpers {
-  final AddressGetX _addressGetX = Get.put(AddressGetX());
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
       ),
       body: GetX<AddressGetX>(
         builder: (controller) {
-          if (_addressGetX.loading.isTrue) {
+          if (AddressGetX.to.loading.isTrue) {
             return const Loading();
           }
           return listAddress();
@@ -45,18 +44,18 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
   }
 
   Widget listAddress() {
-    if (_addressGetX.addressModel!.data!.isNotEmpty) {
+    if (AddressGetX.to.addressModel!.data!.isNotEmpty) {
       return ListView.separated(
           padding: const EdgeInsetsDirectional.only(
             start: 20,
             end: 20,
             top: 50,
           ),
-          itemCount: _addressGetX.addressModel!.data!.length,
+          itemCount: AddressGetX.to.addressModel!.data!.length,
           itemBuilder: (context, index) {
             return ListTile(
               onTap: () => Navigator.pushNamed(context, updateAddressScreen,
-                  arguments: _addressGetX.addressModel!.data![index]),
+                  arguments: AddressGetX.to.addressModel!.data![index]),
               shape: const RoundedRectangleBorder(
                 side: BorderSide(
                   color: ColorsApp.green,
@@ -72,15 +71,15 @@ class _ListAddressesScreenState extends State<ListAddressesScreen>
               horizontalTitleGap: 3,
               title: ViewDetails(
                 data:
-                    '${'city'.tr}: ${_addressGetX.addressModel!.data![index].city.nameEn}'
-                    '\n${'address_screens'.tr}: ${_addressGetX.addressModel!.data![index].name}',
+                    '${'city'.tr}: ${AddressGetX.to.addressModel!.data![index].city.nameEn}'
+                    '\n${'address_screens'.tr}: ${AddressGetX.to.addressModel!.data![index].name}',
                 fontSize: 18,
                 fontFamily: FontsApp.fontMedium,
               ),
               subtitle: ViewDetails(
                 data:
-                    '${'phone'.tr}: ${_addressGetX.addressModel!.data![index].contactNumber}'
-                    '\n${'info'.tr}: ${_addressGetX.addressModel!.data![index].info}',
+                    '${'phone'.tr}: ${AddressGetX.to.addressModel!.data![index].contactNumber}'
+                    '\n${'info'.tr}: ${AddressGetX.to.addressModel!.data![index].info}',
                 fontSize: 18,
                 fontFamily: FontsApp.fontMedium,
               ),

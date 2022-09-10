@@ -27,7 +27,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
   late TextEditingController _infoController;
   late TextEditingController _phoneController;
   String? selectedCityId;
-  String? selected;
+  String selected = 'city'.tr;
 
   @override
   void initState() {
@@ -47,11 +47,7 @@ class _UpdateAddressScreenState extends State<UpdateAddressScreen>
 
   Widget updateCity() {
     return SelectCity(
-      selected: selected!.isEmpty
-          ? language()
-              ? widget.address.city.nameEn
-              : widget.address.city.nameAr
-          : selected!,
+      selected: selected,
       onChanged: (String? value) => setState(() => selectedCityId = value!),
       items: CitiesGetX.to.cityModel!.list.map((list) {
         return DropdownMenuItem(

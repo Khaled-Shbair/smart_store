@@ -9,7 +9,7 @@ import 'dart:convert';
 class OrdersGetX extends GetxController {
   static OrdersGetX get to => Get.find();
   RxBool loading = false.obs;
-
+  RxInt quantity = 0.obs;
   final _order = Rxn<OrdersModel>();
 
   OrdersModel? get order => _order.value;
@@ -21,6 +21,10 @@ class OrdersGetX extends GetxController {
     super.onInit();
     getAllOrdersData();
   }
+
+  void add() => ++quantity;
+
+  void decrease() => --quantity;
 
   Future<void> getAllOrdersData() async {
     loading.value = true;
