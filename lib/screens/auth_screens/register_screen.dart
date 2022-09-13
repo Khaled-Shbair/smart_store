@@ -176,7 +176,8 @@ class _RegisterScreenState extends State<RegisterScreen> with Helpers {
                 fontSize: 17,
               ),
               TextButton(
-                onPressed: () => Navigator.pushNamed(context, loginScreen),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, loginScreen, (route) => false),
                 child: ViewDetails(
                   data: 'login'.tr,
                   fontFamily: FontsApp.fontBold,

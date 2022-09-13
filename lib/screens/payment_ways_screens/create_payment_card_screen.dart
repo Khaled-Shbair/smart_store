@@ -165,6 +165,7 @@ class _CreatePaymentCardScreenState extends State<CreatePaymentCardScreen>
     );
     showSnackBar(message: apiResponse.message, error: !apiResponse.status);
     if (apiResponse.status) {
+      _paymentGetX.getPaymentData();
       navigator();
     }
   }

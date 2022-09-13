@@ -43,6 +43,7 @@ dependencies:
   flutter_svg: ^1.1.4
   sizer: ^2.0.15
   intl: ^0.17.0
+  flutter_offline: ^2.1.0
 
 
 dev_dependencies:

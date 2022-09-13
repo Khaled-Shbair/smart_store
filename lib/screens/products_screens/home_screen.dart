@@ -1,8 +1,10 @@
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../shared_preferences/pref_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../getX/favorite-products_getX.dart';
 import '../../getX/rate_products_getX.dart';
+import '../../widgets/no_internet.dart';
 import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/title_list.dart';
@@ -31,22 +33,32 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('home'.tr)),
-      body: GetX<HomeGetX>(
-        initState: (state) {
-          state.controller!.getHomeData();
-        },
-        builder: (controller) {
-          if (_homeGetX.loading.isTrue) {
-            return const Loading();
+      body: OfflineBuilder(
+        connectivityBuilder: (context, connectivity, child) {
+          final bool connected = connectivity != ConnectivityResult.none;
+          if (connected) {
+            return GetX<HomeGetX>(
+              initState: (state) {
+                state.controller!.getHomeData();
+              },
+              builder: (controller) {
+                if (_homeGetX.loading.isTrue) {
+                  return const Loading();
+                }
+                return ListView(
+                  children: [
+                    carouselSlider(),
+                    listCategories(),
+                    listProduct(),
+                  ],
+                );
+              },
+            );
+          } else {
+            return const NoInterNet();
           }
-          return ListView(
-            children: [
-              carouselSlider(),
-              listCategories(),
-              listProduct(),
-            ],
-          );
         },
+        child: const Loading(),
       ),
     );
   }
@@ -101,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 Navigator.pushNamed(context, categoryScreen);
               },
             ),
-            const SizedBox(height: 5),
             SizedBox(
               height: 100,
               child: ListView.separated(
@@ -114,6 +125,12 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 },
                 itemBuilder: (context, index) {
                   return Container(
+                    padding: const EdgeInsetsDirectional.only(
+                      top: 10,
+                      bottom: 20,
+                      start: 5,
+                      end: 5,
+                    ),
                     width: MediaQuery.of(context).size.width / 6,
                     alignment: AlignmentDirectional.center,
                     decoration: BoxDecoration(
@@ -121,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CircleAvatar(
                           radius: MediaQuery.of(context).size.aspectRatio * 50,
@@ -135,8 +152,6 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                             width: MediaQuery.of(context).size.width * 50,
                           ),
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height / 70),
                         ViewDetails(
                           data: PrefController().language == 'en'
                               ? _homeGetX
@@ -147,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                           color: Colors.black,
                           textAlign: TextAlign.center,
                           fontFamily: FontsApp.fontMedium,
-                          fontSize: 12,
+                          fontSize: 10,
                         ),
                       ],
                     ),
@@ -175,7 +190,6 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                 //  Navigator.pushNamed(context, );
               },
             ),
-            SizedBox(height: MediaQuery.of(context).size.height / 100),
             GridView.builder(
               shrinkWrap: true,
               primary: true,
@@ -199,21 +213,21 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       imageProduct(index),
-                      sizeBoxHeight(130),
+                      sizeBoxHeight(250),
                       ViewDetails(
                         data: PrefController().language == 'en'
                             ? _homeGetX
                                 .homeModel!.data!.latestProducts![index].nameEn
                             : _homeGetX
                                 .homeModel!.data!.latestProducts![index].nameAr,
-                        fontSize: 18,
+                        fontSize: 14,
                         color: ColorsApp.black,
                         fontFamily: FontsApp.fontMedium,
                         overflow: TextOverflow.ellipsis,
                       ),
                       priceProduct(index),
                       RatingBarIndicator(
-                        itemSize: 18,
+                        itemSize: 16,
                         rating: double.parse(_homeGetX.homeModel!.data!
                             .latestProducts![index].overalRate),
                         itemBuilder: (context, index) => const Icon(
@@ -253,7 +267,17 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
           ),
           Container(
             padding: const EdgeInsetsDirectional.all(2),
-            color: ColorsApp.red,
+            decoration: BoxDecoration(
+              color: ColorsApp.red,
+              borderRadius: BorderRadius.only(
+                topRight: PrefController().language == 'en'
+                    ? const Radius.circular(0)
+                    : const Radius.circular(12),
+                topLeft: PrefController().language == 'en'
+                    ? const Radius.circular(12)
+                    : const Radius.circular(0),
+              ),
+            ),
             child: ViewDetails(
               data: 'discount'.tr,
               fontFamily: FontsApp.fontBold,
@@ -338,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
         children: [
           ViewDetails(
             data: _homeGetX.homeModel!.data!.latestProducts![index].offerPrice,
-            fontSize: 16,
+            fontSize: 14,
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.green,
           ),
@@ -349,7 +373,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
             fontFamily: FontsApp.fontMedium,
             color: ColorsApp.gery,
             decorationThickness: 1,
-            fontSize: 13,
+            fontSize: 10,
             height: 1.7,
           ),
         ],
@@ -359,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
       data: _homeGetX.homeModel!.data!.latestProducts![index].price,
       fontFamily: FontsApp.fontMedium,
       color: ColorsApp.green,
-      fontSize: 16,
+      fontSize: 14,
     );
   }
 
