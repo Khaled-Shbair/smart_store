@@ -1,10 +1,8 @@
-import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../shared_preferences/pref_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../getX/favorite-products_getX.dart';
 import '../../getX/rate_products_getX.dart';
-import '../../widgets/no_internet.dart';
 import '../../widgets/view_details.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/title_list.dart';
@@ -33,32 +31,22 @@ class _HomeScreenState extends State<HomeScreen> with Helpers {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('home'.tr)),
-      body: OfflineBuilder(
-        connectivityBuilder: (context, connectivity, child) {
-          final bool connected = connectivity != ConnectivityResult.none;
-          if (connected) {
-            return GetX<HomeGetX>(
-              initState: (state) {
-                state.controller!.getHomeData();
-              },
-              builder: (controller) {
-                if (_homeGetX.loading.isTrue) {
-                  return const Loading();
-                }
-                return ListView(
-                  children: [
-                    carouselSlider(),
-                    listCategories(),
-                    listProduct(),
-                  ],
-                );
-              },
-            );
-          } else {
-            return const NoInterNet();
-          }
+      body: GetX<HomeGetX>(
+        initState: (state) {
+          state.controller!.getHomeData();
         },
-        child: const Loading(),
+        builder: (controller) {
+          if (_homeGetX.loading.isTrue) {
+            return const Loading();
+          }
+          return ListView(
+            children: [
+              carouselSlider(),
+              listCategories(),
+              listProduct(),
+            ],
+          );
+        },
       ),
     );
   }

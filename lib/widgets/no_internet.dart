@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../constants/colors.dart';
+import 'view_details.dart';
 
 class NoInterNet extends StatelessWidget {
   const NoInterNet({Key? key}) : super(key: key);
@@ -14,14 +14,12 @@ class NoInterNet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'Can\'t connect .. check internet',
-              style: TextStyle(
-                fontSize: 22,
-                color: ColorsApp.gery,
-              ),
+            Image.asset('asset/images/no_internet.png'),
+            const ViewDetails(
+              data: 'Can\'t connect .. check internet',
+              fontSize: 18,
+              color: ColorsApp.gery,
             ),
-            Image.asset('asset/images/no_internet.png')
           ],
         ),
       ),
