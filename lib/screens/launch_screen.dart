@@ -1,4 +1,5 @@
 import '../shared_preferences/pref_controller.dart';
+import '../notifications/fb_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import '../constants/routes.dart';
@@ -10,7 +11,7 @@ class LaunchScreen extends StatefulWidget {
   State<LaunchScreen> createState() => _LaunchScreenState();
 }
 
-class _LaunchScreenState extends State<LaunchScreen> {
+class _LaunchScreenState extends State<LaunchScreen> with FbNotifications {
   @override
   void initState() {
     super.initState();
@@ -18,6 +19,9 @@ class _LaunchScreenState extends State<LaunchScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, route);
     });
+    requestNotificationPermissions();
+    initializeForegroundNotificationForAndroid();
+    manageNotificationAction();
   }
 
   @override

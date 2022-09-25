@@ -44,6 +44,9 @@ dependencies:
   sizer: ^2.0.15
   intl: ^0.17.0
   flutter_offline: ^2.1.0
+  firebase_messaging: ^13.0.3
+  flutter_local_notifications: ^11.0.1
+  firebase_core: ^1.23.0
 
 
 dev_dependencies:
